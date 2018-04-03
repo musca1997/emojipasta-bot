@@ -7,7 +7,7 @@ These saved a lot of my time.
 
 ## Requirements
 ```
-pip3 install discord.py
+pip3 install discord
 cd emojipasta-bot
 sudo python3 setup.py install
 ```
@@ -22,7 +22,7 @@ cd emojipasta-bot/build/lib/emojipastabot
 python3 emojipastabot.py
 ```
 
-## Bot Command in discord
+## Bot Command On Discord
 Use & as prefix, and add double quotation marks. &help if you need help.
 For example:
 ```
@@ -37,7 +37,7 @@ you can use '' instead of "" to prevent from this.
 &pasta "she said, 'you're soooo gay.'"
 ```
 
-## Invite my Bot to Your Server!
+## Invite My Bot to Your Server!
 You can use this link to invite my bot to your server:
 https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8
 Also if you have any problems, add me on discord: toiletplunger#8909
