@@ -16,7 +16,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
 
-client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Remember to add double quotation marks when you try to &pasta long sentences. \n You can use this link to invite the bot to your server: https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8", command_prefix="&", pm_help = False)
+client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Remember to add double quotation marks when you try to &pasta long sentences. \n For example: &pasta \" this is how this bot works. \" ", command_prefix="&", pm_help = False)
 
 class EmojipastaGenerator:
 
@@ -92,7 +92,7 @@ def main():
     	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(client.user.id))
     	print('--------')
     	print('--------')
-    	return await client.change_presence(game=discord.Game(name='DADDYS PLUNGER'))
+    	return await client.change_presence(game=discord.Game(name='DADDYS PLUNGER')) #This is buggy, let us know if it doesn't work.
 
     @client.command()
     async def pasta(original_words):
@@ -101,9 +101,19 @@ def main():
 
     	await client.say(final_emoji)
 
+    @client.command()
+    async def github(*args):
+        await client.say("https://github.com/musca1997/emojipasta-bot")
 
+    @client.command()
+    async def orange(*args):
+        await client.say("<@294963984535257089> is my best big titty goth gf <33333")
 
-    
+    @client.command()
+    async def invite(*args):
+        await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
+
+    # This is a basic example of a call and response command. You tell it do "this" and it does it.
     @client.command()
     async def ping(*args):
 
@@ -112,7 +122,7 @@ def main():
     	await client.say(":warning: I'M GAY")
 
 
-    client.run('PUT YOUR DISCORD API TOKEN HERE OR IT WONT RUN PROPERLY')
+    client.run('PUT YOUR TOKEN HERE')
 
 if __name__ == "__main__":
     main()
