@@ -18,7 +18,7 @@ Before the use, get an API token from Discord official.
 Put it in emojipastabot.py file. (client.run)
 And then:
 ```
-cd emojipasta-bot/build/lib/emojipastabot
+cd emojipasta-bot/build/lib/emojipasta
 python3 emojipastabot.py
 ```
 
