@@ -9,7 +9,7 @@ These saved a lot of my time.
 ```
 pip3 install discord
 cd emojipasta-bot
-sudo python3 setup.py install
+python3 setup.py install
 ```
 
 ## Usage
