@@ -113,7 +113,10 @@ def main():
     async def invite(*args):
         await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
 
-    # This is a basic example of a call and response command. You tell it do "this" and it does it.
+    @client.command()
+    async def stats(*args):
+        await client.say(' Emojipasta-Bot \n Bot Owner: toiletplunger#8909 \n Now connected to '+str(len(client.servers))+' servers \n Connected to '+str(len(set(client.get_all_members())))+' users \n vote for me on: https://discordbots.org/bot/429662497172357123')
+
     @client.command()
     async def ping(*args):
 
