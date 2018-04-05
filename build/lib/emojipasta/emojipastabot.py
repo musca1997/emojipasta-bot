@@ -115,7 +115,7 @@ def main():
 
     @client.command()
     async def stats(*args):
-        await client.say(' Emojipasta-Bot \n Bot Owner: toiletplunger#8909 \n Now connected to '+str(len(client.servers))+' servers \n Connected to '+str(len(set(client.get_all_members())))+' users \n vote for me on: https://discordbots.org/bot/429662497172357123')
+        await client.say(' | Emojipasta-Bot | \n Bot Owner: toiletplunger#8909 \n Now connected to '+str(len(client.servers))+' servers \n Connected to '+str(len(set(client.get_all_members())))+' users \n Vote for me on: https://discordbots.org/bot/429662497172357123')
 
     @client.command()
     async def ping(*args):
