@@ -1,8 +1,5 @@
-"""
-Generate emojipasta from text.
-"""
-
 import random
+from random import choice
 import io
 import json
 
@@ -16,7 +13,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
 
-client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Remember to add double quotation marks when you try to &pasta long sentences. \n For example: &pasta \" this is how this bot works. \" ", command_prefix="&", pm_help = False)
+client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 
 class EmojipastaGenerator:
 
@@ -95,11 +92,17 @@ def main():
     	return await client.change_presence(game=discord.Game(name='DADDYS PLUNGER')) #This is buggy, let us know if it doesn't work.
 
     @client.command()
-    async def pasta(original_words):
+    async def pasta(*, original_words):
     	generator = EmojipastaGenerator.of_default_mappings()
     	final_emoji = generator.generate_emojipasta(original_words)
 
     	await client.say(final_emoji)
+
+    @client.command()
+    async def yn(*args):
+        decide_list = ['YES!','NO!']
+        decide_answer = choice(decide_list)
+        await client.say(decide_answer)
 
     @client.command()
     async def github(*args):
