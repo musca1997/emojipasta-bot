@@ -1,4 +1,5 @@
 import random
+from random import choice
 import io
 import json
 
@@ -96,6 +97,12 @@ def main():
     	final_emoji = generator.generate_emojipasta(original_words)
 
     	await client.say(final_emoji)
+
+    @client.command()
+    async def yn(*args):
+        decide_list = ['YES!','NO!']
+        decide_answer = choice(decide_list)
+        await client.say(decide_answer)
 
     @client.command()
     async def github(*args):
