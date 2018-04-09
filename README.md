@@ -30,7 +30,7 @@ For example:
 ```
 Return:
 ```
-This :rage: is a shitty :poop::poop: bot
+This 😤 is a shitty 💩💩 bot
 ```
 
 ## Invite My Bot to Your Server!
