@@ -29,14 +29,6 @@ For example:
 &pasta "This is a shitty bot"
 ```
 
-
-## Known Bugs
-1: if there are another double quotation marks inside the double quotation marks, the bot wouldn't work.
-you can use '' instead of "" to prevent from this.
-```
-&pasta "she said, 'you're soooo gay.'"
-```
-
 ## Invite My Bot to Your Server!
 You can use this link to invite my bot to your server:
 https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8
