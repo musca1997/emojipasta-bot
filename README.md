@@ -23,10 +23,14 @@ python3 emojipastabot.py
 ```
 
 ## Bot Command On Discord
-Use & as prefix, and add double quotation marks. &help if you need help.
+Use & as prefix. &help if you need help.
 For example:
 ```
-&pasta "This is a shitty bot"
+&pasta This is a shitty bot
+```
+Return:
+```
+This :rage: is a shitty :poop::poop: bot
 ```
 
 ## Invite My Bot to Your Server!
