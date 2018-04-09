@@ -19,7 +19,7 @@ Put it in emojipastabot.py file. (client.run)
 And then:
 ```
 cd emojipasta-bot/build/lib/emojipasta
-python3 emojipastabot.py
+python3 bot.py
 ```
 
 ## Bot Command On Discord
