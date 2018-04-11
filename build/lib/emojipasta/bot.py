@@ -73,7 +73,7 @@ def main():
     	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(client.user.id))
     	print('--------')
     	print('--------')
-    	return await client.change_presence(game=discord.Game(name='DADDYS PLUNGER'))
+    	return await client.change_presence(game=discord.Game(name='&help | DADDYS PLUNGER'))
 
     client.run('')
 
