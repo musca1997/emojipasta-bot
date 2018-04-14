@@ -35,6 +35,7 @@ class Bot_Info:
         embed.set_footer(text="Powered by toiletplunger#8909 & Kermit Klan House", icon_url="https://cdn.discordapp.com/attachments/419521490220744705/429667256717279262/f42b7e7.png")
 
         embed.add_field(name="**&pasta**", value="Use &pasta to convert text to emojipasta.\nInput:```&pasta This is a shitty bot\n```Output:\n```This 😤 is a shitty 💩💩 bot```")
+        embed.add_field(name="**&clap**", value="Use &clap to add clap emoji to text.\nInput:```&clap Mommy bought me new pony toy I love you mama\n```Output:\n```Mommy 👏🏻 bought 👏🏼 me 👏 new 👏🏽 pony 👏🏿 toy 👏🏾 I 👏 love 👏🏾 you 👏🏽 mama```")
         embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -60,6 +61,18 @@ class Bot_Function:
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
+
+    @client.command()
+    async def clap(*, original_clap):
+        emojis = [" 👏 "," 👏🏻 "," 👏🏼 "," 👏🏽 "," 👏🏾 "," 👏🏿 "]
+        split_clap = original_clap.split()
+        new_blocks = []
+        for i, block in enumerate(split_clap):
+            new_blocks.append(block)
+            emoji = choice(emojis)
+            new_blocks.append(emoji)
+        final_clap = "".join(new_blocks)
+        await client.say(final_clap)
 
 
 def main():
