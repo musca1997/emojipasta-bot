@@ -84,6 +84,10 @@ class Bot_Function:
 	except ValueError:
 		await client.say("Invalid range")
 
+	@client.command()
+	async def b(*, message: str):
+		newmsg = message.replace("b", "\U0001F171")
+		await client.say(newmsg)
 
 def main():
     @client.event
