@@ -1,4 +1,5 @@
 from random import choice
+from random import randint
 import io
 import json
 
@@ -26,6 +27,11 @@ class Bot_Info:
     	await asyncio.sleep(1)
     	await client.say(":warning: I'M GAY")
 
+    @client.command(pass_context = True)
+    async def feedback(ctx, *, user_feedback):
+        await client.say("K, already sent your feedback 😎💯 ")
+        await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
+
     @client.command()
     async def help(*args):
         embed = discord.Embed(title="toiletplunger#8909 & Kermit Klan House", colour=discord.Colour(0xa4302c), url="https://discord.gg/JHNRwr6", description="Emojipasta-Bot is a bot mainly for converting text to emojipasta.")
@@ -37,7 +43,9 @@ class Bot_Info:
         embed.add_field(name="**&pasta**", value="Use &pasta to convert text to emojipasta.\nInput:```&pasta This is a shitty bot\n```Output:\n```This 😤 is a shitty 💩💩 bot```")
         embed.add_field(name="**&clap**", value="Use &clap to add clap emoji to text.\nInput:```&clap Mommy bought me new pony toy I love you mama\n```Output:\n```Mommy 👏🏻 bought 👏🏼 me 👏 new 👏🏽 pony 👏🏿 toy 👏🏾 I 👏 love 👏🏾 you 👏🏽 mama```")
         embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
+        embed.add_field(name="**&rn**", value="Use &rn to generate a random number.\nInput (Default Range):```&rn\n```Output:\n```1-100: <number>\n```Input (Custom Range):```&rn 87 305\n```Output:\n```87-305: <number>```")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
+        embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
         embed.add_field(name="💬", value=str(len(client.servers))+ ' **servers**', inline=True)
         embed.add_field(name="🏠", value=str(len(set(client.get_all_members())))+ ' **users**', inline=True)
@@ -73,6 +81,13 @@ class Bot_Function:
             new_blocks.append(emoji)
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
+    @client.command()
+    async def rn(arg1=1, arg2=100):
+        try:
+            random_number = randint(arg1, arg2)
+            await client.say("{}-{}: {}".format(arg1, arg2, random_number))
+        except ValueError:
+            await client.say("Invalid range")
 
 
 def main():
