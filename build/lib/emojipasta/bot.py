@@ -76,13 +76,13 @@ class Bot_Function:
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
        
-    @client.command()
-    async def rn(arg1=1, arg2=100):
-	try:
-		random_number = randint(arg1, arg2)
-		await client.say("{}-{}: {}".format(arg1, arg2, random_number))
-	except ValueError:
-		await client.say("Invalid range")
+	@client.command()
+	async def rn(arg1=1, arg2=100):
+		try:
+			random_number = randint(arg1, arg2)
+			await client.say("{}-{}: {}".format(arg1, arg2, random_number))
+		except ValueError:
+			await client.say("Invalid range")
 
 	@client.command()
 	async def b(*, message: str):
