@@ -78,11 +78,11 @@ class Bot_Function:
        
     @client.command()
     async def rn(arg1=1, arg2=100):
-	try:
-		random_number = randint(arg1, arg2)
-		await client.say("{}-{}: {}".format(arg1, arg2, random_number))
-	except ValueError:
-		await client.say("Invalid range")
+        try:
+            random_number = randint(arg1, arg2)
+            await client.say("{}-{}: {}".format(arg1, arg2, random_number))
+        except ValueError:
+            await client.say("Invalid range")
 
 
 def main():
