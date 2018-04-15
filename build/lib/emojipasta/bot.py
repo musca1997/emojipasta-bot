@@ -39,7 +39,7 @@ class Bot_Info:
         embed.add_field(name="**&clap**", value="Use &clap to add clap emoji to text.\nInput:```&clap Mommy bought me new pony toy I love you mama\n```Output:\n```Mommy 👏🏻 bought 👏🏼 me 👏 new 👏🏽 pony 👏🏿 toy 👏🏾 I 👏 love 👏🏾 you 👏🏽 mama```")
         embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
         embed.add_field(name="**&rn**", value="Use &rn to generate a random number.\nInput (Default Range):```&rn\n```Output:\n```1-100: <number>\n```Input (Custom Range):```&rn 87 305\n```Output:\n```87-305: <number>```")
-	embed.add_field(name="**&b**", value="Use &b to replace each 'b' with \U0001F171.\nInput:```&b\n```Output:\n```bbb```")
+	embed.add_field(name="**&b**", value="Use &b to replace each 'b' with 🅱️.\nInput:```&b B button bot\n```Output:\n```🅱️ 🅱️utton 🅱️ot```")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
         embed.add_field(name="💬", value=str(len(client.servers))+ ' **servers**', inline=True)
@@ -87,7 +87,7 @@ class Bot_Function:
 
 	@client.command()
 	async def b(*, message: str):
-		newmsg = message.replace("b", "\U0001F171")
+		newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001F171")
 		await client.say(newmsg)
 
 def main():
