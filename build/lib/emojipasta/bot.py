@@ -45,7 +45,7 @@ class Bot_Info:
         embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
         embed.add_field(name="**&rn**", value="Use &rn to generate a random number.\nInput (Default Range):```&rn\n```Output:\n```1-100: <number>\n```Input (Custom Range):```&rn 87 305\n```Output:\n```87-305: <number>```")
         embed.add_field(name="**&b**", value="Use &b to replace any letter 'b' with 🅱️.\nInput:```&b Emojipasta bot is the best bot!\n```Output:\n```Emojipasta 🅱️ot is the 🅱️est 🅱️ot!```")
-        embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length!")
+        embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -96,18 +96,20 @@ class Bot_Function:
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
         
-    @client.command()
-    async def penislength(ctx):
-        inches = randint(2, 12)
+    @client.command(pass_context=True)
+    async def length(ctx, member: discord.Member=None):
+        member = member or ctx.message.author
+        inches = random.randint(2, 12)
         cm = inches * 2.54
         str = "8" + ("=" * inches) + "D" + " " + "\U0001F4A6" * (inches // 2)
-        await client.say("{}'s penis is **{} inches!** ({} cm)\n{}".format(ctx.message.author.mention, inches, cm, str))
+
+        await bot.say("{}'s penis is **{} inches!** ({} cm)\n{}".format(member.mention, inches, cm, str))
         if inches >= 9:
-            await client.say("\U0001F60D Wow! \U0001F60D")
+            await bot.say("\U0001F60D Wow! \U0001F60D")
         elif inches <= 4:
-            await client.say("Ehh \U0001F612")
+            await bot.say("Ehh \U0001F612")
         else:
-            await client.say("Nice \U0001F609")
+            await bot.say("Nice \U0001F609")
         
         
 
