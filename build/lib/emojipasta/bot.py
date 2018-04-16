@@ -31,7 +31,32 @@ class Bot_Info:
     async def feedback(ctx, *, user_feedback):
         await client.say("K, already sent your feedback 😎💯 ")
         await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
-
+        
+    @client.command()
+    async def dab(dabber):
+        await client.say("https://cdn.discordapp.com/attachments/421005964276138005/432223249653563420/knuckles.png")
+        await client.say("OH SHIT THIS NIGGA %s JUST GOT DABBED ON!!!" % dabber)
+    @client.command()
+    async def jerkit():
+        msg = await client.say("8:fist:====D")
+        await asyncio.sleep(.2)
+        await client.edit_message(msg,"8=:fist:===D")
+        await asyncio.sleep(.3)
+        await client.edit_message(msg,"8==:fist:==D")
+        await asyncio.sleep(.4)
+        await client.edit_message(msg,"8===:fist:=D")
+        await asyncio.sleep(.5)
+        await client.edit_message(msg,"8====:fist:D")
+        await asyncio.sleep(.6)
+        await client.edit_message(msg,"8===:fist:=D")
+        await asyncio.sleep(.5)
+        await client.edit_message(msg,"8==:fist:==D")
+        await asyncio.sleep(.4)
+        await client.edit_message(msg,"8=:fist:===D")
+        await asyncio.sleep(.3)
+        await client.edit_message(msg,"8:fist:====D")
+        await asyncio.sleep(.2)
+        await client.edit_message(msg,"8:fist:====D:sweat_drops:")
     @client.command()
     async def help(*args):
         embed = discord.Embed(title="Kermit Klan House", colour=discord.Colour(0xa4302c), url="https://discord.gg/JHNRwr6", description="Emojipasta-Bot is a bot mainly for converting text to emojipasta.")
