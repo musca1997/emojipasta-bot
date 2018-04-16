@@ -103,11 +103,11 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def penislength(ctx, member: discord.Member=None):
         member = member or ctx.message.author
-        inches = random.randint(2, 12)
+        inches = randint(2, 12)
         cm = inches * 2.54
         str = "8" + ("=" * inches) + "D" + " " + "\U0001F4A6" * (inches // 2)
 
-        await bot.say("{}'s penis is **{} inches!** ({} cm)\n{}".format(member.mention, inches, cm, str))
+        await client.say("{}'s penis is **{} inches!** ({} cm)\n{}".format(member.mention, inches, cm, str))
         if inches >= 9:
             await client.say("\U0001F60D Wow! \U0001F60D")
         elif inches <= 4:
