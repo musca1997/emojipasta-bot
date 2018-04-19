@@ -62,21 +62,23 @@ class Bot_Info:
         await client.say(content="So here's the info of Emojipasta-Bot ", embed=embed)
 
 class Bot_Function:
-    @client.command()
-    async def pasta(*, original_words):
+    @client.command(pass_context=True)
+    async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
         final_emoji = generator.generate_emojipasta(original_words)
 
         await client.say(final_emoji)
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&pasta called from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def yn(*args):
+    @client.command(pass_context=True)
+    async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&yn invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def clap(*, original_clap):
+    @client.command(pass_context=True)
+    async def clap(ctx, *, original_clap):
         emojis = [" 👏 "," 👏🏻 "," 👏🏼 "," 👏🏽 "," 👏🏾 "," 👏🏿 "]
         split_clap = original_clap.split()
         new_blocks = []
@@ -86,19 +88,22 @@ class Bot_Function:
             new_blocks.append(emoji)
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&clap invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def rn(arg1=1, arg2=100):
+    @client.command(pass_context=True)
+    async def rn(ctx, arg1=1, arg2=100):
         try:
             random_number = randint(arg1, arg2)
             await client.say("{}-{}: {}".format(arg1, arg2, random_number))
+            await bot.send_message(discord.Object(id="436544688745480203"), "```&rn invoked from <" + str(ctx.message.server) + ">```")
         except ValueError:
             await client.say("Invalid range")
 
-    @client.command()
-    async def b(*, message: str):
+    @client.command(pass_context=True)
+    async def b(ctx, *, message: str):
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&b invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
     async def penislength(ctx, member: discord.Member=None):
@@ -108,6 +113,7 @@ class Bot_Function:
         str = "8" + ("=" * inches) + "D" + " " + "\U0001F4A6" * (inches // 2)
 
         await client.say("{}'s penis is **{} inches!** ({} cm)\n{}".format(member.mention, inches, cm, str))
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&penislength invoked from <" + str(ctx.message.server) + ">```")
         if inches >= 9:
             await client.say("\U0001F60D Wow! \U0001F60D")
         elif inches <= 4:
@@ -115,13 +121,15 @@ class Bot_Function:
         else:
             await client.say("Nice \U0001F609")
 
-    @client.command()
-    async def dab(dabber):
+    @client.command(pass_context=True)
+    async def dab(ctx, dabber):
         await client.say("https://cdn.discordapp.com/attachments/421005964276138005/432223249653563420/knuckles.png")
         await client.say("OH SHIT THIS NI🅱️🅱️A %s JUST GOT DABBED ON!!!" % dabber)
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&dab invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def jerkit():
+    @client.command(pass_context=True)
+    async def jerkit(ctx):
+        await bot.send_message(discord.Object(id="436544688745480203"), "```&jerkit invoked from <" + str(ctx.message.server) + ">```")
         msg = await client.say("8:fist:====D")
         await asyncio.sleep(.2)
         await client.edit_message(msg,"8=:fist:===D")
