@@ -123,14 +123,14 @@ class Bot_Function:
 
     @client.command(pass_context=True)
     async def dab(ctx, member: discord.Member=None):
-	    if member:
-		    member = member
-		    message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire: JUST GOT DABBED ON BY {}! :100: :ok_hand: ".format(member.mention, ctx.message.author.mention)
-	    else:
-		    member = ctx.message.author
-		    message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
+		if member:
+			member = member
+			message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire: JUST GOT DABBED ON BY {}! :100: :ok_hand: ".format(member.mention, ctx.message.author.mention)
+		else:
+			member = ctx.message.author
+			message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
 
-        dab_images = [
+		dab_images = [
 		    "https://cdn.discordapp.com/attachments/428960174808498176/436617301249359903/Dab_1.png",
 		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300779728908/DAB.png",
 		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300779728906/squidward_dab_by_josael281999-dbbuazm.png",
@@ -147,21 +147,21 @@ class Bot_Function:
 		    "https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
 		    "https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 	    ]
-	    index = randint(0, len(dab_images) - 1)
-	    await client.say(dab_images[index] + "\n" + message)
-        await client.send_message(discord.Object(id="436544688745480203"), "```&dab invoked from <" + str(ctx.message.server) + ">```")
+		index = randint(0, len(dab_images) - 1)
+		await client.say(dab_images[index] + "\n" + message)
+		await client.send_message(discord.Object(id="436544688745480203"), "```&dab invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
     async def walk(ctx, member: discord.Member=None):
-	    if member:
-		    member = member
-		    message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
-	    else:
-		    member = ctx.message.author
-		    message = "( ͡° ͜ʖ ͡°) ╯╲___ Who wants to go for a walk??"
+		if member:
+			member = member
+			message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
+		else:
+			member = ctx.message.author
+			message = "( ͡° ͜ʖ ͡°) ╯╲___ Who wants to go for a walk??"
 
-	    await client.say(message)
-        await client.send_message(discord.Object(id="436544688745480203"), "```&walk invoked from <" + str(ctx.message.server) + ">```")
+		await client.say(message)
+		await client.send_message(discord.Object(id="436544688745480203"), "```&walk invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
     async def jerkit(ctx):
