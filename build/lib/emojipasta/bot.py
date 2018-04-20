@@ -120,9 +120,9 @@ class Bot_Function:
             await client.say("Ehh \U0001F612")
         else:
             await client.say("Nice \U0001F609")
-
-    @client.command(pass_context=True)
-    async def dab(ctx, member: discord.Member=None):
+	
+	@client.command(pass_context=True)
+	async def dab(ctx, member: discord.Member=None):
 		if member:
 			member = member
 			message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire: JUST GOT DABBED ON BY {}! :100: :ok_hand: ".format(member.mention, ctx.message.author.mention)
@@ -131,28 +131,28 @@ class Bot_Function:
 			message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
 
 		dab_images = [
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617301249359903/Dab_1.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300779728908/DAB.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300779728906/squidward_dab_by_josael281999-dbbuazm.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300095795211/Woody_dab.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617300095795210/king_dab__clash_royale__by_josael281999-db8mdhl.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617220714528778/3505ebaa-f270-45d4-8693-88574828ef49.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617219707764736/hitler_hits_a_sick_dab_by_alphashitlord-damch71.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617219091333122/fQh7nCY9K1-8.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617219091333121/dab_2.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617218579759124/a79.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617147230453772/Bearded-Dab.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617146714292236/248.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
-		    "https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
-	    ]
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617301249359903/Dab_1.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617300779728908/DAB.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617300779728906/squidward_dab_by_josael281999-dbbuazm.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617300095795211/Woody_dab.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617300095795210/king_dab__clash_royale__by_josael281999-db8mdhl.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617220714528778/3505ebaa-f270-45d4-8693-88574828ef49.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617219707764736/hitler_hits_a_sick_dab_by_alphashitlord-damch71.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617219091333122/fQh7nCY9K1-8.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617219091333121/dab_2.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617218579759124/a79.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617147230453772/Bearded-Dab.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292236/248.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
+		]
 		index = randint(0, len(dab_images) - 1)
 		await client.say(dab_images[index] + "\n" + message)
 		await client.send_message(discord.Object(id="436544688745480203"), "```&dab invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command(pass_context=True)
-    async def walk(ctx, member: discord.Member=None):
+	@client.command(pass_context=True)
+	async def walk(ctx, member: discord.Member=None):
 		if member:
 			member = member
 			message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
@@ -162,6 +162,7 @@ class Bot_Function:
 
 		await client.say(message)
 		await client.send_message(discord.Object(id="436544688745480203"), "```&walk invoked from <" + str(ctx.message.server) + ">```")
+
 
     @client.command(pass_context=True)
     async def jerkit(ctx):
