@@ -49,7 +49,7 @@ class Bot_Info:
         embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
-	embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
+        embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -125,8 +125,8 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def dab(ctx, member: discord.Member=None):
         if member:
-	    member = member
-	    message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire: JUST GOT DABBED ON BY {}! :100: :ok_hand: ".format(member.mention, ctx.message.author.mention)
+            member = member
+            message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire: JUST GOT DABBED ON BY {}! :100: :ok_hand: ".format(member.mention, ctx.message.author.mention)
         else:
             member = ctx.message.author
             message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
