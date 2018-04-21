@@ -10,6 +10,8 @@ import asyncio
 from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
+import pyqrcode
+import png
 
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
@@ -46,6 +48,8 @@ class Bot_Info:
         embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
         embed.add_field(name="**&rn**", value="Use &rn to generate a random number.\nInput (Default Range):```&rn\n```Output:\n```1-100: <number>\n```Input (Custom Range):```&rn 87 305\n```Output:\n```87-305: <number>```")
         embed.add_field(name="**&b**", value="Use &b to replace any letter 'b' with 🅱️.\nInput:```&b Emojipasta bot is the best bot!\n```Output:\n```Emojipasta 🅱️ot is the 🅱️est 🅱️ot!```")
+        embed.add_field(name="**&owo**", value="Use &owo with text to make you owo!")
+        embed.add_field(name="**&qr**", value="Use &qr with text to generate your own qrcode!")
         embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
@@ -121,7 +125,7 @@ class Bot_Function:
             await client.say("Ehh \U0001F612")
         else:
             await client.say("Nice \U0001F609")
-	
+
     @client.command(pass_context=True)
     async def dab(ctx, member: discord.Member=None):
         if member:
@@ -146,6 +150,7 @@ class Bot_Function:
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292236/248.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/436862948200153088/wubba_lubba_dab_dab_by_alexandratale-dbew3ml.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 		]
         index = randint(0, len(dab_images) - 1)
@@ -187,6 +192,17 @@ class Bot_Function:
         await client.edit_message(msg,"8:fist:====D")
         await asyncio.sleep(.2)
         await client.edit_message(msg,"8:fist:====D:sweat_drops:")
+
+    @client.command(pass_context=True)
+    async def qr(ctx, *, msg):
+        qr = pyqrcode.create(msg)
+        qr.png('qrcode.png', scale=5)
+        await client.send_file(ctx.message.channel, 'qrcode.png')
+
+    @client.command()
+    async def owo(*, message: str):
+        newmsg = message.replace("r", "w").replace("l", "w")
+        await client.say("**O**w**O** " + newmsg + " **O**w**O**")
 
 
 def main():
