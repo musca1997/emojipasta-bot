@@ -52,6 +52,7 @@ class Bot_Info:
         embed.add_field(name="**&qr**", value="Use &qr with text to generate your own qrcode!")
         embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
+        embed.add_field(name="**&mock**", value="Use &mock with text to gEt cOoL tExT.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
@@ -203,6 +204,19 @@ class Bot_Function:
     async def owo(*, message: str):
         newmsg = message.replace("r", "w").replace("l", "w")
         await client.say("**O**w**O** " + newmsg + " **O**w**O**")
+
+    @client.command()
+    async def mock(*, message: str):
+        msg = message.lower()
+        newmsg = ""
+        for c in msg:
+            rand = randint(0, 1)
+            if rand:
+                newmsg = newmsg + c.upper()
+            else:
+                newmsg = newmsg + c
+
+        await client.say("https://cdn.discordapp.com/attachments/420589076916207626/437090583861788687/spongebob.png \n" + newmsg)
 
 
 def main():
