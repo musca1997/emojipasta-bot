@@ -18,16 +18,18 @@ client.remove_command("help")
 
 class Bot_Info:
 
-    @client.command()
-    async def orange(*args):
+    @client.command(pass_context=True)
+    async def orange(ctx, *args):
         await client.say("<@294963984535257089> is my best big titty goth gf <33333")
+        await client.send_message(discord.Object(id="436544688745480203"), "```&orange invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
+    @client.command(pass_context=True)
     async def ping(*args):
 
     	await client.say(":ping_pong: Pong!")
     	await asyncio.sleep(1)
     	await client.say(":warning: I'M GAY")
+        await client.send_message(discord.Object(id="436544688745480203"), "```&ping invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context = True)
     async def feedback(ctx, *, user_feedback):
@@ -35,8 +37,8 @@ class Bot_Info:
         await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
 
 
-    @client.command()
-    async def help(*args):
+    @client.command(pass_context=True)
+    async def help(ctx, *args):
         embed = discord.Embed(title="Kermit Klan House", colour=discord.Colour(0xa4302c), url="https://discord.gg/JHNRwr6", description="Emojipasta-Bot is a bot mainly for converting text to emojipasta.")
 
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/419521490220744705/429667256717279262/f42b7e7.png")
@@ -53,6 +55,7 @@ class Bot_Info:
         embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
         embed.add_field(name="**&mock**", value="Use &mock with text to gEt cOoL tExT.")
+        embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
@@ -66,8 +69,114 @@ class Bot_Info:
         embed.add_field(name="😎", value="[invite](https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8)", inline=True)
 
         await client.say(content="So here's the info of Emojipasta-Bot ", embed=embed)
+        await client.send_message(discord.Object(id="436544688745480203"), "```&help invoked from <" + str(ctx.message.server) + ">```")
 
-class Bot_Function:
+    @client.command(pass_context=True)
+    async def userinfo(ctx, *, user: discord.Member=None):
+        """Shows users's informations"""
+        author = ctx.message.author
+        server = ctx.message.server
+
+        if not user:
+            user = author
+
+        roles = [x.name for x in user.roles if x.name != "@everyone"]
+
+        joined_at = user.joined_at
+        since_created = (ctx.message.timestamp - user.created_at).days
+        since_joined = (ctx.message.timestamp - joined_at).days
+        user_joined = joined_at.strftime("%d %b %Y %H:%M")
+        user_created = user.created_at.strftime("%d %b %Y %H:%M")
+        member_number = sorted(server.members,
+                                  key=lambda m: m.joined_at).index(user) + 1
+
+        created_on = "{}\n({} days ago)".format(user_created, since_created)
+        joined_on = "{}\n({} days ago)".format(user_joined, since_joined)
+
+        game = "Chilling in {} status".format(user.status)
+
+        if user.game is None:
+            pass
+        elif user.game.url is None:
+            game = "Playing {}".format(user.game)
+        else:
+            game = "Streaming: [{}]({})".format(user.game, user.game.url)
+
+        if roles:
+            roles = sorted(roles, key=[x.name for x in server.role_hierarchy
+                                           if x.name != "@everyone"].index)
+            roles = ", ".join(roles)
+        else:
+            roles = "None"
+
+        data = discord.Embed(description=game, colour=user.colour)
+        data.add_field(name="Joined Discord on", value=created_on)
+        data.add_field(name="Joined this server on", value=joined_on)
+        data.add_field(name="Roles", value=roles, inline=False)
+        data.set_footer(text="Member #{} | User ID:{}"
+                                "".format(member_number, user.id))
+
+        name = str(user)
+        name = " ~ ".join((name, user.nick)) if user.nick else name
+
+        if user.avatar_url:
+            data.set_author(name=name, url=user.avatar_url)
+            data.set_thumbnail(url=user.avatar_url)
+        else:
+            data.set_author(name=name)
+
+        try:
+            await client.say(embed=data)
+            await client.send_message(discord.Object(id="436544688745480203"), "```&userinfo invoked from <" + str(ctx.message.server) + ">```")
+        except discord.HTTPException:
+            await client.say("I need the `Embed links` permission "
+                                   "to send this")
+
+    @client.command(pass_context=True)
+    async def serverinfo(ctx):
+        """Shows server's informations"""
+        server = ctx.message.server
+        online = len([m.status for m in server.members
+                         if m.status == discord.Status.online or
+                         m.status == discord.Status.idle])
+        total_users = len(server.members)
+        text_channels = len([x for x in server.channels
+                             if x.type == discord.ChannelType.text])
+        voice_channels = len([x for x in server.channels
+                                if x.type == discord.ChannelType.voice])
+        passed = (ctx.message.timestamp - server.created_at).days
+        created_at = ("Since {}. That's over {} days ago!"
+                         "".format(server.created_at.strftime("%d %b %Y %H:%M"),
+                                    passed))
+
+        colour = ''.join([choice('0123456789ABCDEF') for x in range(6)])
+        colour = int(colour, 16)
+
+        data = discord.Embed(
+            description=created_at,
+            colour=discord.Colour(value=colour))
+        data.add_field(name="Region", value=str(server.region))
+        data.add_field(name="Users", value="{}/{}".format(online, total_users))
+        data.add_field(name="Text Channels", value=text_channels)
+        data.add_field(name="Voice Channels", value=voice_channels)
+        data.add_field(name="Roles", value=len(server.roles))
+        data.add_field(name="Owner", value=str(server.owner))
+        data.set_footer(text="Server ID: " + server.id)
+
+        if server.icon_url:
+            data.set_author(name=server.name, url=server.icon_url)
+            data.set_thumbnail(url=server.icon_url)
+        else:
+            data.set_author(name=server.name)
+
+        try:
+            await client.say(embed=data)
+            await client.send_message(discord.Object(id="436544688745480203"), "```&serverinfo invoked from <" + str(ctx.message.server) + ">```")
+        except discord.HTTPException:
+            await client.say("I need the `Embed links` permission "
+                                  "to send this")
+
+class client_Function:
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
@@ -199,14 +308,16 @@ class Bot_Function:
         qr = pyqrcode.create(msg)
         qr.png('qrcode.png', scale=5)
         await client.send_file(ctx.message.channel, 'qrcode.png')
+        await client.send_message(discord.Object(id="436544688745480203"), "```&qr invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def owo(*, message: str):
+    @client.command(pass_context=True)
+    async def owo(ctx, *, message: str):
         newmsg = message.replace("r", "w").replace("l", "w")
         await client.say("**O**w**O** " + newmsg + " **O**w**O**")
+        await client.send_message(discord.Object(id="436544688745480203"), "```&owo invoked from <" + str(ctx.message.server) + ">```")
 
-    @client.command()
-    async def mock(*, message: str):
+    @client.command(pass_context=True)
+    async def mock(ctx, *, message: str):
         msg = message.lower()
         newmsg = ""
         for c in msg:
@@ -217,9 +328,10 @@ class Bot_Function:
                 newmsg = newmsg + c
 
         await client.say("https://cdn.discordapp.com/attachments/420589076916207626/437090583861788687/spongebob.png \n" + newmsg)
-
+        await client.send_message(discord.Object(id="436544688745480203"), "```&mock invoked from <" + str(ctx.message.server) + ">```")
 
 def main():
+    x = input('What is your discord bot token?')
     @client.event
     async def on_ready():
     	print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
@@ -232,7 +344,7 @@ def main():
     	print('--------')
     	return await client.change_presence(game=discord.Game(name='&help | DADDYS PLUNGER'))
 
-    client.run('')
+    client.run(x)
 
 if __name__ == "__main__":
     main()
