@@ -29,13 +29,11 @@ class Bot_Info:
     	await client.say(":ping_pong: Pong!")
     	await asyncio.sleep(1)
     	await client.say(":warning: I'M GAY")
-        await client.send_message(discord.Object(id="436544688745480203"), "```&ping invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context = True)
     async def feedback(ctx, *, user_feedback):
         await client.say("K, already sent your feedback 😎💯 ")
         await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
-
 
     @client.command(pass_context=True)
     async def help(ctx, *args):
@@ -279,7 +277,6 @@ class client_Function:
         await client.say(message)
         await client.send_message(discord.Object(id="436544688745480203"), "```&walk invoked from <" + str(ctx.message.server) + ">```")
 
-
     @client.command(pass_context=True)
     async def jerkit(ctx):
         await client.send_message(discord.Object(id="436544688745480203"), "```&jerkit invoked from <" + str(ctx.message.server) + ">```")
@@ -330,6 +327,48 @@ class client_Function:
         await client.say("https://cdn.discordapp.com/attachments/420589076916207626/437090583861788687/spongebob.png \n" + newmsg)
         await client.send_message(discord.Object(id="436544688745480203"), "```&mock invoked from <" + str(ctx.message.server) + ">```")
 
+    @client.command(pass_context=True)
+    async def ban(ctx, user: discord.Member, days: str = None):
+        if not ctx.message.author.server_permissions.administrator:
+            await client.say("You are not authorized to ban users.")
+            return
+
+        commander = ctx.message.author
+        server = ctx.message.server
+        if commander == user:
+            await client.say("If you don't like it here that much, just leave..")
+            return
+
+        if not client_Function.is_higher(server, commander, user):
+            await client.say("The user you are trying to ban is a higher role than you..")
+            return
+
+        days_msg = ""
+        if days:
+            if days.isdigit():
+                days = int(days)
+                if days > 7 or days < 0:
+                    await client.say("An invalid amount of days were given. Please use 0 - 7. If no amount is given, the value will default to 0.")
+                    return
+        else:
+            days = 0
+
+        if days == 0:
+            days_msg = "No messages have been deleted."
+        elif days == 1:
+            days_msg = "1 day worth of messages will be deleted."
+        else:
+            days_msg = "" + str(days) + " days worth of messages will be deleted."
+
+        try:
+            await client.ban(user, delete_message_days=days)
+            await client.say("Banning {} \n{}".format(user, days_msg))
+        except:
+            await client.say("I am not authorized to ban users.")
+
+    def is_higher(server, mod, user):
+    	return mod.top_role.position > user.top_role.position
+	
 def main():
     x = input('What is your discord bot token?')
     @client.event
