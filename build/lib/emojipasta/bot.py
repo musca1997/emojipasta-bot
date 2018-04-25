@@ -56,6 +56,7 @@ class Bot_Info:
         embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
+        embed.add_field(name="**&ban**", value="Only higher roles of the server can use this function. Use &ban someone.")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -174,7 +175,7 @@ class Bot_Info:
             await client.say("I need the `Embed links` permission "
                                   "to send this")
 
-class client_Function:
+class Bot_Function:
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
@@ -339,7 +340,7 @@ class client_Function:
             await client.say("If you don't like it here that much, just leave..")
             return
 
-        if not client_Function.is_higher(server, commander, user):
+        if not Bot_Function.is_higher(server, commander, user):
             await client.say("The user you are trying to ban is a higher role than you..")
             return
 
@@ -368,9 +369,8 @@ class client_Function:
 
     def is_higher(server, mod, user):
     	return mod.top_role.position > user.top_role.position
-	
+
 def main():
-    x = input('What is your discord bot token?')
     @client.event
     async def on_ready():
     	print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
@@ -383,7 +383,7 @@ def main():
     	print('--------')
     	return await client.change_presence(game=discord.Game(name='&help | DADDYS PLUNGER'))
 
-    client.run(x)
+    client.run('')
 
 if __name__ == "__main__":
     main()
