@@ -9,6 +9,7 @@ import discord
 import asyncio
 from discord.ext.commands import Bot
 from discord.ext import commands
+from discord.ext.commands.cooldowns import BucketType
 import platform
 import pyqrcode
 import png
@@ -54,7 +55,7 @@ class Bot_Info:
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
         embed.add_field(name="**&mock**", value="Use &mock with text to gEt cOoL tExT.")
         embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
-        embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off.")
+        embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off. You can only use it once every 5min.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
         embed.add_field(name="**&ban**", value="Only higher roles of the server can use this function. Use &ban someone.")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
@@ -279,6 +280,7 @@ class Bot_Function:
         await client.send_message(discord.Object(id="436544688745480203"), "```&walk invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 300, commands.BucketType.user)
     async def jerkit(ctx):
         await client.send_message(discord.Object(id="436544688745480203"), "```&jerkit invoked from <" + str(ctx.message.server) + ">```")
         msg = await client.say("8:fist:====D")
@@ -330,6 +332,7 @@ class Bot_Function:
 
     @client.command(pass_context=True)
     async def ban(ctx, user: discord.Member, days: str = None):
+        await client.send_message(discord.Object(id="436544688745480203"), "```&ban invoked from <" + str(ctx.message.server) + ">```")
         if not ctx.message.author.server_permissions.administrator:
             await client.say("You are not authorized to ban users.")
             return
