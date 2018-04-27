@@ -257,10 +257,21 @@ class Bot_Function:
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617219091333121/dab_2.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617218579759124/a79.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617147230453772/Bearded-Dab.png",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439001759168462848/giphy.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439001759168462849/AS003639_09.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439001759860391946/AW386482_01.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439001759860391947/dabpuush_by_discopanda_tm-d9znmse.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439001760447856640/dab_on_em_rose_by_madithekitten-dasw55o.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256214317170688/20162F022F072F862FBettyWhite.f3633.jpg",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256230528155658/d6d.jpg",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256250312556564/giphy.gif",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256264187445260/hqdefault.jpg",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256283821113344/maxresdefault.jpg",
+			"https://cdn.discordapp.com/attachments/428960174808498176/439256300107464715/minion_dab_by_julestheocelot-db7yk05.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292236/248.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/436862948200153088/wubba_lubba_dab_dab_by_alexandratale-dbew3ml.png",
+			"https://cdn.discordapp.com/attachments/420589076916207626/436862948200153088/wubba_lubba_dab_dab_by_alexandratale-dbew3ml.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 		]
         index = randint(0, len(dab_images) - 1)
