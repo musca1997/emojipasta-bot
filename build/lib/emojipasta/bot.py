@@ -57,7 +57,7 @@ class Bot_Info:
         embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off. You can only use it once every 5min.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
-        embed.add_field(name="**&ban**", value="Only higher roles of the server can use this function. Use &ban someone.")
+        embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -275,7 +275,9 @@ class Bot_Function:
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 		]
         index = randint(0, len(dab_images) - 1)
-        await client.say(dab_images[index] + "\n" + message)
+        embed = discord.Embed()
+        embed.set_image(url=dab_images[index])
+        await client.say(content=message, embed=embed)
         await client.send_message(discord.Object(id="436544688745480203"), "```&dab invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
@@ -342,47 +344,49 @@ class Bot_Function:
         await client.send_message(discord.Object(id="436544688745480203"), "```&mock invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
-    async def ban(ctx, user: discord.Member, days: str = None):
-        await client.send_message(discord.Object(id="436544688745480203"), "```&ban invoked from <" + str(ctx.message.server) + ">```")
-        if not ctx.message.author.server_permissions.administrator:
-            await client.say("You are not authorized to ban users.")
-            return
-
-        commander = ctx.message.author
-        server = ctx.message.server
-        if commander == user:
-            await client.say("If you don't like it here that much, just leave..")
-            return
-
-        if not Bot_Function.is_higher(server, commander, user):
-            await client.say("The user you are trying to ban is a higher role than you..")
-            return
-
-        days_msg = ""
-        if days:
-            if days.isdigit():
-                days = int(days)
-                if days > 7 or days < 0:
-                    await client.say("An invalid amount of days were given. Please use 0 - 7. If no amount is given, the value will default to 0.")
-                    return
-        else:
-            days = 0
-
-        if days == 0:
-            days_msg = "No messages have been deleted."
-        elif days == 1:
-            days_msg = "1 day worth of messages will be deleted."
-        else:
-            days_msg = "" + str(days) + " days worth of messages will be deleted."
-
+    async def ban(ctx, target: discord.User, *reason):
         try:
-            await client.ban(user, delete_message_days=days)
-            await client.say("Banning {} \n{}".format(user, days_msg))
-        except:
-            await client.say("I am not authorized to ban users.")
+            if (ctx.message.author.server_permissions.ban_members == True):
+                await client.ban(target)
+                reason = " ".join(map(str, reason))
+                await client.say("Banned {0} {1}".format(target, reason))
+            else:
+                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
+        except Exception as e:
+            await client.say("Failed. My role is not higher than that person.")
 
-    def is_higher(server, mod, user):
-    	return mod.top_role.position > user.top_role.position
+    @client.command(pass_context=True)
+    async def kick(ctx, target: discord.User, *reason):
+        try:
+            if (ctx.message.author.server_permissions.ban_members == True):
+                await client.kick(target)
+                reason = " ".join(map(str, reason))
+                await client.say("Kicked {0} {1}".format(target, reason))
+            else:
+                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
+        except Exception as e:
+            await client.say("Failed. My role is not higher than that person.")
+
+    @client.command(pass_context=True)
+    async def nick(ctx, target: discord.User, *, nickname):
+        try:
+            if (ctx.message.author.server_permissions.ban_members == True):
+                await client.change_nickname(target, nickname)
+                await client.say("Done.")
+            else:
+                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
+        except Exception as e:
+            await client.say("Failed. My role is not higher than that person.")
+
+    @client.command(pass_context=True)
+    async def status(ctx,  *, new_stat):
+        new_stat = "&help | " + new_stat
+        if (str(ctx.message.author) == "toiletplunger#8909" or "SpicyBigDaddy#8008" or "Frankup#0001" or "Orange#6303"):
+            await client.change_presence(game=discord.Game(name=(new_stat)))
+            await client.say("Done.")
+        else:
+            await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+
 
 def main():
     @client.event
