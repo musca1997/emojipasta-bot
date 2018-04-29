@@ -272,6 +272,17 @@ class Bot_Function:
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
 			"https://cdn.discordapp.com/attachments/420589076916207626/436862948200153088/wubba_lubba_dab_dab_by_alexandratale-dbew3ml.png",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439972205003145217/92af322e14246ae1291d06fa9e32223a.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439972589331283978/tenor.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439972589855834115/ee09ebd7068f47c52eff406cf8177c418dbd3e86_hq_by_the8bitdj-dbbdl6e.gif",
+            "https://cdn.discordapp.com/attachments/412884243195232257/439972560499769346/dabpuush_by_discopanda_tm-d9znmse.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439973096548597761/ovgeujull8bsku3o_by_theophobic-dbk0904.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439973217038368784/www_gifcreator_me_dj0utn_by_swap_sans-db6yudf.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439973320994324491/harambe.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439973445850365972/062717_milcin_arcia_sedar_dab_med_n9garc16.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439974137927041044/giphy.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439974802183290921/giphy-bdt.gif",
+            "https://cdn.discordapp.com/attachments/420589076916207626/439974968537907220/giphy.gif",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 		]
         index = randint(0, len(dab_images) - 1)
@@ -330,8 +341,12 @@ class Bot_Function:
         await client.send_message(discord.Object(id="436544688745480203"), "```&owo invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
-    async def mock(ctx, *, message: str):
-        msg = message.lower()
+    async def mock(ctx, *, message: str = None):
+        channel = ctx.message.channel
+        if not message:
+            msg = "my name is " + ctx.message.author.mention + " and I don't know how to properly use the mock command"
+        else:
+            msg = message.lower()
         newmsg = ""
         for c in msg:
             rand = randint(0, 1)
@@ -340,7 +355,10 @@ class Bot_Function:
             else:
                 newmsg = newmsg + c
 
-        await client.say("https://cdn.discordapp.com/attachments/420589076916207626/437090583861788687/spongebob.png \n" + newmsg)
+        embed = discord.Embed(description=newmsg)
+        embed.set_thumbnail(url="http://i.imgur.com/upItEiG.jpg")
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await client.send_message(channel, embed=embed)
         await client.send_message(discord.Object(id="436544688745480203"), "```&mock invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
@@ -381,11 +399,22 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def status(ctx,  *, new_stat):
         new_stat = "&help | " + new_stat
-        if (str(ctx.message.author) == "toiletplunger#8909" or "SpicyBigDaddy#8008" or "Frankup#0001" or "Orange#6303"):
+        if (str(ctx.message.author) == "toiletplunger#8909" or str(ctx.message.author)  == "SpicyBigDaddy#8008" or str(ctx.message.author)  == "Frankup#0001" or str(ctx.message.author)  == "Orange#6303"):
             await client.change_presence(game=discord.Game(name=(new_stat)))
             await client.say("Done.")
         else:
             await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+
+    @client.command(pass_context=True)
+    async def shrek(ctx):
+        channel = ctx.message.channel
+        author = ctx.message.author
+        message = author.mention + " has invited Shrek to visit " + channel.mention + "!"
+        embed = discord.Embed(description=message)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/421005964276138005/434538229438349313/Shrek_emoji.png")
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await client.send_message(channel, embed=embed)
+        await client.send_message(discord.Object(id="436544688745480203"), "```&shrek invoked from <" + str(ctx.message.server) + ">```")
 
 
 def main():
@@ -399,7 +428,6 @@ def main():
     	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(client.user.id))
     	print('--------')
     	print('--------')
-    	return await client.change_presence(game=discord.Game(name='&help | DADDYS PLUNGER'))
 
     client.run('')
 
