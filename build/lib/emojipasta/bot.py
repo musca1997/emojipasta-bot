@@ -177,6 +177,41 @@ class Bot_Info:
                                   "to send this")
 
 class Bot_Function:
+    @client.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
+    async def brawl(*users):
+        brawlers = len(users)
+        if brawlers > 5:
+            await client.say("To prevent this command from filling the chat with spam you are limited to 5 brawlers.")
+            return
+        elif brawlers == 1:
+            await client.say("Are you trying to fight yourself..? More than one brawler is required.")
+            return
+        combatants = list(users)
+        attack = ['punched','kicked','slapped','poked','bit']
+        bodypart = ['eyes','mouth','arm','leg','stomach','chest','groin','face']
+        users = ", ".join(map(str, users))
+        await client.say("Starting a brawl with {}".format(users))
+        await asyncio.sleep(3)
+        for i in range (len(combatants)):
+            if(len(combatants) == 1):
+                await client.say("{} is the victor!".format(combatants[0]))
+                return
+            los = rand.choice(combatants)
+            if(len(combatants) == 2):
+                vic = rand.choice(combatants)
+                if vic == los:
+                    combatants.remove(los)
+                    vic = combatants[0]
+                else:
+                    combatants.remove(los)
+            elif(brawlers > 2):
+                combatants.remove(los)
+                vic = rand.choice(combatants)
+            atk = rand.choice(attack)
+            bpt = rand.choice(bodypart)
+            await client.say("{0} has {1} {2} in the {3}! {2} is defeated!".format(vic,atk,los,bpt))
+            await asyncio.sleep(5)
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
@@ -433,3 +468,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
