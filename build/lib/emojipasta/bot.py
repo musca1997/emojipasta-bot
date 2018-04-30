@@ -26,7 +26,6 @@ class Bot_Info:
 
     @client.command(pass_context=True)
     async def ping(*args):
-
     	await client.say(":ping_pong: Pong!")
     	await asyncio.sleep(1)
     	await client.say(":warning: I'M GAY")
