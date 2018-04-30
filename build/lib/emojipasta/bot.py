@@ -53,6 +53,7 @@ class Bot_Info:
         embed.add_field(name="**&qr**", value="Use &qr with text to generate your own qrcode!")
         embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
         embed.add_field(name="**&dab**", value="Use &dab @someone to dab on them!")
+        embed.add_field(name="**&spin**", value="Use &spin @someone to spin on them!")
         embed.add_field(name="**&mock**", value="Use &mock with text to gEt cOoL tExT.")
         embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off. You can only use it once every 5min.")
@@ -178,12 +179,12 @@ class Bot_Info:
                                   "to send this")
 
 class Bot_Function:
-	
+
     async def log(command, server, time):
         embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
         embed.set_author(name=server)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
-        
+
     @client.command(pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def brawl(ctx, *users):
@@ -228,14 +229,14 @@ class Bot_Function:
 
         await client.say(final_emoji)
         await Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
         await Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def clap(ctx, *, original_clap):
         emojis = [" 👏 "," 👏🏻 "," 👏🏼 "," 👏🏽 "," 👏🏾 "," 👏🏿 "]
@@ -248,7 +249,7 @@ class Bot_Function:
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
         await Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def rn(ctx, arg1=1, arg2=100):
         try:
@@ -263,7 +264,7 @@ class Bot_Function:
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
         await Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def penislength(ctx, member: discord.Member=None):
         member = member or ctx.message.author
@@ -279,7 +280,7 @@ class Bot_Function:
             reaction = "Nice \U0001F609"
         await client.say("{}'s penis is **{} inches!** ({} cm)\n{}\n{}".format(member.mention, inches, cm, text, reaction))
         await Bot_Function.log("penislength", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def spin(ctx, member: discord.Member=None):
         if member:
@@ -293,7 +294,7 @@ class Bot_Function:
         embed.set_image(url="https://cdn.discordapp.com/attachments/372188609425702915/436986898641059870/fidget-spinner-gif-transparent-1.gif")
         await client.say(content=message, embed=embed)
         await Bot_Function.log("spin", ctx.message.server, ctx.message.timestamp)
-        
+
     @client.command(pass_context=True)
     async def dab(ctx, member: discord.Member=None):
         if member:
