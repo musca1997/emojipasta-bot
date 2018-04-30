@@ -57,6 +57,7 @@ class Bot_Info:
         embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
         embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off. You can only use it once every 5min.")
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
+        embed.add_field(name="**&brawl**", value="Use &brawl @someone @someone to let them fight!")
         embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
@@ -197,9 +198,9 @@ class Bot_Function:
             if(len(combatants) == 1):
                 await client.say("{} is the victor!".format(combatants[0]))
                 return
-            los = rand.choice(combatants)
+            los = choice(combatants)
             if(len(combatants) == 2):
-                vic = rand.choice(combatants)
+                vic = choice(combatants)
                 if vic == los:
                     combatants.remove(los)
                     vic = combatants[0]
@@ -207,11 +208,12 @@ class Bot_Function:
                     combatants.remove(los)
             elif(brawlers > 2):
                 combatants.remove(los)
-                vic = rand.choice(combatants)
-            atk = rand.choice(attack)
-            bpt = rand.choice(bodypart)
+                vic = choice(combatants)
+            atk = choice(attack)
+            bpt = choice(bodypart)
             await client.say("{0} has {1} {2} in the {3}! {2} is defeated!".format(vic,atk,los,bpt))
             await asyncio.sleep(5)
+
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
@@ -468,4 +470,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
