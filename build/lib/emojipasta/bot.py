@@ -268,7 +268,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def penislength(ctx, member: discord.Member=None):
         member = member or ctx.message.author
-        inches = random.randint(2, 12)
+        inches = randint(2, 12)
         cm = inches * 2.54
         text = "8" + ("=" * inches) + "D" + " " + "\U0001F4A6" * (inches // 2)
         reaction = ""
