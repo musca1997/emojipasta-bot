@@ -187,7 +187,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def brawl(ctx, *users):
-        Bot_Function.log("brawl", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("brawl", ctx.message.server, ctx.message.timestamp)
         brawlers = len(users)
         if brawlers > 5:
             await client.say("To prevent this command from filling the chat with spam you are limited to 5 brawlers.")
@@ -227,14 +227,14 @@ class Bot_Function:
         final_emoji = generator.generate_emojipasta(original_words)
 
         await client.say(final_emoji)
-        Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
         
     @client.command(pass_context=True)
     async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
-        Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
         
     @client.command(pass_context=True)
     async def clap(ctx, *, original_clap):
@@ -247,14 +247,14 @@ class Bot_Function:
             new_blocks.append(emoji)
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
-        Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
         
     @client.command(pass_context=True)
     async def rn(ctx, arg1=1, arg2=100):
         try:
             random_number = randint(arg1, arg2)
             await client.say("{}-{}: {}".format(arg1, arg2, random_number))
-            Bot_Function.log("rn", ctx.message.server, ctx.message.timestamp)
+            await Bot_Function.log("rn", ctx.message.server, ctx.message.timestamp)
         except ValueError:
             await client.say("Invalid range")
 
@@ -262,7 +262,7 @@ class Bot_Function:
     async def b(ctx, *, message: str):
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
-        Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
         
     @client.command(pass_context=True)
     async def penislength(ctx, member: discord.Member=None):
