@@ -176,12 +176,12 @@ class Bot_Info:
                                   "to send this")
 
 class Bot_Function:
-	
+
 	async def log(command, server, time):
 		embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
 		embed.set_author(name=server)
 		await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
-		
+
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
@@ -189,14 +189,14 @@ class Bot_Function:
 
         await client.say(final_emoji)
 		await Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
-		
+
     @client.command(pass_context=True)
     async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
 		await Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
-		
+
     @client.command(pass_context=True)
     async def clap(ctx, *, original_clap):
         emojis = [" 👏 "," 👏🏻 "," 👏🏼 "," 👏🏽 "," 👏🏾 "," 👏🏿 "]
@@ -209,7 +209,7 @@ class Bot_Function:
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
 		await Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
-		
+
     @client.command(pass_context=True)
     async def rn(ctx, arg1=1, arg2=100):
         try:
@@ -224,7 +224,7 @@ class Bot_Function:
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
 		await Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
-		
+
 	@client.command(pass_context=True)
 	async def penislength(ctx, member: discord.Member=None):
 		member = member or ctx.message.author
@@ -295,7 +295,7 @@ class Bot_Function:
         embed.set_image(url=dab_images[index])
         await client.say(content=message, embed=embed)
 		await Bot_Function.log("dab", ctx.message.server, ctx.message.timestamp)
-		
+
     @client.command(pass_context=True)
     async def walk(ctx, member: discord.Member=None):
         if member:
