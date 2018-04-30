@@ -177,10 +177,10 @@ class Bot_Info:
 
 class Bot_Function:
 
-	async def log(command, server, time):
-		embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
-		embed.set_author(name=server)
-		await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
+    async def log(command, server, time):
+        embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
+        embed.set_author(name=server)
+        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
@@ -188,14 +188,14 @@ class Bot_Function:
         final_emoji = generator.generate_emojipasta(original_words)
 
         await client.say(final_emoji)
-		await Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("pasta", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
-		await Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("yn", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def clap(ctx, *, original_clap):
@@ -208,14 +208,14 @@ class Bot_Function:
             new_blocks.append(emoji)
         final_clap = "".join(new_blocks)
         await client.say(final_clap)
-		await Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("clap", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def rn(ctx, arg1=1, arg2=100):
         try:
             random_number = randint(arg1, arg2)
             await client.say("{}-{}: {}".format(arg1, arg2, random_number))
-			await Bot_Function.log("rn", ctx.message.server, ctx.message.timestamp)
+            await Bot_Function.log("rn", ctx.message.server, ctx.message.timestamp)
         except ValueError:
             await client.say("Invalid range")
 
@@ -223,7 +223,7 @@ class Bot_Function:
     async def b(ctx, *, message: str):
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
-		await Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("b", ctx.message.server, ctx.message.timestamp)
 
 	@client.command(pass_context=True)
 	async def penislength(ctx, member: discord.Member=None):
@@ -239,7 +239,7 @@ class Bot_Function:
 		else:
 			reaction = "Nice \U0001F609"
 		await client.say("{}'s penis is **{} inches!** ({} cm)\n{}\n{}".format(member.mention, inches, cm, text, reaction))
-		await Bot_Function.log("penislength", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("penislength", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def dab(ctx, member: discord.Member=None):
@@ -294,7 +294,7 @@ class Bot_Function:
         embed = discord.Embed()
         embed.set_image(url=dab_images[index])
         await client.say(content=message, embed=embed)
-		await Bot_Function.log("dab", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("dab", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def walk(ctx, member: discord.Member=None):
