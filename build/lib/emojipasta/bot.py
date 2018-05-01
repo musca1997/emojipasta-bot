@@ -129,7 +129,7 @@ class Bot_Info:
 
         try:
             await client.say(embed=data)
-            await client.send_message(discord.Object(id="436544688745480203"), "```&userinfo invoked from <" + str(ctx.message.server) + ">```")
+            await Bot_Function.log("userinfo", ctx.message.server, ctx.message.timestamp)
         except discord.HTTPException:
             await client.say("I need the `Embed links` permission "
                                    "to send this")
@@ -173,7 +173,7 @@ class Bot_Info:
 
         try:
             await client.say(embed=data)
-            await client.send_message(discord.Object(id="436544688745480203"), "```&serverinfo invoked from <" + str(ctx.message.server) + ">```")
+            await Bot_Function.log("serverinfo", ctx.message.server, ctx.message.timestamp)
         except discord.HTTPException:
             await client.say("I need the `Embed links` permission "
                                   "to send this")
