@@ -207,6 +207,7 @@ class Bot_Function:
         embed.set_footer(text="\U0001F44D " + tu + "  |  \U0001F44E " + td)
         embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
         await client.send_message(ctx.message.channel, embed=embed)
+        Bot_Function.log("ud", ctx.message.server, ctx.message.timestamp)
 
     def check_duplicate(users):
         di = dict()
