@@ -225,63 +225,63 @@ class Bot_Function:
             await asyncio.sleep(5)
 
     @client.command(pass_context=True)
-	async def flip(ctx, *, message: str):
-		reverse = message[::-1]
-		letters = {' ': ' ','z': 'z','y': 'ʎ','x': 'x','w': 'ʍ','v': 'ʌ','u': 'n','t': 'ʇ','s': 's','r': 'ɹ',
+    async def flip(ctx, *, message: str):
+        reverse = message[::-1]
+        letters = {' ': ' ','z': 'z','y': 'ʎ','x': 'x','w': 'ʍ','v': 'ʌ','u': 'n','t': 'ʇ','s': 's','r': 'ɹ',
         'q': 'b','p': 'd','o': 'o','n': 'u','m': 'ɯ','l': 'l','k': 'ʞ','j': 'ɾ','i': 'ᴉ','h': 'ɥ',
         'g': 'ƃ','f': 'ɟ','e': 'ǝ','d': 'p','c': 'ɔ','b': 'q','a': 'ɐ'}
-		newmsg = ""
-		for c in reverse:
-			if not letters.get(c):
-				continue
-			newmsg = newmsg + letters[c]
-		await client.say(newmsg)
+        newmsg = ""
+        for c in reverse:
+            if not letters.get(c):
+                continue
+            newmsg = newmsg + letters[c]
+        await client.say(newmsg)
         await Bot_Function.log("flip", ctx.message.server, ctx.message.timestamp)
 
-	@client.command(pass_context=True)
-	async def uw(ctx, message: str = None):
-		if message == "list":
-			await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
-			return
-		f = open(os.path.join(__location__, "randomsites.txt"));
-		contents = f.readlines()
-		link = ""
-		rand = randint(0, len(contents))
-		counter = 0
-		for i in contents:
-			if counter == rand:
-				link = i
-				break
-			else:
-				counter+=1
-		f.close()
-		embed = discord.Embed(description=link + "\nReport a broken link with the &feedback command.")
-		embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
-		embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
-		await client.send_message(ctx.message.channel, embed=embed)
+    @client.command(pass_context=True)
+    async def uw(ctx, message: str = None):
+        if message == "list":
+            await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
+            return
+        f = open(os.path.join(__location__, "randomsites.txt"));
+        contents = f.readlines()
+        link = ""
+        rand = randint(0, len(contents))
+        counter = 0
+        for i in contents:
+            if counter == rand:
+                link = i
+                break
+            else:
+                counter+=1
+        f.close()
+        embed = discord.Embed(description=link + "\nReport a broken link with the &feedback command.")
+        embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await client.send_message(ctx.message.channel, embed=embed)
         await Bot_Function.log("uw", ctx.message.server, ctx.message.timestamp)
 
-	@client.command(pass_context=True)
-	async def bw(ctx, message: str = None):
-		if message == "list":
-			await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
-			return
-		f = open(os.path.join(__location__, "bannedsites.txt"));
-		contents = f.readlines()
-		link = ""
-		rand = randint(0, len(contents))
-		counter = 0
-		for i in contents:
-			if counter == rand:
-				link = i
-				break
-			else:
-				counter+=1
-		f.close()
-		embed = discord.Embed(description=link + "\n:flag_cn: Embrace your non-China privilege by visiting a website banned in China! :flag_cn: \nReport a broken link with the &feedback command.")
-		embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
-		embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
-		await client.send_message(ctx.message.channel, embed=embed)
+    @client.command(pass_context=True)
+    async def bw(ctx, message: str = None):
+        if message == "list":
+            await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
+            return
+        f = open(os.path.join(__location__, "bannedsites.txt"));
+        contents = f.readlines()
+        link = ""
+        rand = randint(0, len(contents))
+        counter = 0
+        for i in contents:
+            if counter == rand:
+                link = i
+                break
+            else:
+                counter+=1
+        f.close()
+        embed = discord.Embed(description=link + "\n:flag_cn: Embrace your non-China privilege by visiting a website banned in China! :flag_cn: \nReport a broken link with the &feedback command.")
+        embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await client.send_message(ctx.message.channel, embed=embed)
         await Bot_Function.log("bw", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
