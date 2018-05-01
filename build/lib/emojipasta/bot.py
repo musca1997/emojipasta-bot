@@ -1,6 +1,7 @@
 from random import choice
 from random import randint
 import io
+import os
 import json
 
 from emojigene import EmojipastaGenerator
@@ -60,6 +61,7 @@ class Bot_Info:
         embed.add_field(name="**&walk**", value="Use &walk @someone to walk with them!")
         embed.add_field(name="**&brawl**", value="Use &brawl @someone @someone to let them fight!")
         embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
+        embed.add_field(name="**&flip**", value="uʍop ǝpᴉsdn ʇxǝʇ ɹnoʎ dᴉlɟ")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -221,6 +223,20 @@ class Bot_Function:
             bpt = choice(bodypart)
             await client.say("{0} has {1} {2} in the {3}! {2} is defeated!".format(vic,atk,los,bpt))
             await asyncio.sleep(5)
+
+    @client.command(pass_context=True)
+	async def flip(ctx, *, message: str):
+		reverse = message[::-1]
+		letters = {' ': ' ','z': 'z','y': 'ʎ','x': 'x','w': 'ʍ','v': 'ʌ','u': 'n','t': 'ʇ','s': 's','r': 'ɹ',
+        'q': 'b','p': 'd','o': 'o','n': 'u','m': 'ɯ','l': 'l','k': 'ʞ','j': 'ɾ','i': 'ᴉ','h': 'ɥ',
+        'g': 'ƃ','f': 'ɟ','e': 'ǝ','d': 'p','c': 'ɔ','b': 'q','a': 'ɐ'}
+		newmsg = ""
+		for c in reverse:
+			if not letters.get(c):
+				continue
+			newmsg = newmsg + letters[c]
+		await client.say(newmsg)
+        await Bot_Function.log("flip", ctx.message.server, ctx.message.timestamp)
 
 	@client.command(pass_context=True)
 	async def uw(ctx, message: str = None):
