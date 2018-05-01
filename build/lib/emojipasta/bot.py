@@ -185,10 +185,24 @@ class Bot_Function:
         embed.set_author(name=server)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
+
+    def check_duplicate(users):
+        di = dict()
+        for u in users:
+            if not u in di:
+                di.update({u: 0})
+            else:
+                di.update({u: di.get(u) + 1})
+        for key, value in di.items():
+            if value > 0:
+                return True
     @client.command(pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def brawl(ctx, *users):
         await Bot_Function.log("brawl", ctx.message.server, ctx.message.timestamp)
+        if Bot_Function.checkduplicate(users) == True:
+            await client.say("You cannot duplicate brawlers..")
+            return
         brawlers = len(users)
         if brawlers > 5:
             await client.say("To prevent this command from filling the chat with spam you are limited to 5 brawlers.")
