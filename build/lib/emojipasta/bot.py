@@ -62,6 +62,8 @@ class Bot_Info:
         embed.add_field(name="**&brawl**", value="Use &brawl @someone @someone to let them fight!")
         embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
         embed.add_field(name="**&flip**", value="uʍop ǝpᴉsdn ʇxǝʇ ɹnoʎ dᴉlɟ")
+        embed.add_field(name="**&d**", value="DES PA CI TO. Can only be used once every min.")
+        embed.add_field(name="**&uw/&bw**", value="Use &uw or &bw to grab a random website!")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
         embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
         embed.add_field(name="**&help**", value="Nothing special. Just to get this info and help message.")
@@ -243,7 +245,7 @@ class Bot_Function:
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
             return
-        f = open(os.path.join(__location__, "randomsites.txt"));
+        f = open(os.path.join("randomsites.txt"));
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -266,7 +268,7 @@ class Bot_Function:
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
             return
-        f = open(os.path.join(__location__, "bannedsites.txt"));
+        f = open(os.path.join("bannedsites.txt"));
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -489,6 +491,7 @@ class Bot_Function:
                 await client.ban(target)
                 reason = " ".join(map(str, reason))
                 await client.say("Banned {0} {1}".format(target, reason))
+                await Bot_Function.log("ban", ctx.message.server, ctx.message.timestamp)
             else:
                 await client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
@@ -501,6 +504,7 @@ class Bot_Function:
                 await client.kick(target)
                 reason = " ".join(map(str, reason))
                 await client.say("Kicked {0} {1}".format(target, reason))
+                await Bot_Function.log("kick", ctx.message.server, ctx.message.timestamp)
             else:
                 await client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
@@ -512,6 +516,7 @@ class Bot_Function:
             if (ctx.message.author.server_permissions.ban_members == True):
                 await client.change_nickname(target, nickname)
                 await client.say("Done.")
+                await Bot_Function.log("nick", ctx.message.server, ctx.message.timestamp)
             else:
                 await client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
@@ -536,6 +541,14 @@ class Bot_Function:
         embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
         await client.send_message(channel, embed=embed)
         await Bot_Function.log("shrek", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
+    @commands.cooldown(1, 60, commands.BucketType.user)
+    async def d(ctx):
+        for i in 'DESPACITO':
+            await client.say(i)
+            await asyncio.sleep(1)
+        await Bot_Function.log("d", ctx.message.server, ctx.message.timestamp)
 
 
 def main():
