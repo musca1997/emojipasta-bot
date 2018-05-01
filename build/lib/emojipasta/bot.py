@@ -222,6 +222,52 @@ class Bot_Function:
             await client.say("{0} has {1} {2} in the {3}! {2} is defeated!".format(vic,atk,los,bpt))
             await asyncio.sleep(5)
 
+	@client.command(pass_context=True)
+	async def uw(ctx, message: str = None):
+		if message == "list":
+			await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
+			return
+		f = open(os.path.join(__location__, "randomsites.txt"));
+		contents = f.readlines()
+		link = ""
+		rand = randint(0, len(contents))
+		counter = 0
+		for i in contents:
+			if counter == rand:
+				link = i
+				break
+			else:
+				counter+=1
+		f.close()
+		embed = discord.Embed(description=link + "\nReport a broken link with the &feedback command.")
+		embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
+		embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+		await client.send_message(ctx.message.channel, embed=embed)
+        await Bot_Function.log("uw", ctx.message.server, ctx.message.timestamp)
+
+	@client.command(pass_context=True)
+	async def bw(ctx, message: str = None):
+		if message == "list":
+			await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
+			return
+		f = open(os.path.join(__location__, "bannedsites.txt"));
+		contents = f.readlines()
+		link = ""
+		rand = randint(0, len(contents))
+		counter = 0
+		for i in contents:
+			if counter == rand:
+				link = i
+				break
+			else:
+				counter+=1
+		f.close()
+		embed = discord.Embed(description=link + "\n:flag_cn: Embrace your non-China privilege by visiting a website banned in China! :flag_cn: \nReport a broken link with the &feedback command.")
+		embed.set_author(name=ctx.message.author.display_name + " requested a link!", icon_url=ctx.message.author.avatar_url)
+		embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+		await client.send_message(ctx.message.channel, embed=embed)
+        await Bot_Function.log("bw", ctx.message.server, ctx.message.timestamp)
+
     @client.command(pass_context=True)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
