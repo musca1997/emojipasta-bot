@@ -223,7 +223,7 @@ class Bot_Function:
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def brawl(ctx, *users):
         await Bot_Function.log("brawl", ctx.message.server, ctx.message.timestamp)
-        if Bot_Function.checkduplicate(users) == True:
+        if Bot_Function.check_duplicate(users) == True:
             await client.say("You cannot duplicate brawlers..")
             return
         brawlers = len(users)
