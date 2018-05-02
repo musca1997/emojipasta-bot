@@ -14,6 +14,8 @@ from discord.ext.commands.cooldowns import BucketType
 import platform
 import pyqrcode
 import png
+import json
+import requests
 
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
@@ -59,6 +61,7 @@ class Bot_Info:
         embed.add_field(name="**&walk/&dab/&spin/&brawl**", value="Use one of these commands with @someone to interact with them!")
         embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
         embed.add_field(name="**&flip**", value="uʍop ǝpᴉsdn ʇxǝʇ ɹnoʎ dᴉlɟ")
+        embed.add_field(name="**&ud**", value="Use &ud <term> to search Urban Dictionary!")
         embed.add_field(name="**&d**", value="DES PA CI TO. Can only be used once every min.")
         embed.add_field(name="**&uw/&bw/&d**", value="Useless commands but why not try?")
         embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
@@ -185,10 +188,44 @@ class Bot_Function:
         embed.set_author(name=server)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
+
+    @client.command(pass_context=True)
+    async def ud(ctx, *, message: str):
+        term = message
+        r = requests.get("http://api.urbandictionary.com/v0/define?term=" + term)
+        data = json.loads(r.text)
+        result = data['result_type']
+        if result == "no_results":
+            await client.say("No definition was found for *" + term + "*")
+            return
+        definition = data['list'][0]['definition']
+        word = data['list'][0]['word']
+        example = data['list'][0]['example']
+        tu = str(data['list'][0]['thumbs_up'])
+        td = str(data['list'][0]['thumbs_down'])
+        embed = discord.Embed(title=word, description=definition + "\n\n*" + example + "*")
+        embed.set_footer(text="\U0001F44D " + tu + "  |  \U0001F44E " + td)
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await client.send_message(ctx.message.channel, embed=embed)
+        Bot_Function.log("ud", ctx.message.server, ctx.message.timestamp)
+
+    def check_duplicate(users):
+        di = dict()
+        for u in users:
+            if not u in di:
+                di.update({u: 0})
+            else:
+                di.update({u: di.get(u) + 1})
+        for key, value in di.items():
+            if value > 0:
+                return True
     @client.command(pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def brawl(ctx, *users):
         await Bot_Function.log("brawl", ctx.message.server, ctx.message.timestamp)
+        if Bot_Function.checkduplicate(users) == True:
+            await client.say("You cannot duplicate brawlers..")
+            return
         brawlers = len(users)
         if brawlers > 5:
             await client.say("To prevent this command from filling the chat with spam you are limited to 5 brawlers.")
