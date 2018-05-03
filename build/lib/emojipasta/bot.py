@@ -578,7 +578,8 @@ class Bot_Function:
     @client.command(pass_context=True)
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def d(ctx):
-        for i in 'DESPACITO':
+        d = ["DES", "PA", "CITO"]
+        for i in d:
             await client.say(i)
             await asyncio.sleep(1)
         await Bot_Function.log("d", ctx.message.server, ctx.message.timestamp)
