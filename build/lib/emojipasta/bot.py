@@ -558,7 +558,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def status(ctx,  *, new_stat):
         new_stat = "&help | " + new_stat
-        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author)  == "396783619466854402" or str(ctx.message.author)  == "183457916114698241" or str(ctx.message.author)  == "294963984535257089"):
+        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
             await client.change_presence(game=discord.Game(name=(new_stat)))
             await client.say("Done.")
         else:
