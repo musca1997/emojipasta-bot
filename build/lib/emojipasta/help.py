@@ -82,4 +82,4 @@ class Help():
         await self.client.say(embed=embed)
 
 def setup(client):
-    bot.add_cog(Help(client))
+    client.add_cog(Help(client))
