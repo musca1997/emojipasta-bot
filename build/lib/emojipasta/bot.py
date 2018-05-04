@@ -560,7 +560,7 @@ def main():
     	print('--------')
     	print('--------')
 
-    client.load_extention("help")
+    client.load_extension("help")
     client.run('')
 
 if __name__ == "__main__":
