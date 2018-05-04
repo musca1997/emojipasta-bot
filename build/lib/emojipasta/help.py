@@ -75,7 +75,7 @@ class Help():
         embed.add_field(name="💬", value=str(len(self.client.servers))+ ' **servers**', inline=True)
         embed.add_field(name="🏠", value=str(len(set(self.client.get_all_members())))+ ' **users**', inline=True)
         embed.add_field(name="👁", value="[support](https://discord.gg/JHNRwr6)", inline=True)
-        embed.add_field(name="💦", value="[github](https://github.com/musca1997/emojipasta-bot)", inline=True)
+        embed.add_field(name="💦", value="[website](https://www.emojipasta.fun/)", inline=True)
         embed.add_field(name="💯", value="[vote](https://discordbots.org/bot/429662497172357123)", inline=True)
         embed.add_field(name="😎", value="[invite](https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8)", inline=True)
 

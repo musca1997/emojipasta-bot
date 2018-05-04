@@ -28,6 +28,11 @@ class Bot_Info:
         await client.send_message(discord.Object(id="436544688745480203"), "```&orange invoked from <" + str(ctx.message.server) + ">```")
 
     @client.command(pass_context=True)
+    async def github(ctx, *args):
+        await client.say("https://github.com/musca1997/emojipasta-bot")
+        await client.send_message(discord.Object(id="436544688745480203"), "```&github invoked from <" + str(ctx.message.server) + ">```")
+
+    @client.command(pass_context=True)
     async def ping(*args):
 
     	await client.say(":ping_pong: Pong!")
