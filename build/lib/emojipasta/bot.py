@@ -40,43 +40,6 @@ class Bot_Info:
         await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
 
     @client.command(pass_context=True)
-    async def help(ctx, *args):
-        embed = discord.Embed(title="Kermit Klan House", colour=discord.Colour(0xa4302c), url="https://discord.gg/JHNRwr6", description="Emojipasta-Bot is a bot mainly for converting text to emojipasta.")
-
-        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/419521490220744705/429667256717279262/f42b7e7.png")
-        embed.set_author(name="Emojipasta-Bot Info", url="https://discordapp.com", icon_url="https://cdn.discordapp.com/attachments/419521490220744705/429667256717279262/f42b7e7.png")
-        embed.set_footer(text="Powered by Kermit Klan House", icon_url="https://cdn.discordapp.com/attachments/419521490220744705/429667256717279262/f42b7e7.png")
-
-        embed.add_field(name="**&pasta**", value="Use &pasta to convert text to emojipasta.\nInput:```&pasta This is a shitty bot\n```Output:\n```This 😤 is a shitty 💩💩 bot```")
-        embed.add_field(name="**&clap**", value="Use &clap to add clap emoji to text.\nInput:```&clap Mommy bought me new pony toy I love you mama\n```Output:\n```Mommy 👏🏻 bought 👏🏼 me 👏 new 👏🏽 pony 👏🏿 toy 👏🏾 I 👏 love 👏🏾 you 👏🏽 mama```")
-        embed.add_field(name="**&yn**", value="Use &yn to make decision (yes or no).\nInput:```&yn Should I use this function?\n```Output:\n```YES!```")
-        embed.add_field(name="**&rn**", value="Use &rn to generate a random number.\nInput (Default Range):```&rn\n```Output:\n```1-100: <number>\n```Input (Custom Range):```&rn 87 305\n```Output:\n```87-305: <number>```")
-        embed.add_field(name="**&b**", value="Use &b to replace any letter 'b' with 🅱️.\nInput:```&b Emojipasta bot is the best bot!\n```Output:\n```Emojipasta 🅱️ot is the 🅱️est 🅱️ot!```")
-        embed.add_field(name="**&owo**", value="Use &owo with text to make you owo!")
-        embed.add_field(name="**&qr**", value="Use &qr with text to generate your own qrcode!")
-        embed.add_field(name="**&penislength**", value="Use &penislength to measure your penis length! Try tagging someone to find out theirs!")
-        embed.add_field(name="**&mock**", value="Use &mock with text to gEt cOoL tExT.")
-        embed.add_field(name="**&userinfo**", value="Use &userinfo or &serverinfo to get the information.")
-        embed.add_field(name="**&jerkit**", value="Use &jerkit to jerk off when you can't jerk off. You can only use it once every 5min.")
-        embed.add_field(name="**&walk/&dab/&spin/&brawl**", value="Use one of these commands with @someone to interact with them!")
-        embed.add_field(name="**&ban/&kick/&nick**", value="Only higher roles of the server can use these functions.")
-        embed.add_field(name="**&flip**", value="uʍop ǝpᴉsdn ʇxǝʇ ɹnoʎ dᴉlɟ")
-        embed.add_field(name="**&ud**", value="Use &ud <term> to search Urban Dictionary!")
-        embed.add_field(name="**&d**", value="DES PA CI TO. Can only be used once every min.")
-        embed.add_field(name="**&uw/&bw/&d**", value="Useless commands but why not try?")
-        embed.add_field(name="**&ping**", value="Nothing special. Just to test if bot is working.")
-        embed.add_field(name="**&feedback**", value="Use this to send feedback, we'll contact you if your feedback is valuable.")
-        embed.add_field(name="💬", value=str(len(client.servers))+ ' **servers**', inline=True)
-        embed.add_field(name="🏠", value=str(len(set(client.get_all_members())))+ ' **users**', inline=True)
-        embed.add_field(name="👁", value="[support](https://discord.gg/JHNRwr6)", inline=True)
-        embed.add_field(name="💦", value="[github](https://github.com/musca1997/emojipasta-bot)", inline=True)
-        embed.add_field(name="💯", value="[vote](https://discordbots.org/bot/429662497172357123)", inline=True)
-        embed.add_field(name="😎", value="[invite](https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8)", inline=True)
-
-        await client.say(content="So here's the info of Emojipasta-Bot ", embed=embed)
-        await Bot_Function.log("help", ctx.message.server, ctx.message.timestamp)
-
-    @client.command(pass_context=True)
     async def userinfo(ctx, *, user: discord.Member=None):
         """Shows users's informations"""
         author = ctx.message.author
@@ -558,7 +521,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def status(ctx,  *, new_stat):
         new_stat = "&help | " + new_stat
-        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author)  == "396783619466854402" or str(ctx.message.author)  == "183457916114698241" or str(ctx.message.author)  == "294963984535257089"):
+        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
             await client.change_presence(game=discord.Game(name=(new_stat)))
             await client.say("Done.")
         else:
@@ -578,7 +541,8 @@ class Bot_Function:
     @client.command(pass_context=True)
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def d(ctx):
-        for i in 'DESPACITO':
+        d = ["DES", "PA", "CITO"]
+        for i in d:
             await client.say(i)
             await asyncio.sleep(1)
         await Bot_Function.log("d", ctx.message.server, ctx.message.timestamp)
@@ -596,6 +560,7 @@ def main():
     	print('--------')
     	print('--------')
 
+    client.load_extention("help")
     client.run('')
 
 if __name__ == "__main__":
