@@ -591,16 +591,29 @@ class Bot_Function:
         await client.say(content="OK here's the random blank meme template for you!", embed=embed)
         await Bot_Function.log("t", ctx.message.server, ctx.message.timestamp)
 
-    @client.command(pass_context=True)
-    async def addt(ctx, temp_url):
-        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
-            f = open('memetemplates.txt', 'a')
-            f.write(temp_url + '\n')
-            f.close()
-            await client.say("Added the new meme template successfully!")
-        else:
-            await client.say("Cucked. Bot Owners only.")
-
+    @client.event
+    async def on_message(message):
+        if not message.channel.id == "431202784575094794":
+            return
+        if not message.attachments:
+            return
+        url = str(message.attachments[0]['url'])
+        extensions = ["png", "gif", "jpg", "jpeg"]
+        length = len(url)
+        index = 1
+        for x in range(2, length):
+            if url[-x] == ".":
+                break
+            else:
+                index+=1
+        ext = url[-index:]
+        if ext not in extensions:
+            await bot.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
+            return
+        f = open('memetemplates.txt', 'a')
+        f.write(url + '\n')
+        f.close()
+        await bot.send_message(message.channel, "Added the new meme template successfully!")
 
 def main():
     @client.event
