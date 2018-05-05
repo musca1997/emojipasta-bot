@@ -608,12 +608,12 @@ class Bot_Function:
                 index+=1
         ext = url[-index:]
         if ext not in extensions:
-            await bot.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
+            await client.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
             return
         f = open('memetemplates.txt', 'a')
         f.write(url + '\n')
         f.close()
-        await bot.send_message(message.channel, "Added the new meme template successfully!")
+        await client.send_message(message.channel, "Added the new meme template successfully!")
 
 def main():
     @client.event
