@@ -594,6 +594,20 @@ class Bot_Function:
     @client.command(pass_context=True)
     async def addt(ctx, temp_url):
         if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
+            extensions = ["png", "gif", "jpg", "jpeg"]
+            length = len(temp_url)
+            index = 1
+            for x in range(2, length):
+                if temp_url[-x] == ".":
+                    return
+                else:
+                    index+=1
+
+            ext = temp_url[-index:]
+            if ext not in extensions:
+                await client.say("Supported file types are png, gif, jpg, and jpeg.")
+                return
+
             f = open('memetemplates.txt', 'a')
             f.write(temp_url + '\n')
             f.close()
