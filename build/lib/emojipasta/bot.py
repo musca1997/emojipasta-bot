@@ -34,10 +34,9 @@ class Bot_Info:
 
     @client.command(pass_context=True)
     async def ping(*args):
-
-    	await client.say(":ping_pong: Pong!")
-    	await asyncio.sleep(1)
-    	await client.say(":warning: I'M GAY")
+        await client.say(":ping_pong: Pong!")
+        await asyncio.sleep(1)
+        await client.say(":warning: I'M GAY")
         await Bot_Function.log("ping", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context = True)
@@ -572,6 +571,35 @@ class Bot_Function:
             await client.say(i)
             await asyncio.sleep(1)
         await Bot_Function.log("d", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
+    async def t(ctx):
+        f = open(os.path.join("memetemplates.txt"))
+        contents = f.readlines()
+        link = ""
+        rand = randint(0, len(contents))
+        counter = 0
+        for i in contents:
+            if counter == rand:
+                link = i
+                break
+            else:
+                counter+=1
+        f.close()
+        embed = discord.Embed()
+        embed.set_image(url=link)
+        await client.say(content="OK here's the random blank meme template for you!", embed=embed)
+        await Bot_Function.log("t", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
+    async def addt(ctx, temp_url):
+        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
+            f = open('memetemplates.txt', 'a')
+            f.write(temp_url + '\n')
+            f.close()
+            await client.say("Added the new meme template successfully!")
+        else:
+            await client.say("Cucked. Bot Owners only.")
 
 
 def main():

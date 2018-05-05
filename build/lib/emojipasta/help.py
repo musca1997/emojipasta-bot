@@ -39,6 +39,7 @@ class Help():
             "uw": "uw\nSelects a random useless website and displays it to the channel.",
             "bw": "bw\nYa'll ever want to flex on Chinese users? Displays a website that is banned in China.",
             "comic": "comic\nGo back to the year 2011 and enjoy le epik trolled style forever alone xdxd",
+            "t": "t\nGrab a random blank meme template!",
             "ping": "ping\nUsed as a test command to make sure the bot is working."
         }
         if message:
@@ -56,17 +57,16 @@ class Help():
             ["b", "Replace any letter 'b' with 🅱️"],
             ["owo", "You wiww weawwy wove this one"],
             ["qr", "Generate a QR code"],
-            ["penislength", "Measure penislength"],
+            ["penislength/jerkit", "Things to do with your pee pee"],
             ["mock", "Use &mock with text to gEt cOoL tExT."],
             ["userinfo", "Use &userinfo or &serverinfo to get the information."],
-            ["jerkit", "Use &jerkit to jerk off when you can't jerk off."],
             ["walk/&dab/&spin/&brawl", "Use one of these commands with @someone to interact with them!"],
             ["ban/&kick/&nick", "Only higher roles of the server can use these functions."],
             ["flip", "uʍop ǝpᴉsdn ʇxǝʇ ɹnoʎ dᴉlɟ"],
             ["ud", "Use &ud <term> to search Urban Dictionary!"],
-            ["d", "DES PA CI TO. Can only be used once every min."],
             ["uw/&bw/&d", "Useless commands but why not try?"],
             ["comic", "Enjoy le epik trolled style forever alone xdxd"],
+            ["t", "Grab a random blank meme template!"],
             ["ping", "Nothing special. Just to test if bot is working."],
         ]
 
