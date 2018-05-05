@@ -614,7 +614,9 @@ class Bot_Function:
         f = open('memetemplates.txt', 'a')
         f.write(url + '\n')
         f.close()
-        await client.send_message(message.channel, "Added the new meme template successfully!")
+        embed = discord.Embed(description="uploaded by" + message.author, timestamp=time)
+        embed.set_author(name="Meme template")
+        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
 def main():
     @client.event
