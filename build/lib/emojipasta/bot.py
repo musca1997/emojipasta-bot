@@ -33,7 +33,7 @@ class Bot_Info:
         await Bot_Function.log("github", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
-    async def ping(*args):
+    async def ping(ctx, *args):
         await client.say(":ping_pong: Pong!")
         await asyncio.sleep(1)
         await client.say(":warning: I'M GAY")
@@ -593,6 +593,7 @@ class Bot_Function:
 
     @client.event
     async def on_message(message):
+        await client.process_commands(message)
         if not message.channel.id == "431202784575094794":
             return
         if not message.attachments:
