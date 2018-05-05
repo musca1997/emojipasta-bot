@@ -25,12 +25,12 @@ class Bot_Info:
     @client.command(pass_context=True)
     async def orange(ctx, *args):
         await client.say("<@294963984535257089> is my best big titty goth gf <33333")
-        await client.send_message(discord.Object(id="436544688745480203"), "```&orange invoked from <" + str(ctx.message.server) + ">```")
+        await Bot_Function.log("orange", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def github(ctx, *args):
         await client.say("https://github.com/musca1997/emojipasta-bot")
-        await client.send_message(discord.Object(id="436544688745480203"), "```&github invoked from <" + str(ctx.message.server) + ">```")
+        await Bot_Function.log("github", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def ping(*args):
@@ -38,6 +38,7 @@ class Bot_Info:
     	await client.say(":ping_pong: Pong!")
     	await asyncio.sleep(1)
     	await client.say(":warning: I'M GAY")
+        await Bot_Function.log("ping", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context = True)
     async def feedback(ctx, *, user_feedback):
@@ -550,6 +551,7 @@ class Bot_Function:
             await client.say("Done.")
         else:
             await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+        await Bot_Function.log("status", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def shrek(ctx):

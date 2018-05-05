@@ -38,6 +38,7 @@ class Help():
             "d": "d\nSings one of the most famous lyrics of all time.\n**Cooldown:** 1 minute.",
             "uw": "uw\nSelects a random useless website and displays it to the channel.",
             "bw": "bw\nYa'll ever want to flex on Chinese users? Displays a website that is banned in China.",
+            "comic": "comic\nGo back to the year 2011 and enjoy le epik trolled style forever alone xdxd",
             "ping": "ping\nUsed as a test command to make sure the bot is working."
         }
         if message:
@@ -65,6 +66,7 @@ class Help():
             ["ud", "Use &ud <term> to search Urban Dictionary!"],
             ["d", "DES PA CI TO. Can only be used once every min."],
             ["uw/&bw/&d", "Useless commands but why not try?"],
+            ["comic", "Enjoy le epik trolled style forever alone xdxd"],
             ["ping", "Nothing special. Just to test if bot is working."],
         ]
 
