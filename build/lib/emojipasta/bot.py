@@ -265,11 +265,30 @@ class Bot_Function:
         await Bot_Function.log("uw", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
+    async def comic(ctx):
+        f = open(os.path.join("comics.txt"))
+        contents = f.readlines()
+        link = ""
+        rand = randint(0, len(contents))
+        counter = 0
+        for i in contents:
+            if counter == rand:
+                link = i
+                break
+            else:
+                counter+=1
+        f.close()
+        embed = discord.Embed()
+        embed.set_image(url=link)
+        await client.say(content="Our :100: devs :ok_hand: enjoy :lion_face::relaxed: them :punch: unironically", embed=embed)
+        await Bot_Function.log("comic", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
     async def bw(ctx, message: str = None):
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
             return
-        f = open(os.path.join("bannedsites.txt"));
+        f = open(os.path.join("bannedsites.txt"))
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
