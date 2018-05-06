@@ -24,13 +24,18 @@ class Bot_Info:
 
     @client.command(pass_context=True)
     async def help(ctx, *args):
-        await client.say("Check out command list here: https://www.emojipasta.fun/commands/")
+        await client.say("Check out command list here: https://www.emojipasta.fun/commands/ \nJoin our support server if you need more info: https://discord.gg/JHNRwr6")
         await Bot_Function.log("help", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def invite(ctx, *args):
         await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
         await Bot_Function.log("invite", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
+    async def vote(ctx, *args):
+        await client.say("https://discordbots.org/bot/429662497172357123")
+        await Bot_Function.log("vote", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def orange(ctx, *args):
