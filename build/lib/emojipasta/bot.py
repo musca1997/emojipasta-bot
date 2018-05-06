@@ -594,7 +594,7 @@ class Bot_Function:
     @client.event
     async def on_message(message):
         await client.process_commands(message)
-        if not message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448":
+        if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
             return
         if not message.attachments:
             return
@@ -615,7 +615,7 @@ class Bot_Function:
         f = open(files[str(message.channel.id)], 'a')
         f.write(url + '\n')
         f.close()
-        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + message.author, timestamp=time)
+        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
 def main():
