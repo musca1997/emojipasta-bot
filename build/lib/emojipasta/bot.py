@@ -27,6 +27,7 @@ class Bot_Info:
         await client.say("Check out command list here: https://www.emojipasta.fun/commands/")
         await Bot_Function.log("help", ctx.message.server, ctx.message.timestamp)
 
+    @client.command(pass_context=True)
     async def invite(ctx, *args):
         await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
         await Bot_Function.log("invite", ctx.message.server, ctx.message.timestamp)
