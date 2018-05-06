@@ -615,7 +615,7 @@ class Bot_Function:
         f = open(files[str(message.channel.id)], 'a')
         f.write(url + '\n')
         f.close()
-        embed = discord.Embed(description="File added to " + files[str(message.channel.id)], timestamp=time)
+        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + message.author, timestamp=time)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
 def main():
