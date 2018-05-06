@@ -23,6 +23,15 @@ client.remove_command("help")
 class Bot_Info:
 
     @client.command(pass_context=True)
+    async def help(ctx, *args):
+        await client.say("Check out command list here: https://www.emojipasta.fun/commands/")
+        await Bot_Function.log("help", ctx.message.server, ctx.message.timestamp)
+
+    async def invite(ctx, *args):
+        await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
+        await Bot_Function.log("invite", ctx.message.server, ctx.message.timestamp)
+
+    @client.command(pass_context=True)
     async def orange(ctx, *args):
         await client.say("<@294963984535257089> is my best big titty goth gf <33333")
         await Bot_Function.log("orange", ctx.message.server, ctx.message.timestamp)
@@ -630,7 +639,6 @@ def main():
     	print('--------')
     	print('--------')
 
-    client.load_extension("help")
     client.run('')
 
 if __name__ == "__main__":
