@@ -594,10 +594,11 @@ class Bot_Function:
     @client.event
     async def on_message(message):
         await client.process_commands(message)
-        if not message.channel.id == "431202784575094794":
+        if not message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448":
             return
         if not message.attachments:
             return
+        files = {"431202784575094794": "memetemplates.txt", "442488016523624448": "comics.txt"}
         url = str(message.attachments[0]['url'])
         extensions = ["png", "gif", "jpg", "jpeg"]
         length = len(url)
@@ -611,11 +612,10 @@ class Bot_Function:
         if ext not in extensions:
             await client.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
             return
-        f = open('memetemplates.txt', 'a')
+        f = open(files[str(message.channel.id)], 'a')
         f.write(url + '\n')
         f.close()
-        embed = discord.Embed(description="uploaded by" + message.author, timestamp=time)
-        embed.set_author(name="Meme template")
+        embed = discord.Embed(description="File added to " + files[str(message.channel.id)], timestamp=time)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
 def main():
