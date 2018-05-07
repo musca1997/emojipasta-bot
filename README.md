@@ -29,11 +29,17 @@ python3 bot.py
 
 Use & as prefix. &help if you need help.
 
-![](https://cdn.discordapp.com/attachments/421365350689406977/440066950547374084/example.png)
+![](https://media.discordapp.net/attachments/420589076916207626/442525531745812490/image.png?width=574&height=524)
+
 
 ## Links
+
+[website](https://www.emojipasta.fun/)
+
 [invite](https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8)
+
+[command list](https://www.emojipasta.fun/commands/)
 
 [vote](https://discordbots.org/bot/429662497172357123)
 
-Also if you have any problems, add me on discord: toiletplunger#8909
+[server](https://discord.gg/JHNRwr6)

@@ -54,6 +54,7 @@ class Bot_Info:
         await client.say(":warning: I'M GAY")
         await Bot_Function.log("ping", ctx.message.server, ctx.message.timestamp)
 
+    @commands.cooldown(1, 30, commands.BucketType.user)
     @client.command(pass_context = True)
     async def feedback(ctx, *, user_feedback):
         await client.say("K, already sent your feedback 😎💯 ")
@@ -171,6 +172,28 @@ class Bot_Function:
         embed.set_author(name=server)
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
+    @commands.cooldown(1, 30, commands.BucketType.user)
+    @client.command(pass_context=True)
+    async def poll(ctx, question: str, *options: str):
+        optioncount = len(options)
+        if optioncount == 1:
+            await bot.say("It's not really a poll if there's only one option.")
+            return
+        if optioncount > 10:
+            await bot.say("Poll option limit is 10! Try simplifying your question.")
+            return
+        reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+        msg = ""
+        for x, option in enumerate(options):
+            msg = msg + "\n{} {}".format(reactions[x], option)
+
+        embed = discord.Embed(title=question, description=msg)
+        message = await client.say(embed=embed)
+
+        for reaction in reactions[:optioncount]:
+            await client.add_reaction(message, reaction)
+
+        await client.edit_message(message, embed=embed)
 
     @client.command(pass_context=True)
     async def ud(ctx, *, message: str):
@@ -624,6 +647,7 @@ class Bot_Function:
             else:
                 index+=1
         ext = url[-index:]
+        ext = ext.lower()
         if ext not in extensions:
             await client.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
             return
