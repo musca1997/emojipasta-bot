@@ -23,6 +23,15 @@ client.remove_command("help")
 class Bot_Info:
 
     @client.command(pass_context=True)
+    async def count(ctx, *args):
+        embed = discord.Embed(description="\n**So here is the server and user count.**")
+        embed.add_field(name="💬", value=str(len(client.servers))+ ' **servers**', inline=True)
+        embed.add_field(name="🏠", value=str(len(set(client.get_all_members())))+ ' **users**', inline=True)
+        await client.say(embed=embed)
+        await Bot_Function.log("count", ctx.message.server, ctx.message.timestamp)
+
+
+    @client.command(pass_context=True)
     async def help(ctx, *args):
         await client.say("Check out command list here: https://www.emojipasta.fun/commands/ \nJoin our support server if you need more info: https://discord.gg/JHNRwr6")
         await Bot_Function.log("help", ctx.message.server, ctx.message.timestamp)
@@ -177,10 +186,10 @@ class Bot_Function:
     async def poll(ctx, question: str, *options: str):
         optioncount = len(options)
         if optioncount == 1:
-            await bot.say("It's not really a poll if there's only one option.")
+            await client.say("It's not really a poll if there's only one option.")
             return
         if optioncount > 10:
-            await bot.say("Poll option limit is 10! Try simplifying your question.")
+            await client.say("Poll option limit is 10! Try simplifying your question.")
             return
         reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
         msg = ""
@@ -638,7 +647,7 @@ class Bot_Function:
             return
         files = {"431202784575094794": "memetemplates.txt", "442488016523624448": "comics.txt"}
         url = str(message.attachments[0]['url'])
-        extensions = ["png", "gif", "jpg", "jpeg"]
+        extensions = ["png", "gif", "jpg", "jpeg", "PNG", "GIF", "JPG", "JPEG"]
         length = len(url)
         index = 1
         for x in range(2, length):
@@ -647,9 +656,7 @@ class Bot_Function:
             else:
                 index+=1
         ext = url[-index:]
-        ext = ext.lower()
         if ext not in extensions:
-            await client.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
             return
         f = open(files[str(message.channel.id)], 'a')
         f.write(url + '\n')
