@@ -647,6 +647,7 @@ class Bot_Function:
             else:
                 index+=1
         ext = url[-index:]
+        ext = ext.lower()
         if ext not in extensions:
             await client.send_message(message.channel, "Supported file types are png, gif, jpg, and jpeg.")
             return
