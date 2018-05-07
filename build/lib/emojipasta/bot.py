@@ -54,6 +54,7 @@ class Bot_Info:
         await client.say(":warning: I'M GAY")
         await Bot_Function.log("ping", ctx.message.server, ctx.message.timestamp)
 
+    @commands.cooldown(1, 30, commands.BucketType.user)
     @client.command(pass_context = True)
     async def feedback(ctx, *, user_feedback):
         await client.say("K, already sent your feedback 😎💯 ")
