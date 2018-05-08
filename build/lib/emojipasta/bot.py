@@ -312,7 +312,7 @@ class Bot_Function:
         await Bot_Function.log("uw", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
-    async def comic(ctx):
+    async def maymay(ctx):
         f = open(os.path.join("comics.txt"))
         contents = f.readlines()
         link = ""
@@ -328,7 +328,7 @@ class Bot_Function:
         embed = discord.Embed()
         embed.set_image(url=link)
         await client.say(content="Our :100: devs :ok_hand: enjoy :lion_face::relaxed: them :punch: unironically", embed=embed)
-        await Bot_Function.log("comic", ctx.message.server, ctx.message.timestamp)
+        await Bot_Function.log("maymay", ctx.message.server, ctx.message.timestamp)
 
     @client.command(pass_context=True)
     async def bw(ctx, message: str = None):
@@ -473,6 +473,7 @@ class Bot_Function:
             "https://cdn.discordapp.com/attachments/420589076916207626/439974137927041044/giphy.gif",
             "https://cdn.discordapp.com/attachments/420589076916207626/439974802183290921/giphy-bdt.gif",
             "https://cdn.discordapp.com/attachments/420589076916207626/439974968537907220/giphy.gif",
+            "https://media.discordapp.net/attachments/428960174808498176/443191684981850123/6088d94.png?width=528&height=523",
 			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
 		]
         index = randint(0, len(dab_images) - 1)
@@ -663,6 +664,82 @@ class Bot_Function:
         f.close()
         embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
         await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
+
+    @client.event
+    async def on_server_join(server):
+        server = server
+        online = len([m.status for m in server.members
+                         if m.status == discord.Status.online or
+                         m.status == discord.Status.idle])
+        total_users = len(server.members)
+        text_channels = len([x for x in server.channels
+                             if x.type == discord.ChannelType.text])
+        voice_channels = len([x for x in server.channels
+                                if x.type == discord.ChannelType.voice])
+
+        colour = ''.join([choice('0123456789ABCDEF') for x in range(6)])
+        colour = int(colour, 16)
+
+        data = discord.Embed(
+            description="",
+            colour=discord.Colour(value=colour))
+        data.add_field(name="Region", value=str(server.region))
+        data.add_field(name="Users", value="{}/{}".format(online, total_users))
+        data.add_field(name="Text Channels", value=text_channels)
+        data.add_field(name="Voice Channels", value=voice_channels)
+        data.add_field(name="Roles", value=len(server.roles))
+        data.add_field(name="Owner", value=str(server.owner))
+        data.set_footer(text="Server ID: " + server.id)
+
+        if server.icon_url:
+            data.set_author(name=server.name, url=server.icon_url)
+            data.set_thumbnail(url=server.icon_url)
+        else:
+            data.set_author(name=server.name)
+
+        try:
+            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **added** into a new server!", embed=data)
+        except discord.HTTPException:
+            await client.say("I need the `Embed links` permission "
+                                  "to send this")
+
+    @client.event
+    async def on_server_remove(server):
+        server = server
+        online = len([m.status for m in server.members
+                         if m.status == discord.Status.online or
+                         m.status == discord.Status.idle])
+        total_users = len(server.members)
+        text_channels = len([x for x in server.channels
+                             if x.type == discord.ChannelType.text])
+        voice_channels = len([x for x in server.channels
+                                if x.type == discord.ChannelType.voice])
+
+        colour = ''.join([choice('0123456789ABCDEF') for x in range(6)])
+        colour = int(colour, 16)
+
+        data = discord.Embed(
+            description="",
+            colour=discord.Colour(value=colour))
+        data.add_field(name="Region", value=str(server.region))
+        data.add_field(name="Users", value="{}/{}".format(online, total_users))
+        data.add_field(name="Text Channels", value=text_channels)
+        data.add_field(name="Voice Channels", value=voice_channels)
+        data.add_field(name="Roles", value=len(server.roles))
+        data.add_field(name="Owner", value=str(server.owner))
+        data.set_footer(text="Server ID: " + server.id)
+
+        if server.icon_url:
+            data.set_author(name=server.name, url=server.icon_url)
+            data.set_thumbnail(url=server.icon_url)
+        else:
+            data.set_author(name=server.name)
+
+        try:
+            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **removed** from this server. Press XD to pay respect.", embed=data)
+        except discord.HTTPException:
+            await client.say("I need the `Embed links` permission "
+                                  "to send this")
 
 def main():
     @client.event
