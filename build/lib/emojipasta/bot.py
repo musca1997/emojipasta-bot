@@ -17,6 +17,7 @@ import png
 import json
 import requests
 
+
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
 
@@ -753,7 +754,9 @@ def main():
     	print('--------')
     	print('--------')
 
+    client.load_extension('image')
     client.run('')
+
 
 if __name__ == "__main__":
     main()
