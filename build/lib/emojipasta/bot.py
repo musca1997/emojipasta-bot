@@ -17,7 +17,6 @@ import png
 import json
 import requests
 
-
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
 
@@ -179,11 +178,6 @@ class Bot_Info:
                                   "to send this")
 
 class Bot_Function:
-
-    async def log(command, server, time):
-        embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
-        embed.set_author(name=server)
-        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
     @commands.cooldown(1, 30, commands.BucketType.user)
     @client.command(pass_context=True)
@@ -538,50 +532,6 @@ class Bot_Function:
         await client.send_message(channel, embed=embed)
 
     @client.command(pass_context=True)
-    async def ban(ctx, target: discord.User, *reason):
-        try:
-            if (ctx.message.author.server_permissions.ban_members == True):
-                await client.ban(target)
-                reason = " ".join(map(str, reason))
-                await client.say("Banned {0} {1}".format(target, reason))
-            else:
-                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
-        except Exception as e:
-            await client.say("Failed. My role is not higher than that person.")
-
-    @client.command(pass_context=True)
-    async def kick(ctx, target: discord.User, *reason):
-        try:
-            if (ctx.message.author.server_permissions.ban_members == True):
-                await client.kick(target)
-                reason = " ".join(map(str, reason))
-                await client.say("Kicked {0} {1}".format(target, reason))
-            else:
-                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
-        except Exception as e:
-            await client.say("Failed. My role is not higher than that person.")
-
-    @client.command(pass_context=True)
-    async def nick(ctx, target: discord.User, *, nickname):
-        try:
-            if (ctx.message.author.server_permissions.ban_members == True):
-                await client.change_nickname(target, nickname)
-                await client.say("Done.")
-            else:
-                await client.say("You don't have the required permissions, {}".format(ctx.message.author))
-        except Exception as e:
-            await client.say("Failed. My role is not higher than that person.")
-
-    @client.command(pass_context=True)
-    async def status(ctx,  *, new_stat):
-        new_stat = "&help | " + new_stat
-        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
-            await client.change_presence(game=discord.Game(name=(new_stat)))
-            await client.say("Done.")
-        else:
-            await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
-
-    @client.command(pass_context=True)
     async def shrek(ctx):
         channel = ctx.message.channel
         author = ctx.message.author
@@ -616,32 +566,6 @@ class Bot_Function:
         embed = discord.Embed()
         embed.set_image(url=link)
         await client.say(content="OK here's the random blank meme template for you!", embed=embed)
-
-    @client.event
-    async def on_message(message):
-        await client.process_commands(message)
-        if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
-            return
-        if not message.attachments:
-            return
-        files = {"431202784575094794": "memetemplates.txt", "442488016523624448": "comics.txt"}
-        url = str(message.attachments[0]['url'])
-        extensions = ["png", "gif", "jpg", "jpeg", "PNG", "GIF", "JPG", "JPEG"]
-        length = len(url)
-        index = 1
-        for x in range(2, length):
-            if url[-x] == ".":
-                break
-            else:
-                index+=1
-        ext = url[-index:]
-        if ext not in extensions:
-            return
-        f = open(files[str(message.channel.id)], 'a')
-        f.write(url + '\n')
-        f.close()
-        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
-        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
     @client.event
     async def on_server_join(server):
@@ -719,6 +643,42 @@ class Bot_Function:
             await client.say("I need the `Embed links` permission "
                                   "to send this")
 
+class Restricted:
+    @client.command(pass_context=True)
+    async def status(ctx,  *, new_stat):
+        new_stat = "&help | " + new_stat
+        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
+            await client.change_presence(game=discord.Game(name=(new_stat)))
+            await client.say("Done.")
+        else:
+            await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+
+    @client.event
+    async def on_message(message):
+        await client.process_commands(message)
+        if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
+            return
+        if not message.attachments:
+            return
+        files = {"431202784575094794": "memetemplates.txt", "442488016523624448": "comics.txt"}
+        url = str(message.attachments[0]['url'])
+        extensions = ["png", "gif", "jpg", "jpeg"]
+        length = len(url)
+        index = 1
+        for x in range(2, length):
+            if url[-x] == ".":
+                break
+            else:
+                index+=1
+        ext = url[-index:].lower()
+        if ext not in extensions:
+            return
+        f = open(files[str(message.channel.id)], 'a')
+        f.write(url + '\n')
+        f.close()
+        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
+        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
+
 def main():
     @client.event
     async def on_ready():
@@ -731,9 +691,11 @@ def main():
     	print('--------')
     	print('--------')
 
-    client.load_extension('image')
-    client.run('')
+    cogs = ['image', 'moderation']
+    for cog in cogs:
+        client.load_extension(cog)
 
+    client.run('')
 
 if __name__ == "__main__":
     main()
