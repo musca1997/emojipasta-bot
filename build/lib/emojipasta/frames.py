@@ -10,6 +10,7 @@ class Frames():
     def __init__(self, client):
         self.client = client
 
+#meme frames
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="zucc1 zucc2 zucc3")
     async def zucc(self):
@@ -86,6 +87,94 @@ class Frames():
     async def kek(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def preg(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def trigger(self):
+        pass
+
+#music frames
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="coil1 coil2")
+    async def coil(self):
+        pass
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def coil1(self):
+        pass
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def coil2(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def dg(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def viper(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def lrd(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def nmh(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def television(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def blond(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def ac(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def vu(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def lilpeep(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def lilpump(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def madvillainy(self):
+        pass
+
+
+#film frames
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def cowboy(self):
+        pass
+
+#func thinggy
     async def on_command(self, command, ctx):
         if command.description:
             split = command.description.split()
