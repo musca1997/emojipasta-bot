@@ -1,3 +1,6 @@
+[![Discord Bots](https://discordbots.org/api/widget/servers/429662497172357123.svg)](https://discordbots.org/bot/429662497172357123)
+[![Discord Bots](https://discordbots.org/api/widget/status/429662497172357123.svg)](https://discordbots.org/bot/429662497172357123)
+
 ## Description
 
 ![](https://media.discordapp.net/attachments/420589076916207626/445403014413680645/0b474fc21107647274667b194e7417dc.png)
