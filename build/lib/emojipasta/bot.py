@@ -19,7 +19,7 @@ import requests
 
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
-os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
+
 class Bot_Info:
 
     @client.command(pass_context=True)
@@ -723,7 +723,7 @@ def main():
     for cog in cogs:
         client.load_extension(cog)
 
-    client.run('NDA3MzcyNDMwODM1ODQzMDg0.DdsbEQ.5y3dgbNu3Y2K1ngUG2HCxgP15RA')
+    client.run('')
 
 if __name__ == "__main__":
     main()

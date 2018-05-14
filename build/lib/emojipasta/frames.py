@@ -5,7 +5,6 @@ from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 import urllib.request
 import os
-os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
 
 class Frames():
     def __init__(self, client):
