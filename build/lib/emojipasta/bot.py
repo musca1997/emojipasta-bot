@@ -719,7 +719,7 @@ def main():
     	print('--------')
     	print('--------')
 
-    cogs = ['image', 'moderation']
+    cogs = ['image', 'moderation', 'frames']
     for cog in cogs:
         client.load_extension(cog)
 
