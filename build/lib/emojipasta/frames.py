@@ -5,6 +5,7 @@ from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 import urllib.request
 import os
+os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
 
 class Frames():
     def __init__(self, client):
@@ -69,6 +70,21 @@ class Frames():
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command()
     async def shutterstock(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def commie(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def gay(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def kek(self):
         pass
 
     async def on_command(self, command, ctx):

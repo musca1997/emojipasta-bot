@@ -21,38 +21,6 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
-    async def gay(self, ctx, *args):
-        chosen_filter = 'filters/gay.png'
-        pic_name = str(ctx.message.channel.id)+'.png'
-        await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
-        await self.client.send_file(ctx.message.channel, pic_name)
-
-    @commands.command(pass_context=True)
-    @commands.cooldown(1, 15, commands.BucketType.user)
-    async def ss(self, ctx, *args):
-        chosen_filter = 'filters/shutterstock.png'
-        pic_name = str(ctx.message.channel.id)+'.png'
-        await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
-        await self.client.send_file(ctx.message.channel, pic_name)
-
-    @commands.command(pass_context=True)
-    @commands.cooldown(1, 15, commands.BucketType.user)
-    async def commie(self, ctx, *args):
-        chosen_filter = 'filters/commie.png'
-        pic_name = str(ctx.message.channel.id)+'.png'
-        await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
-        await self.client.send_file(ctx.message.channel, pic_name)
-
-    @commands.command(pass_context=True)
-    @commands.cooldown(1, 15, commands.BucketType.user)
-    async def kek(self, ctx, *args):
-        chosen_filter = 'filters/kek.png'
-        pic_name = str(ctx.message.channel.id)+'.png'
-        await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
-        await self.client.send_file(ctx.message.channel, pic_name)
-
-    @commands.command(pass_context=True)
-    @commands.cooldown(1, 15, commands.BucketType.user)
     async def glitch(self, ctx, *args):
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx)
