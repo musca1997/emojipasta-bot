@@ -9,91 +9,88 @@ class Bot_Image_Filter():
     def __init__(self, client):
         self.client = client
 
-    async def log(self, command, server, time):
-        embed = discord.Embed(description="used the " + command + " command.", timestamp=time)
-        embed.set_author(name=server)
-        await self.client.send_message(discord.Object(id="436544688745480203"), embed=embed)
-
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def blur(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx)
         original = Image.open(pic_name)
         blurred = original.filter(ImageFilter.BLUR)
         blurred.save(pic_name)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "blur", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def ifunny(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/ifunny.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "ifunny", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def gay(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/gay.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "gay", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def ss(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/shutterstock.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "ss", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def funwaa(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/funwaa.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "funwaa", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def commie(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/commie.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "commie", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def kek(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         chosen_filter = 'filters/kek.png'
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "kek", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def zucc(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         zucc_list = ['filters/zucc1.png', 'filters/zucc2.png', 'filters/zucc3.png']
         num = randint(0, len(zucc_list)-1)
         chosen_filter = zucc_list[num]
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "zucc", ctx.message.server, ctx.message.timestamp)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    async def idub(self, ctx, num: int = None):
+        idub_list = ['filters/idub1.png', 'filters/idub2.png', 'filters/idub3.png', 'filters/idub4.png', 'filters/idub5.png', 'filters/idub6.png']
+        if num is None:
+            num = randint(0, len(idub_list)-1)
+        chosen_filter = idub_list[num]
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.filtered_image(self, ctx, pic_name, chosen_filter)
+        await self.client.send_file(ctx.message.channel, pic_name)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def glitch(self, ctx, *args):
-        await self.client.say("**Processing Image...(Note: In order to prevent spam, you can only use filter funcs once every 15s.)**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx)
         img = Image.open(pic_name)
@@ -110,7 +107,6 @@ class Bot_Image_Filter():
         img = ImageEnhance.Sharpness(img).enhance(100.0)
         img.save(pic_name)
         await self.client.send_file(ctx.message.channel, pic_name)
-        await Bot_Image_Filter.log(self, "glitch", ctx.message.server, ctx.message.timestamp)
 
 
     async def filtered_image(self, ctx, pic_name, chosen_filter):

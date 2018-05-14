@@ -23,6 +23,7 @@ client.remove_command("help")
 class Bot_Info:
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def count(ctx, *args):
         embed = discord.Embed(description="\n**So here is the server and user count.**")
         embed.add_field(name="💬", value=str(len(client.servers))+ ' **servers**', inline=True)
@@ -43,26 +44,32 @@ class Bot_Info:
         await client.send_message(discord.Object(id="436544688745480203"), embed=logembed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def help(ctx, *args):
         await client.say("Check out command list here: https://www.emojipasta.fun/commands/ \nJoin our support server if you need more info: https://discord.gg/JHNRwr6")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def invite(ctx, *args):
         await client.say("https://discordapp.com/oauth2/authorize?client_id=429662497172357123&scope=bot&permissions=8")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def vote(ctx, *args):
         await client.say("https://discordbots.org/bot/429662497172357123")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def orange(ctx, *args):
         await client.say("<@294963984535257089> is my best big titty goth gf <33333")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def github(ctx, *args):
         await client.say("https://github.com/musca1997/emojipasta-bot")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def ping(ctx, *args):
         await client.say(":ping_pong: Pong!")
         await asyncio.sleep(1)
@@ -75,6 +82,7 @@ class Bot_Info:
         await client.send_message(discord.Object(id='434726800711483393'), str(ctx.message.author) + ' from <' + str(ctx.message.server) + '> just sent a feedback: ```' + str(user_feedback) + '```')
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def userinfo(ctx, *, user: discord.Member=None):
         """Shows users's informations"""
         author = ctx.message.author
@@ -135,6 +143,7 @@ class Bot_Info:
                                    "to send this")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def serverinfo(ctx):
         """Shows server's informations"""
         server = ctx.message.server
@@ -203,6 +212,7 @@ class Bot_Function:
         await client.edit_message(message, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def ud(ctx, *, message: str):
         term = message
         r = requests.get("http://api.urbandictionary.com/v0/define?term=" + term)
@@ -271,6 +281,7 @@ class Bot_Function:
             await asyncio.sleep(5)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def flip(ctx, *, message: str):
         reverse = message[::-1]
         letters = {' ': ' ','z': 'z','y': 'ʎ','x': 'x','w': 'ʍ','v': 'ʌ','u': 'n','t': 'ʇ','s': 's','r': 'ɹ',
@@ -284,6 +295,7 @@ class Bot_Function:
         await client.say(newmsg)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def uw(ctx, message: str = None):
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
@@ -306,6 +318,7 @@ class Bot_Function:
         await client.send_message(ctx.message.channel, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def maymay(ctx):
         f = open(os.path.join("comics.txt"))
         contents = f.readlines()
@@ -324,6 +337,7 @@ class Bot_Function:
         await client.say(content="Our :100: devs :ok_hand: enjoy :lion_face::relaxed: them :punch: unironically", embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def bw(ctx, message: str = None):
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
@@ -346,6 +360,7 @@ class Bot_Function:
         await client.send_message(ctx.message.channel, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def pasta(ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
         final_emoji = generator.generate_emojipasta(original_words)
@@ -353,12 +368,14 @@ class Bot_Function:
         await client.say(final_emoji)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def yn(ctx, *args):
         decide_list = ['YES!','NO!']
         decide_answer = choice(decide_list)
         await client.say(decide_answer)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def clap(ctx, *, original_clap):
         emojis = [" 👏 "," 👏🏻 "," 👏🏼 "," 👏🏽 "," 👏🏾 "," 👏🏿 "]
         split_clap = original_clap.split()
@@ -371,6 +388,7 @@ class Bot_Function:
         await client.say(final_clap)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def rn(ctx, arg1=1, arg2=100):
         try:
             random_number = randint(arg1, arg2)
@@ -379,11 +397,13 @@ class Bot_Function:
             await client.say("Invalid range")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def b(ctx, *, message: str):
         newmsg = message.replace("b", "\U0001F171").replace("B", "\U0001f171")
         await client.say(newmsg)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def penislength(ctx, member: discord.Member=None):
         member = member or ctx.message.author
         inches = randint(2, 12)
@@ -399,6 +419,7 @@ class Bot_Function:
         await client.say("{}'s penis is **{} inches!** ({} cm)\n{}\n{}".format(member.mention, inches, cm, text, reaction))
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def spin(ctx, member: discord.Member=None):
         if member:
             member = member
@@ -412,6 +433,7 @@ class Bot_Function:
         await client.say(content=message, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def dab(ctx, member: discord.Member=None):
         if member:
             member = member
@@ -467,6 +489,7 @@ class Bot_Function:
         await client.say(content=message, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def walk(ctx, member: discord.Member=None):
         if member:
             member = member
@@ -501,17 +524,20 @@ class Bot_Function:
         await client.edit_message(msg,"8:fist:====D:sweat_drops:")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def qr(ctx, *, msg):
         qr = pyqrcode.create(msg)
         qr.png('qrcode.png', scale=5)
         await client.send_file(ctx.message.channel, 'qrcode.png')
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def owo(ctx, *, message: str):
         newmsg = message.replace("r", "w").replace("l", "w")
         await client.say("**O**w**O** " + newmsg + " **O**w**O**")
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def mock(ctx, *, message: str = None):
         channel = ctx.message.channel
         if not message:
@@ -532,6 +558,7 @@ class Bot_Function:
         await client.send_message(channel, embed=embed)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def shrek(ctx):
         channel = ctx.message.channel
         author = ctx.message.author
@@ -550,6 +577,7 @@ class Bot_Function:
             await asyncio.sleep(1)
 
     @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def t(ctx):
         f = open(os.path.join("memetemplates.txt"))
         contents = f.readlines()
@@ -600,7 +628,7 @@ class Bot_Function:
             data.set_author(name=server.name)
 
         try:
-            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **added** into a new server!", embed=data)
+            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **added** into a new server! Now I'm in " + str(len(client.servers)) + " servers with " + str(len(set(client.get_all_members()))) + " users.", embed=data)
         except discord.HTTPException:
             await client.say("I need the `Embed links` permission "
                                   "to send this")
@@ -638,7 +666,7 @@ class Bot_Function:
             data.set_author(name=server.name)
 
         try:
-            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **removed** from this server. Press XD to pay respect.", embed=data)
+            await client.send_message(discord.Object(id="436544688745480203"), content="I just got **removed** from this server. Press XD to pay respect. Now I'm in " + str(len(client.servers)) + " servers with " + str(len(set(client.get_all_members()))) + " users.", embed=data)
         except discord.HTTPException:
             await client.say("I need the `Embed links` permission "
                                   "to send this")
