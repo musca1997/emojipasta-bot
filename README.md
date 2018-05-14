@@ -33,6 +33,8 @@ Use & as prefix. **&help** if you need help.
 
 ![](https://media.discordapp.net/attachments/420589076916207626/442525531745812490/image.png?width=574&height=524)
 
+![](https://media.discordapp.net/attachments/419521490220744705/445410586252279829/2018-05-14_9.38.15.png?width=362&height=523)
+
 ## Join Our Project
 
   our bot's main attraction is the emojipasta generator, but it has since grown into a much larger project. we have an expanding list of features that involve fun, over the top meme commands, as well as general purpose server commands. we are looking for new developers to add to our team.
