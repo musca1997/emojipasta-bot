@@ -98,7 +98,7 @@ class Bot_Events:
 
 class Bot_Info:
 
-    @client.command(pass_context=True)
+    @client.command(pass_context=True, aliases=['users', 'servers'])
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def count(ctx, *args):
         embed = discord.Embed(description="\n**So here is the server and user count.**")
