@@ -42,7 +42,12 @@ class Bot_Info:
     async def on_command(command, ctx):
         logembed = discord.Embed(description="used the " + str(command) + " command.", timestamp=ctx.message.timestamp)
         logembed.set_author(name=ctx.message.server)
-        await client.send_message(discord.Object(id="436544688745480203"), embed=logembed)
+        await client.send_message(discord.Object(id="420586176467042316"), embed=logembed)
+
+    @client.event
+    async def on_member_join(member):
+        message = "Hello, welcome to Kermit House of Shitposting <@" + member.id + ">! Home of the Emojipasta Bot. We are looking for Python developers. If you are interested, please check <#444895389921837067> :) If not, chill with us and use the bot!!!"
+        await client.send_message(discord.Object(id="420586176467042316"), content=message)
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
@@ -301,7 +306,7 @@ class Bot_Function:
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
             return
-        f = open(os.path.join("randomsites.txt"));
+        f = open(os.path.join("textfiles/randomsites.txt"));
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -321,7 +326,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def maymay(ctx):
-        f = open(os.path.join("comics.txt"))
+        f = open(os.path.join("textfiles/comics.txt"))
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -343,7 +348,7 @@ class Bot_Function:
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
             return
-        f = open(os.path.join("bannedsites.txt"))
+        f = open(os.path.join("textfiles/bannedsites.txt"))
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
