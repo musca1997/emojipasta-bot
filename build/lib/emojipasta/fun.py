@@ -53,50 +53,20 @@ class Fun():
             member = ctx.message.author
             message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
 
-        dab_images = [
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617301249359903/Dab_1.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617300779728908/DAB.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617300779728906/squidward_dab_by_josael281999-dbbuazm.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617300095795211/Woody_dab.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617300095795210/king_dab__clash_royale__by_josael281999-db8mdhl.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617220714528778/3505ebaa-f270-45d4-8693-88574828ef49.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617219707764736/hitler_hits_a_sick_dab_by_alphashitlord-damch71.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617219091333122/fQh7nCY9K1-8.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617219091333121/dab_2.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617218579759124/a79.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617147230453772/Bearded-Dab.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439001759168462848/giphy.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439001759168462849/AS003639_09.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439001759860391946/AW386482_01.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439001759860391947/dabpuush_by_discopanda_tm-d9znmse.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439001760447856640/dab_on_em_rose_by_madithekitten-dasw55o.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256214317170688/20162F022F072F862FBettyWhite.f3633.jpg",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256230528155658/d6d.jpg",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256250312556564/giphy.gif",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256264187445260/hqdefault.jpg",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256283821113344/maxresdefault.jpg",
-			"https://cdn.discordapp.com/attachments/428960174808498176/439256300107464715/minion_dab_by_julestheocelot-db7yk05.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292236/248.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617146714292235/249480900001211_1.png",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617146173358081/1508659373107.gif",
-			"https://cdn.discordapp.com/attachments/420589076916207626/436862948200153088/wubba_lubba_dab_dab_by_alexandratale-dbew3ml.png",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439972205003145217/92af322e14246ae1291d06fa9e32223a.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439972589331283978/tenor.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439972589855834115/ee09ebd7068f47c52eff406cf8177c418dbd3e86_hq_by_the8bitdj-dbbdl6e.gif",
-            "https://cdn.discordapp.com/attachments/412884243195232257/439972560499769346/dabpuush_by_discopanda_tm-d9znmse.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439973096548597761/ovgeujull8bsku3o_by_theophobic-dbk0904.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439973217038368784/www_gifcreator_me_dj0utn_by_swap_sans-db6yudf.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439973320994324491/harambe.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439973445850365972/062717_milcin_arcia_sedar_dab_med_n9garc16.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439974137927041044/giphy.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439974802183290921/giphy-bdt.gif",
-            "https://cdn.discordapp.com/attachments/420589076916207626/439974968537907220/giphy.gif",
-            "https://media.discordapp.net/attachments/428960174808498176/443191684981850123/6088d94.png?width=528&height=523",
-			"https://cdn.discordapp.com/attachments/428960174808498176/436617144914935829/2e9d4609812ebddeb159f1499e37ec97.png"
-		]
-        index = randint(0, len(dab_images) - 1)
+        f = open(os.path.join("textfiles/dabimages.txt"))
+        contents = f.readlines()
+        link = ""
+        rand = randint(0, len(contents))
+        counter = 0
+        for i in contents:
+            if counter == rand:
+                link = i
+                break
+            else:
+                counter+=1
+        f.close()
         embed = discord.Embed()
-        embed.set_image(url=dab_images[index])
+        embed.set_image(url=link)
         await self.client.say(content=message, embed=embed)
 
         @commands.command(pass_context=True)
