@@ -585,7 +585,7 @@ class Bot_Function:
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def t(ctx):
-        f = open(os.path.join("memetemplates.txt"))
+        f = open(os.path.join("textfiles/memetemplates.txt"))
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
