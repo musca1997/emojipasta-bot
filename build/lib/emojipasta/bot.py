@@ -720,7 +720,7 @@ def main():
     	print('--------')
     	print('--------')
 
-    cogs = ['image', 'moderation', 'frames']
+    cogs = ['image', 'moderation', 'frames', 'emojibomb']
     for cog in cogs:
         client.load_extension(cog)
 
