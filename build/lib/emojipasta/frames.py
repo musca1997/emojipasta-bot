@@ -97,6 +97,32 @@ class Frames():
     async def trigger(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def cat(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def kim(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def sonic(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def swear(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def tp(self):
+        pass
+
+
 #music frames
 
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -165,6 +191,36 @@ class Frames():
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command()
     async def madvillainy(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def beatles(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def bjork(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def can(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def qotsa(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def swans(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command()
+    async def sy(self):
         pass
 
 
