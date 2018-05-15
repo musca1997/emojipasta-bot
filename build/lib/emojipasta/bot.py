@@ -16,6 +16,7 @@ import pyqrcode
 import png
 import json
 import requests
+from util.keys import DISCORD_BOT_KEY
 
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
@@ -723,7 +724,7 @@ def main():
     for cog in cogs:
         client.load_extension(cog)
 
-    client.run('')
+    client.run(DISCORD_BOT_KEY)
 
 if __name__ == "__main__":
     main()
