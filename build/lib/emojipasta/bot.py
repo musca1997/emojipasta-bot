@@ -27,7 +27,7 @@ class Bot_Events:
     async def on_command(command, ctx):
         logembed = discord.Embed(description="used the " + str(command) + " command.", timestamp=ctx.message.timestamp)
         logembed.set_author(name=ctx.message.server)
-        await client.send_message(discord.Object(id="420586176467042316"), embed=logembed)
+        await client.send_message(discord.Object(id="436544688745480203"), embed=logembed)
 
     @client.event
     async def on_member_join(member):
@@ -124,7 +124,7 @@ class Bot_Info:
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def orange(ctx, *args):
-        await client.say("<@294963984535257089> is my best big titty goth gf <33333")
+        await client.say("@Orange is my best big titty goth gf <33333")
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
