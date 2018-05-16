@@ -4,8 +4,10 @@ from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 from random import randint
 import urllib.request
+from util.functions import Functions
 
 class Bot_Image_Filter():
+
     def __init__(self, client):
         self.client = client
 
@@ -40,17 +42,27 @@ class Bot_Image_Filter():
         await self.client.send_file(ctx.message.channel, pic_name)
 
     async def get_attachment_images(self, ctx, url):
-        last_attachment = None
+        last_attachment = url
+        if url:
+            if Functions.is_image(url) is False:
+                url = None
         if url is None:
             async for m in self.client.logs_from(ctx.message.channel, before=ctx.message, limit=20):
                 if m.attachments:
-                    last_attachment = m.attachments[0]['url']
+                    try:
+                        last_attachment = m.attachments[0]['url']
+                    except KeyError:
+                        continue
                     break
                 elif m.embeds:
-                    last_attachment = m.embeds[0]['url']
-                    break
-        else:
-            last_attachment = url
+                    try:
+                        last_attachment = m.embeds[0]['url']
+                    except KeyError:
+                        continue
+                    if not Functions.is_image(last_attachment):
+                        continue
+                    else:
+                        break
         pic_name = str(ctx.message.channel.id)+'.png'
         headers = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
         f = urllib.request.Request(url=last_attachment,headers=headers)
