@@ -53,7 +53,7 @@ class Fun():
             member = ctx.message.author
             message = ":regional_indicator_o::regional_indicator_h::warning::regional_indicator_s::regional_indicator_h::regional_indicator_i::regional_indicator_t::exclamation: THIS NI:b::b:A :fire: {} :fire:JUST DABBED {}! :100: :ok_hand:".format(member.mention, ctx.message.channel.mention)
 
-        f = open(os.path.join("textfiles/dabimages.txt"))
+        f = open("textfiles/dabimages.txt")
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -69,17 +69,17 @@ class Fun():
         embed.set_image(url=link)
         await self.client.say(content=message, embed=embed)
 
-        @commands.command(pass_context=True)
-        @commands.cooldown(1, 8, commands.BucketType.user)
-        async def walk(self, ctx, member: discord.Member=None):
-            if member:
-                member = member
-                message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
-            else:
-                member = ctx.message.author
-                message = "( ͡° ͜ʖ ͡°) ╯╲___ Who wants to go for a walk??"
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def walk(self, ctx, member: discord.Member=None):
+        if member:
+            member = member
+            message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
+        else:
+            member = ctx.message.author
+            message = "( ͡° ͜ʖ ͡°) ╯╲___ Who wants to go for a walk??"
 
-            await self.client.say(message)
+        await self.client.say(message)
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
@@ -255,7 +255,7 @@ class Fun():
         if message == "list":
             await client.say("Here's the master list of links:\nhttps://pastebin.com/FVhnt8xs")
             return
-        f = open(os.path.join("textfiles/randomsites.txt"));
+        f = open("textfiles/randomsites.txt");
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -275,7 +275,7 @@ class Fun():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def maymay(self, ctx):
-        f = open(os.path.join("textfiles/comics.txt"))
+        f = open("textfiles/comics.txt")
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -297,7 +297,7 @@ class Fun():
         if message == "list":
             await self.client.say("Here's the master list of links:\nhttps://pastebin.com/dLe1MdPL")
             return
-        f = open(os.path.join("textfiles/bannedsites.txt"))
+        f = open("textfiles/bannedsites.txt")
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))
@@ -317,7 +317,7 @@ class Fun():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def t(self, ctx):
-        f = open(os.path.join("textfiles/memetemplates.txt"))
+        f = open("textfiles/memetemplates.txt")
         contents = f.readlines()
         link = ""
         rand = randint(0, len(contents))

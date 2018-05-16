@@ -265,21 +265,14 @@ class Restricted:
         await client.process_commands(message)
         if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
             return
-        if not message.attachments:
+        if message.attachments:
+            url = str(message.attachments[0]['url'])
+        if message.embeds:
+            url = str(message.embeds[0]['url'])
+        else:
             return
-        files = {"431202784575094794": "memetemplates.txt", "442488016523624448": "comics.txt"}
-        url = str(message.attachments[0]['url'])
-        extensions = ["png", "gif", "jpg", "jpeg"]
-        length = len(url)
-        index = 1
-        for x in range(2, length):
-            if url[-x] == ".":
-                break
-            else:
-                index+=1
-        ext = url[-index:].lower()
-        if ext not in extensions:
-            return
+
+        files = {"431202784575094794": "textfiles/memetemplates.txt", "442488016523624448": "textfiles/comics.txt"}
         f = open(files[str(message.channel.id)], 'a')
         f.write(url + '\n')
         f.close()
