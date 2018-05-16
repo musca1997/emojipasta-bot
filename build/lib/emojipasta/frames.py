@@ -4,7 +4,6 @@ from random import randint
 from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 import urllib.request
-import os
 
 class Frames():
     def __init__(self, client):
@@ -259,6 +258,9 @@ class Frames():
         async for m in self.client.logs_from(ctx.message.channel, before=ctx.message, limit=20):
             if m.attachments:
                 last_attachment = m.attachments[0]['url']
+                break
+            elif m.embeds:
+                last_attachment = m.embeds[0]['url']
                 break
         pic_name = str(ctx.message.channel.id)+'.png'
         headers = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
