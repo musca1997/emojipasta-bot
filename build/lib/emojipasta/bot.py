@@ -31,6 +31,9 @@ class Bot_Events:
 
     @client.event
     async def on_member_join(member):
+        server = member.server
+        if not (server.id == "419521489759502337"):
+            return
         message = "Hello, welcome to Kermit House of Shitposting <@" + member.id + ">! Home of the Emojipasta Bot. We are looking for Python developers. If you are interested, please check <#444895389921837067> :) If not, chill with us and use the bot!!!"
         await client.send_message(discord.Object(id="420586176467042316"), content=message)
 
