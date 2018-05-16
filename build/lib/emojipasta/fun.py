@@ -10,8 +10,26 @@ from discord.ext.commands.cooldowns import BucketType
 from emojigene import EmojipastaGenerator
 
 class Fun():
+
     def __init__(self, client):
         self.client = client
+
+    @commands.command(pass_context=True, aliases=['roll'])
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def dice(self, ctx):
+        roll = randint(1, 6)
+        dice = ["https://cdn.discordapp.com/attachments/372188609425702915/446370393998229514/dice-1.png",
+                "https://cdn.discordapp.com/attachments/372188609425702915/446370398767022090/dice-2.png",
+                "https://cdn.discordapp.com/attachments/372188609425702915/446370401510227978/dice-3.png",
+                "https://cdn.discordapp.com/attachments/372188609425702915/446370403284156426/dice-4.png",
+                "https://cdn.discordapp.com/attachments/372188609425702915/446370404878123019/dice-5.png",
+                "https://cdn.discordapp.com/attachments/372188609425702915/446370408610922497/dice-6.png"]
+        msg = "It landed on **{}**!".format(roll)
+        embed = discord.Embed(description=msg, title="tossed the :game_die:!")
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name)
+        embed.set_thumbnail(url=dice[roll - 1])
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+        await self.client.send_message(ctx.message.channel, embed=embed)
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
