@@ -38,6 +38,11 @@ class Frames():
         pass
 
     @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def ss(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="frame idub1 idub2 idub3 idub4 idub5 idub6")
     async def idub(self):
         pass
