@@ -41,6 +41,19 @@ class General():
         await self.client.edit_message(message, embed=embed)
 
     @commands.command(pass_context=True)
+    async def ynpoll(self, ctx, *, input: str):
+        if input is None:
+            await self.client.say("You must supply a question..")
+            return
+        msg = "😁 Yes\n😠 No"
+        embed = discord.Embed(title=input, description=msg, colour=0xffcc4d)
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name + " asks,")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/372188609425702915/446747780157931542/thinking.png")
+        message = await self.client.say(embed=embed)
+        await self.client.add_reaction(message, '😁')
+        await self.client.add_reaction(message, '😠')
+
+    @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def yn(self, ctx, *args):
         decide_list = [':heavy_check_mark: YES!',':heavy_multiplication_x: NO!']
