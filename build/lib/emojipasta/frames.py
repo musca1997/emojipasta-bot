@@ -127,6 +127,31 @@ class Frames():
     async def tp(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def gag(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def knuckle(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def liberal(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def pickle(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def sb(self):
+        pass
+
 
 #music frames
 
@@ -226,6 +251,11 @@ class Frames():
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="frame")
     async def sy(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def damn(self):
         pass
 
 
