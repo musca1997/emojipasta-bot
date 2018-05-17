@@ -40,6 +40,7 @@ class General():
 
         await self.client.edit_message(message, embed=embed)
 
+    @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def ynpoll(self, ctx, *, input: str):
         if input is None:
