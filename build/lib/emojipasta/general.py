@@ -25,7 +25,7 @@ class General():
         if optioncount > 10:
             await self.client.say("Poll option limit is 10! Try simplifying your question.")
             return
-        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '🤗', '😇', '😮', '😌']
+        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '😮', '😇', '🤗', '😌']
         msg = ""
         for x, option in enumerate(options):
             msg = msg + "\n{} {}".format(reactions[x], option)
