@@ -5,6 +5,7 @@ from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 import urllib.request
 from util.functions import Functions
+
 class Frames():
     def __init__(self, client):
         self.client = client
