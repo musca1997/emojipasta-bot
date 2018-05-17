@@ -12,9 +12,12 @@ class General():
     def __init__(self, client):
         self.client = client
 
-    @commands.cooldown(1, 30, commands.BucketType.user)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.command(pass_context=True)
-    async def poll(self, ctx, question: str, *options: str):
+    async def poll(self, ctx, *, input: str):
+        tokens = input.split(",")
+        question = tokens[0] + " 💬"
+        options = tokens[1:]
         optioncount = len(options)
         if optioncount == 1:
             await self.client.say("It's not really a poll if there's only one option.")
@@ -22,12 +25,12 @@ class General():
         if optioncount > 10:
             await self.client.say("Poll option limit is 10! Try simplifying your question.")
             return
-        reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '🤔', '😇', '😮', '😌']
         msg = ""
         for x, option in enumerate(options):
             msg = msg + "\n{} {}".format(reactions[x], option)
 
-        embed = discord.Embed(title=question, description=msg)
+        embed = discord.Embed(title=question, description=msg, colour=0xffcc4d)
         message = await self.client.say(embed=embed)
 
         for reaction in reactions[:optioncount]:
