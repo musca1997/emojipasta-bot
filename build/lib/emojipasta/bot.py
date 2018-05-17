@@ -294,7 +294,7 @@ def main():
     	print('--------')
     	print('--------')
 
-    cogs = ['image', 'moderation', 'frames', 'emojibomb', 'general', 'fun']
+    cogs = ['image', 'moderation', 'frames', 'emojibomb', 'general', 'fun', 'games']
     for cog in cogs:
         client.load_extension(cog)
 
