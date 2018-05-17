@@ -16,7 +16,7 @@ class General():
     @commands.command(pass_context=True)
     async def poll(self, ctx, *, input: str):
         tokens = input.split(",")
-        question = tokens[0] + " 💬"
+        question = tokens[0]
         options = tokens[1:]
         optioncount = len(options)
         if optioncount == 1:
@@ -25,12 +25,14 @@ class General():
         if optioncount > 10:
             await self.client.say("Poll option limit is 10! Try simplifying your question.")
             return
-        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '🤔', '😇', '😮', '😌']
+        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '🤗', '😇', '😮', '😌']
         msg = ""
         for x, option in enumerate(options):
             msg = msg + "\n{} {}".format(reactions[x], option)
 
         embed = discord.Embed(title=question, description=msg, colour=0xffcc4d)
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name + " asks,")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/372188609425702915/446747780157931542/thinking.png")
         message = await self.client.say(embed=embed)
 
         for reaction in reactions[:optioncount]:
