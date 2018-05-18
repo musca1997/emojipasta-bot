@@ -12,9 +12,12 @@ class General():
     def __init__(self, client):
         self.client = client
 
-    @commands.cooldown(1, 30, commands.BucketType.user)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.command(pass_context=True)
-    async def poll(self, ctx, question: str, *options: str):
+    async def poll(self, ctx, *, input: str):
+        tokens = input.split(",")
+        question = tokens[0]
+        options = tokens[1:]
         optioncount = len(options)
         if optioncount == 1:
             await self.client.say("It's not really a poll if there's only one option.")
@@ -22,18 +25,38 @@ class General():
         if optioncount > 10:
             await self.client.say("Poll option limit is 10! Try simplifying your question.")
             return
-        reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+        reactions = ['😝', '😎', '😁', '😍', '😂', '😚', '😮', '😇', '🤗', '😌']
         msg = ""
         for x, option in enumerate(options):
             msg = msg + "\n{} {}".format(reactions[x], option)
 
-        embed = discord.Embed(title=question, description=msg)
+        embed = discord.Embed(title=question, description=msg, colour=0xffcc4d)
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name + " asks,")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/372188609425702915/446747780157931542/thinking.png")
         message = await self.client.say(embed=embed)
 
         for reaction in reactions[:optioncount]:
             await self.client.add_reaction(message, reaction)
 
         await self.client.edit_message(message, embed=embed)
+
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    @commands.command(pass_context=True)
+    async def ynpoll(self, ctx, *, input: str=None):
+        footer = ""
+        if input is None:
+            footer = "You can ask your own question too! &ynpoll <question>"
+            input = "Is Emojipasta Bot the best Discord bot?"
+        msg = "😁 Yes\n😠 No"
+        embed = discord.Embed(title=input, description=msg, colour=0xffcc4d)
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name + " asks,")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/372188609425702915/446747780157931542/thinking.png")
+        if footer is not "":
+            embed.set_footer(text=footer)
+
+        message = await self.client.say(embed=embed)
+        await self.client.add_reaction(message, '😁')
+        await self.client.add_reaction(message, '😠')
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
