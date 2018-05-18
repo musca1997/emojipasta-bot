@@ -92,7 +92,7 @@ class Fun():
     async def walk(self, ctx, member: discord.Member=None):
         if member:
             member = member
-            message = "( ͡° ͜ʖ ͡°) ╯╲___卐卐卐卐卐 Don't mind me just taking {} for a walk!".format(member.mention)
+            message = "( ͡° ͜ʖ ͡°) ╯╲___:dog: Don't mind me just taking {} for a walk!".format(member.mention)
         else:
             member = ctx.message.author
             message = "( ͡° ͜ʖ ͡°) ╯╲___ Who wants to go for a walk??"
