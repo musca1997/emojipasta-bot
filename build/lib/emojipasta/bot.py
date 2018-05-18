@@ -41,7 +41,7 @@ class Bot_Events:
         server = member.server
         if not (server.id == "419521489759502337"):
             return
-        message = "The faggot known as <@" + member.id + "> has left :("
+        message = "The faggot known as <@" + member.id + "> has left :( \nhttps://cdn.discordapp.com/attachments/446345808346873858/446673433602818048/20180517_100014.png"
         await client.send_message(discord.Object(id="420586176467042316"), content=message)
 
     @client.event
