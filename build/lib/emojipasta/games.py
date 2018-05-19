@@ -25,7 +25,7 @@ class Games():
         resultnum = (num - index) % 3
 
         msg = "{}\n\n{}\n\n{}".format(emoji[index], result[resultnum].format(ctx.message.author.display_name), emoji[num])
-        botuser = ctx.message.server.get_member("407372430835843084")
+        botuser = ctx.message.server.get_member("429662497172357123")
         embed = discord.Embed(description=msg, colour=0xffcc4d)
         embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name)
         embed.set_footer(icon_url=botuser.avatar_url, text=botuser.display_name)
