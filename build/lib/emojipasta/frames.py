@@ -12,7 +12,7 @@ class Frames():
 
 #meme frames
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.command(description="frame zucc1 zucc2 zucc3")
+    @commands.command(description="frame zucc1 zucc2 zucc3 zucc4")
     async def zucc(self):
         pass
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -26,6 +26,10 @@ class Frames():
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="frame")
     async def zucc3(self):
+        pass
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def zucc4(self):
         pass
 
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -70,6 +74,19 @@ class Frames():
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="frame")
     async def idub6(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame swear1 swear2")
+    async def swear(self):
+        pass
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def swear1(self):
+        pass
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def swear2(self):
         pass
 
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -119,11 +136,6 @@ class Frames():
 
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.command(description="frame")
-    async def swear(self):
-        pass
-
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.command(description="frame")
     async def tp(self):
         pass
 
@@ -152,6 +164,80 @@ class Frames():
     async def sb(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def nut(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def altright(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def buzzfeed(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def die(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def cry(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def dick(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def unlock(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def hillary(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def shrek(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def mark(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def memri(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def wish(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def porn(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def sam(self):
+        pass
+
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def wasted(self):
+        pass
 
 #music frames
 
@@ -258,6 +344,10 @@ class Frames():
     async def damn(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def rh(self):
+        pass
 
 #film frames
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -265,6 +355,10 @@ class Frames():
     async def cowboy(self):
         pass
 
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.command(description="frame")
+    async def lynch(self):
+        pass
 #func thinggy
     async def on_command(self, command, ctx):
         if not command.description:
