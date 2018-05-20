@@ -127,6 +127,7 @@ class Fun():
         await self.client.send_message(channel, embed=embed)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 4, commands.BucketType.user)
     async def convert(self, ctx, *, message: str=None):
         message = message.lower()
         newmsg = ""
