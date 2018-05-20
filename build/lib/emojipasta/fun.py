@@ -127,6 +127,18 @@ class Fun():
         await self.client.send_message(channel, embed=embed)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 4, commands.BucketType.user)
+    async def convert(self, ctx, *, message: str=None):
+        message = message.lower()
+        newmsg = ""
+        for c in message:
+            if c == " ":
+                newmsg = newmsg + ":joy:"
+            else:
+                newmsg = newmsg + ":regional_indicator_"+c+":"
+        await self.client.say(newmsg)
+
+    @commands.command(pass_context=True)
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def d(self, ctx):
         d = ["DES", "PA", "CITO"]
