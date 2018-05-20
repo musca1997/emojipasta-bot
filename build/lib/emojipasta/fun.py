@@ -129,6 +129,9 @@ class Fun():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)
     async def convert(self, ctx, *, message: str=None):
+        if message is None:
+            message = "emojipasta bot is the best"
+            continue
         message = message.lower()
         newmsg = ""
         for c in message:
