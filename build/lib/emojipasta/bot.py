@@ -301,7 +301,7 @@ def main():
     	print('--------')
     	print('--------')
 
-    cogs = ['image', 'moderation', 'frames', 'emojibomb', 'general', 'fun', 'games']
+    cogs = ['image', 'moderation', 'frames', 'emojibomb', 'general', 'fun', 'games', 'emojipaste']
     for cog in cogs:
         client.load_extension(cog)
 
