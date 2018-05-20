@@ -56,7 +56,7 @@ class Emojipaste():
         async with aiohttp.ClientSession() as session:
             async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose,emotion', headers=headers, data=json.dumps(data)) as r:
                 faces = await r.json()
-
+        print(faces)
         if len(faces) == 0:
             await self.client.say(":no_entry_sign: Unable to detect a face.")
             return
