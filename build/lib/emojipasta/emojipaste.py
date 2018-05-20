@@ -67,18 +67,16 @@ class Emojipaste():
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         draw_img = img.convert("RGBA")
 
-        emojiimages = ["angry.png", "contempt.png", "disgust.png", "fear.png", "happy.png", "neutral.png", "sad.png", "shocked.png"]
-
         for f in faces:
-            emo = []
+            d = {}
             for emotion, value in f['faceAttributes']['emotion'].items():
-                emo.append(value)
-            largest = 0
-            for x in range(1, len(emo) - 1):
-                if emo[x] > emo[largest]:
-                    largest = x
+                d[emotion] = value
 
-            emojiface = Image.open('images/'+emojiimages[largest]).convert("RGBA")
+            v = list(d.values())
+            k = list(d.keys())
+            emotion = k[v.index(max(v))]
+
+            emojiface = Image.open('images/'+emotion+'.png').convert("RGBA")
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
             current_emojiface = emojiface.resize((w, int(w * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
