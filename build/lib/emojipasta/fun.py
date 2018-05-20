@@ -131,7 +131,6 @@ class Fun():
     async def convert(self, ctx, *, message: str=None):
         if message is None:
             message = "emojipasta bot is the best"
-            continue
         message = message.lower()
         newmsg = ""
         for c in message:
