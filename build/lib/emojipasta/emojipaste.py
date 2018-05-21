@@ -54,9 +54,9 @@ class Emojipaste():
         data = {"url": url}
         faces = {}
         async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose,emotion', headers=headers, data=json.dumps(data)) as r:
+            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose,emotion,glasses', headers=headers, data=json.dumps(data)) as r:
                 faces = await r.json()
-        print(faces)
+
         if len(faces) == 0:
             await self.client.say(":no_entry_sign: Unable to detect a face.")
             return
@@ -72,9 +72,13 @@ class Emojipaste():
             for emotion, value in f['faceAttributes']['emotion'].items():
                 d[emotion] = value
 
-            v = list(d.values())
-            k = list(d.keys())
-            emotion = k[v.index(max(v))]
+            emotion = ""
+            if f['faceAttributes']['glasses'] == "Sunglasses":
+                emotion = "sunglasses"
+            else:
+                v = list(d.values())
+                k = list(d.keys())
+                emotion = k[v.index(max(v))]
 
             emojiface = Image.open('images/'+emotion+'.png').convert("RGBA")
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
