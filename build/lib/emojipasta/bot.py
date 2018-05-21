@@ -273,6 +273,11 @@ class Restricted:
     @client.event
     async def on_message(message):
         await client.process_commands(message)
+        if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
+            await client.add_reaction(message, '👏')
+            await client.add_reaction(message, '🍑')
+        if (message.content.startswith("despacito") or message.content.startswith("Despacito") or message.content.startswith("DESPACITO")):
+            await client.add_reaction(message, '😍')
         if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
             return
         if message.attachments:
