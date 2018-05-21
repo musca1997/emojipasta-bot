@@ -49,20 +49,23 @@ class Bot_Image_Filter():
         if url is None:
             async for m in self.client.logs_from(ctx.message.channel, before=ctx.message, limit=20):
                 if m.attachments:
-                    try:
+                    if len(m.attachments) > 0 and 'url' in m.attachments[0]:
                         last_attachment = m.attachments[0]['url']
-                    except KeyError:
-                        continue
-                    break
-                elif m.embeds:
-                    try:
-                        last_attachment = m.embeds[0]['url']
-                    except KeyError:
-                        continue
-                    if not Functions.is_image(last_attachment):
-                        continue
+                        if not Functions.is_image(last_attachment):
+                            continue
+                        else:
+                            break
                     else:
-                        break
+                        continue
+                elif m.embeds:
+                    if len(m.embeds) > 0 and 'url' in m.embeds[0]:
+                        last_attachment = m.embeds[0]['url']
+                        if not Functions.is_image(last_attachment):
+                            continue
+                        else:
+                            break
+                    else:
+                        continue
         pic_name = str(ctx.message.channel.id)+'.png'
         headers = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
         f = urllib.request.Request(url=last_attachment,headers=headers)
