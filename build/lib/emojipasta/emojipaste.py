@@ -8,8 +8,7 @@ import urllib.request
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from util.functions import Functions
-import os
-os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
+
 class Emojipaste():
     def __init__(self, client):
         self.client = client
