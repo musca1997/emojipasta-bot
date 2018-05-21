@@ -137,7 +137,7 @@ class Fun():
             if c == " ":
                 newmsg = newmsg + ":joy:"
             else:
-                newmsg = newmsg + " :regional_indicator_"+c+": "
+                newmsg = newmsg + ":regional_indicator_"+c+":"
         await self.client.say(newmsg)
 
     @commands.command(pass_context=True)
