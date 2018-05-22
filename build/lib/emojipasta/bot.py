@@ -2,7 +2,7 @@ from random import choice
 from random import randint
 import io
 import os
-
+import psycopg2
 import discord
 import asyncio
 from discord.ext.commands import Bot
@@ -10,10 +10,10 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 import platform
 from util.keys import DISCORD_BOT_KEY
-
+from util.keys import DB_PASSWORD
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
-
+client.db = psycopg2.connect("dbname=emojipasta host=/tmp/ user=postgres password="+DB_PASSWORD)
 class Bot_Events:
 
     @client.event
@@ -320,6 +320,5 @@ def main():
         client.load_extension(cog)
 
     client.run(DISCORD_BOT_KEY)
-
 if __name__ == "__main__":
     main()
