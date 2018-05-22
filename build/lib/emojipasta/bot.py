@@ -281,6 +281,12 @@ class Restricted:
 
     @client.event
     async def on_message(message):
+        cur = client.db.cursor()
+        cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
+        result = cur.fetchone()[0]
+        cur.close()
+        if result is True:
+            return
         await client.process_commands(message)
         if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
             await client.add_reaction(message, '👏')
