@@ -180,8 +180,7 @@ class Bot_Info:
         since_joined = (ctx.message.timestamp - joined_at).days
         user_joined = joined_at.strftime("%d %b %Y %H:%M")
         user_created = user.created_at.strftime("%d %b %Y %H:%M")
-        member_number = sorted(server.members,
-                                  key=lambda m: m.joined_at).index(user) + 1
+        member_number = sorted(server.members, key=lambda m: m.joined_at).index(user) + 1
 
         created_on = "{}\n({} days ago)".format(user_created, since_created)
         joined_on = "{}\n({} days ago)".format(user_joined, since_joined)
@@ -206,8 +205,7 @@ class Bot_Info:
         data.add_field(name="Joined Discord on", value=created_on)
         data.add_field(name="Joined this server on", value=joined_on)
         data.add_field(name="Roles", value=roles, inline=False)
-        data.set_footer(text="Member #{} | User ID:{}"
-                                "".format(member_number, user.id))
+        data.set_footer(text="Member #{} | User ID:{}".format(member_number, user.id))
 
         name = str(user)
         name = " ~ ".join((name, user.nick)) if user.nick else name
@@ -221,8 +219,7 @@ class Bot_Info:
         try:
             await client.say(embed=data)
         except discord.HTTPException:
-            await client.say("I need the `Embed links` permission "
-                                   "to send this")
+            await client.say("I need the `Embed links` permission to send this")
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
@@ -238,9 +235,7 @@ class Bot_Info:
         voice_channels = len([x for x in server.channels
                                 if x.type == discord.ChannelType.voice])
         passed = (ctx.message.timestamp - server.created_at).days
-        created_at = ("Since {}. That's over {} days ago!"
-                         "".format(server.created_at.strftime("%d %b %Y %H:%M"),
-                                    passed))
+        created_at = ("Since {}. That's over {} days ago!".format(server.created_at.strftime("%d %b %Y %H:%M"), passed))
 
         colour = ''.join([choice('0123456789ABCDEF') for x in range(6)])
         colour = int(colour, 16)
@@ -265,8 +260,7 @@ class Bot_Info:
         try:
             await client.say(embed=data)
         except discord.HTTPException:
-            await client.say("I need the `Embed links` permission "
-                                  "to send this")
+            await client.say("I need the `Embed links` permission to send this")
 
 class Restricted:
 
