@@ -2,7 +2,7 @@ from random import choice
 from random import randint
 import io
 import os
-import psycopg2
+
 import discord
 import asyncio
 from discord.ext.commands import Bot
@@ -13,7 +13,7 @@ from util.keys import DISCORD_BOT_KEY
 from util.keys import DB_PASSWORD
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
-client.db = psycopg2.connect("dbname=emojipasta host=/tmp/ user=postgres password="+DB_PASSWORD)
+
 class Bot_Events:
 
     @client.event
@@ -281,12 +281,6 @@ class Restricted:
 
     @client.event
     async def on_message(message):
-        cur = client.db.cursor()
-        cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
-        result = cur.fetchone()[0]
-        cur.close()
-        if result is True:
-            return
         await client.process_commands(message)
         if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
             await client.add_reaction(message, '👏')
