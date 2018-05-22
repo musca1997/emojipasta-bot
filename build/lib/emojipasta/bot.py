@@ -119,7 +119,11 @@ class Bot_Info:
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def help(ctx, *args):
-        await client.say("Check out command list here: https://www.emojipasta.fun/commands/ \nJoin our support server if you need more info: https://discord.gg/JHNRwr6")
+        embed = discord.Embed(description=" Emojipasta-bot info")
+        embed.add_field(name="💬Command List", value=' https://www.emojipasta.fun/commands/', inline=True)
+        embed.add_field(name="🏠Support Server", value=' https://discord.gg/JHNRwr6', inline=True)
+        embed.add_field(name="🤥Twitter", value=' https://twitter.com/KShitpostbot', inline=True)
+        await client.say(embed=embed)
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
@@ -130,6 +134,11 @@ class Bot_Info:
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def vote(ctx, *args):
         await client.say("https://discordbots.org/bot/429662497172357123")
+
+    @client.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def twitter(ctx, *args):
+        await client.say("https://twitter.com/KShitpostbot")
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
