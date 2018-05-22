@@ -2,7 +2,6 @@ from random import choice
 from random import randint
 import io
 import os
-import py
 import discord
 import asyncio
 import psycopg2
