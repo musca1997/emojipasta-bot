@@ -2,9 +2,9 @@ from random import choice
 from random import randint
 import io
 import os
-import psycopg2
 import discord
 import asyncio
+
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
@@ -13,7 +13,6 @@ from util.keys import DISCORD_BOT_KEY
 from util.keys import DB_PASSWORD
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
-client.db = psycopg2.connect("dbname=emojipasta host=/tmp/ user=postgres password="+DB_PASSWORD)
 class Bot_Events:
 
     @client.event
@@ -180,8 +179,7 @@ class Bot_Info:
         since_joined = (ctx.message.timestamp - joined_at).days
         user_joined = joined_at.strftime("%d %b %Y %H:%M")
         user_created = user.created_at.strftime("%d %b %Y %H:%M")
-        member_number = sorted(server.members,
-                                  key=lambda m: m.joined_at).index(user) + 1
+        member_number = sorted(server.members,key=lambda m: m.joined_at).index(user) + 1
 
         created_on = "{}\n({} days ago)".format(user_created, since_created)
         joined_on = "{}\n({} days ago)".format(user_joined, since_joined)
@@ -206,8 +204,7 @@ class Bot_Info:
         data.add_field(name="Joined Discord on", value=created_on)
         data.add_field(name="Joined this server on", value=joined_on)
         data.add_field(name="Roles", value=roles, inline=False)
-        data.set_footer(text="Member #{} | User ID:{}"
-                                "".format(member_number, user.id))
+        data.set_footer(text="Member #{} | User ID:{}".format(member_number, user.id))
 
         name = str(user)
         name = " ~ ".join((name, user.nick)) if user.nick else name
@@ -221,8 +218,7 @@ class Bot_Info:
         try:
             await client.say(embed=data)
         except discord.HTTPException:
-            await client.say("I need the `Embed links` permission "
-                                   "to send this")
+            await client.say("I need the `Embed links` permission to send this")
 
     @client.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
@@ -238,9 +234,7 @@ class Bot_Info:
         voice_channels = len([x for x in server.channels
                                 if x.type == discord.ChannelType.voice])
         passed = (ctx.message.timestamp - server.created_at).days
-        created_at = ("Since {}. That's over {} days ago!"
-                         "".format(server.created_at.strftime("%d %b %Y %H:%M"),
-                                    passed))
+        created_at = ("Since {}. That's over {} days ago!".format(server.created_at.strftime("%d %b %Y %H:%M"), passed))
 
         colour = ''.join([choice('0123456789ABCDEF') for x in range(6)])
         colour = int(colour, 16)
@@ -265,8 +259,7 @@ class Bot_Info:
         try:
             await client.say(embed=data)
         except discord.HTTPException:
-            await client.say("I need the `Embed links` permission "
-                                  "to send this")
+            await client.say("I need the `Embed links` permission to send this")
 
 class Restricted:
 
@@ -281,12 +274,6 @@ class Restricted:
 
     @client.event
     async def on_message(message):
-        cur = client.db.cursor()
-        cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
-        result = cur.fetchone()[0]
-        cur.close()
-        if result is True:
-            return
         await client.process_commands(message)
         if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
             await client.add_reaction(message, '👏')
