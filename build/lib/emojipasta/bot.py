@@ -323,21 +323,19 @@ class Restricted:
             await client.add_reaction(message, '🍑')
         if (message.content.startswith("despacito") or message.content.startswith("Despacito") or message.content.startswith("DESPACITO")):
             await client.add_reaction(message, '😍')
-        if not (message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448"):
-            return
-        if message.attachments:
-            url = str(message.attachments[0]['url'])
-        if message.embeds:
-            url = str(message.embeds[0]['url'])
-        else:
-            return
 
-        files = {"431202784575094794": "textfiles/memetemplates.txt", "442488016523624448": "textfiles/comics.txt"}
-        f = open(files[str(message.channel.id)], 'a')
-        f.write(url + '\n')
-        f.close()
-        embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
-        await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
+        if message.channel.id == "431202784575094794" or message.channel.id == "442488016523624448":
+            url = ""
+            if message.attachments:
+                url = str(message.attachments[0]['url'])
+            elif message.embeds:
+                url = str(message.embeds[0]['url'])
+            files = {"431202784575094794": "textfiles/memetemplates.txt", "442488016523624448": "textfiles/comics.txt"}
+            f = open(files[str(message.channel.id)], 'a')
+            f.write(url + '\n')
+            f.close()
+            embed = discord.Embed(description="File added to " + files[str(message.channel.id)] + " by " + str(message.author))
+            await client.send_message(discord.Object(id="436544688745480203"), embed=embed)
 
 def main():
     @client.event
