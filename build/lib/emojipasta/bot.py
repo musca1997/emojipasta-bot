@@ -10,9 +10,14 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 import platform
 from util.keys import DISCORD_BOT_KEY
-from util.keys import DB_PASSWORD
+from util.keys import DB_VARS as DBVAR
+
+import psycopg2
+
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
+client.db = psycopg2.connect(dbname=DBVAR[0], host=DBVAR[1], user=DBVAR[2], password=DBVAR[3])
+
 class Bot_Events:
 
     @client.event
@@ -272,8 +277,46 @@ class Restricted:
         else:
             await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
 
+
+    @client.group(pass_context=True)
+    async def emojipasta(ctx):
+        if ctx.invoked_subcommand is None:
+            await client.say(":no_entry_sign: Invalid subcommand passed.")
+    @emojipasta.command(pass_context=True)
+    async def enable(ctx):
+        if not (str(ctx.message.author.id) == "183457916114698241" or str(ctx.message.author.id) == "349838216637186048"):
+            return
+
+        cur = client.db.cursor()
+        cur.execute("DELETE FROM channels WHERE id=%s;", (ctx.message.channel.id,))
+        client.db.commit()
+        cur.close()
+        await client.say(":white_check_mark: I am now enabled in <#" + ctx.message.channel.id + ">")
+    @emojipasta.command(pass_context=True)
+    async def disable(ctx):
+        if not str(ctx.message.author.id) == "183457916114698241":
+            return
+
+        cur = client.db.cursor()
+        cur.execute("""
+            INSERT INTO channels (id)
+            SELECT %s
+            WHERE
+                NOT EXISTS (
+                    SELECT id FROM channels WHERE id=%s
+                );""", (ctx.message.channel.id,ctx.message.channel.id))
+        client.db.commit()
+        cur.close()
+        await client.say(":x: I am now disabled in <#" + ctx.message.channel.id + ">")
     @client.event
     async def on_message(message):
+        if not message.content.startswith("&emojipasta"):
+            cur = client.db.cursor()
+            cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
+            result = cur.fetchone()[0]
+            cur.close()
+            if result is True:
+                return
         await client.process_commands(message)
         if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
             await client.add_reaction(message, '👏')
