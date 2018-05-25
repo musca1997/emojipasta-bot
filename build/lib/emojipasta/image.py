@@ -23,6 +23,31 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
+    async def shrink(self, ctx, per: str=None, url: str=None):
+        if not (per is None and url is None):
+            try:
+                per = int(per)
+                if per == 100:
+                    await self.client.say(":no_entry_sign: You're trying to shrink an image to 100% of it's size. Percentage defaulted to 5%")
+                    per = 5
+                if per > 100:
+                    await self.client.say(":no_entry_sign: This is the *shrink* command. Percentage defaulted to 5%")
+                    per = 5
+            except:
+                url = per
+                per = 5
+        else:
+            per = 5
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        img = Image.open(pic_name).convert("RGBA")
+        w, h = img.width, img.height
+        img = img.resize((int(w * (per * .01)), int(h * (per * .01))), resample=Image.LANCZOS)
+        img.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def glitch(self, ctx, url: str=None):
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)

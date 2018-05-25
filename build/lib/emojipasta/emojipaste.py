@@ -38,7 +38,7 @@ class Emojipaste():
         for f in faces:
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
-            current_emojiface = emojiface.resize((w, int(w * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
+            current_emojiface = emojiface.resize((w + int(w * .2), int((w + int(w * .2)) * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
 
