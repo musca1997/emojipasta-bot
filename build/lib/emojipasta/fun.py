@@ -369,7 +369,7 @@ class Fun():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def chan(self, ctx, board: str):
-        if board is None:
+        if board == None:
             await self.client.say("Please enter the board name!")
             return
         url = 'https://boards.4chan.org/' + board
@@ -380,7 +380,7 @@ class Fun():
                 'DNT': '1',
                 'Connection': 'keep-alive'}
         r = requests.get(url, headers=headers)
-        if not (r.status_code ==200):
+        if not (r.status_code == 200):
             await self.client.say("Invalid board, pls try again!")
             return
 
@@ -396,8 +396,8 @@ class Fun():
             for i in text_content:
                 text = text + i
         embed = discord.Embed(description=text)
+        embed.set_author(name='/' + board + '/', url='https://discord.gg/JHNRwr6')
         embed.set_image(url=image_url)
-
         await self.client.say(embed=embed)
 
 def setup(client):
