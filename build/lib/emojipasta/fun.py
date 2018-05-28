@@ -387,8 +387,8 @@ class Fun():
         soup = BeautifulSoup(r.content,"html.parser")
         get_image = soup.find_all('a', attrs={"class":"fileThumb"})
         get_text = soup.find_all('blockquote', attrs={"class":"postMessage"})
-        get_image = get_image[1].attrs['href']
-        get_text = get_text[1]
+        get_image = get_image[3].attrs['href']
+        get_text = get_text[3]
         image_url = 'http:' + str(get_image)
         text_content = get_text.find_all(text=True)
         text = ''
