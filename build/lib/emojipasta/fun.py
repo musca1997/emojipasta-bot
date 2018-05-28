@@ -365,5 +365,39 @@ class Fun():
         embed.set_image(url=link)
         await self.client.say(content="OK here's the random blank meme template for you!", embed=embed)
 
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def chan(self, ctx, board: str):
+        if board is None:
+            await self.client.say("Please enter the board name!")
+            return
+        url = 'https://boards.4chan.org/' + board
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3',
+                'Accept-Encoding': 'gzip, deflate',
+                'DNT': '1',
+                'Connection': 'keep-alive'}
+        r = requests.get(url, headers=headers)
+        if not (r.status_code ==200):
+            await self.client.say("Invalid board, pls try again!")
+            return
+
+        soup = BeautifulSoup(r.content,"html.parser")
+        get_image = soup.find_all('a', attrs={"class":"fileThumb"})
+        get_text = soup.find_all('blockquote', attrs={"class":"postMessage"})
+        get_image = get_image[1].attrs['href']
+        get_text = get_text[1]
+        image_url = 'http:' + str(get_image)
+        text_content = get_text.find_all(text=True)
+        text = ''
+        if text_content is not None:
+            for i in text_content:
+                text = text + i
+        embed = discord.Embed(description=text)
+        embed.set_image(url=image_url)
+
+        await self.client.say(embed=embed)
+
 def setup(client):
     client.add_cog(Fun(client))
