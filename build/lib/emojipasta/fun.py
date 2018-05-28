@@ -368,9 +368,6 @@ class Fun():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def chan(self, ctx, board: str):
-        if board is None:
-            await self.client.say("Please enter the board name!")
-            return
         url = 'https://boards.4chan.org/' + board
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0',
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -379,9 +376,6 @@ class Fun():
                 'DNT': '1',
                 'Connection': 'keep-alive'}
         r = requests.get(url, headers=headers)
-        if not (r.status_code ==200):
-            await self.client.say("Invalid board, pls try again!")
-            return
 
         soup = BeautifulSoup(r.content,"html.parser")
         get_image = soup.find_all('a', attrs={"class":"fileThumb"})
