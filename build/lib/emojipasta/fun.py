@@ -394,7 +394,7 @@ class Fun():
                 text = text + i
         embed = discord.Embed(description=text)
         embed.set_author(name='/' + board + '/', url='https://discord.gg/JHNRwr6')
-        embed.set_image(url=image_url)
+        embed.set_image(url=image)
         await self.client.say(embed=embed)
 
 def setup(client):
