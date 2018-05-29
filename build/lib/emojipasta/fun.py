@@ -8,6 +8,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from emojigene import EmojipastaGenerator
+from bs4 import BeautifulSoup
 
 class Fun():
 
@@ -364,6 +365,42 @@ class Fun():
         embed = discord.Embed()
         embed.set_image(url=link)
         await self.client.say(content="OK here's the random blank meme template for you!", embed=embed)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def chan(self, ctx, board: str):
+        url = 'https://boards.4chan.org/' + board
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3',
+                'Accept-Encoding': 'gzip, deflate',
+                'DNT': '1',
+                'Connection': 'keep-alive'}
+        r = requests.get(url, headers=headers)
+        if not (r.status_code == 200):
+            await self.client.say("Invalid board, pls try again!")
+            return
+
+        soup = BeautifulSoup(r.content,"html.parser")
+        divs = soup.find_all('div', attrs={"class": "thread"})
+        yeet = divs[4].find('a', attrs={"class":"fileThumb"})
+        despacito = divs[4].find('blockquote', attrs={"class":"postMessage"})
+        get_image = yeet.attrs['href']
+        get_text = despacito.find_all(text=True)
+        thread_id = despacito.attrs['id']
+        image = 'https:' + get_image
+        text = ''
+        if get_text is not None:
+            for i in get_text:
+                text = text + i
+        thread_url = url + '/thread/'
+        for a in thread_id:
+            if a != 'm':
+                thread_url = thread_url + a
+        embed = discord.Embed(description=text)
+        embed.set_author(name='Click here to view original thread in /' + board + '/', url=thread_url)
+        embed.set_image(url=image)
+        await self.client.say(embed=embed)
 
 def setup(client):
     client.add_cog(Fun(client))
