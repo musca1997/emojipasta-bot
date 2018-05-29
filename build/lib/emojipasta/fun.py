@@ -387,13 +387,18 @@ class Fun():
         despacito = divs[4].find('blockquote', attrs={"class":"postMessage"})
         get_image = yeet.attrs['href']
         get_text = despacito.find_all(text=True)
+        thread_id = despacito.attrs['id']
         image = 'https:' + get_image
         text = ''
         if get_text is not None:
             for i in get_text:
                 text = text + i
+        thread_url = url + '/thread/'
+        for a in despacito:
+            if a != 'm':
+                thread_url = thread_url + a
         embed = discord.Embed(description=text)
-        embed.set_author(name='/' + board + '/', url='https://discord.gg/JHNRwr6')
+        embed.set_author(name='Click here to view original thread in /' + board + '/', url=thread_url)
         embed.set_image(url=image)
         await self.client.say(embed=embed)
 
