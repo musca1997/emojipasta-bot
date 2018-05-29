@@ -23,6 +23,24 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
+    async def df(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        original = Image.open(pic_name)
+        df = original.filter(ImageFilter.EDGE_ENHANCE)
+        df = df.filter(ImageFilter.SHARPEN)
+        df = df.filter(ImageFilter.EDGE_ENHANCE_MORE)
+        df = df.filter(ImageFilter.SMOOTH)
+
+
+        deep = ImageEnhance.Contrast(df)
+        df = deep.enhance(15)
+
+        df.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def shrink(self, ctx, per: str=None, url: str=None):
         if not (per is None and url is None):
             try:
