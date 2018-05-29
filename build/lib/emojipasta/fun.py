@@ -394,7 +394,7 @@ class Fun():
             for i in get_text:
                 text = text + i
         thread_url = url + '/thread/'
-        for a in despacito:
+        for a in thread_id:
             if a != 'm':
                 thread_url = thread_url + a
         embed = discord.Embed(description=text)
