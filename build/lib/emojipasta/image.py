@@ -94,7 +94,7 @@ class Bot_Image_Filter():
         width, height = img.width, img.height
         newimg = Image.new("RGB", (width, height), "white")
         for x in range(1, width-1):
-            for y in range(1, height-1): 1)
+            for y in range(1, height-1):
                 Gx = 0
                 Gy = 0
                 p = img.getpixel((x-1, y-1))
