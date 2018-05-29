@@ -5,6 +5,7 @@ from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 from random import randint
 import urllib.request
 from util.functions import Functions
+import math
 
 class Bot_Image_Filter():
 
@@ -82,6 +83,70 @@ class Bot_Image_Filter():
         r = ImageEnhance.Brightness(r).enhance(1.5)
         img = ImageEnhance.Sharpness(img).enhance(100.0)
         img.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    async def edges(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        img = Image.open(pic_name).convert("RGBA")
+        width, height = img.width, img.height
+        newimg = Image.new("RGB", (width, height), "white")
+        for x in range(1, width-1):
+            for y in range(1, height-1): 1)
+                Gx = 0
+                Gy = 0
+                p = img.getpixel((x-1, y-1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                intensity = r + g + b
+                Gx += -intensity
+                Gy += -intensity
+                p = img.getpixel((x-1, y))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gx += -2 * (r + g + b)
+                p = img.getpixel((x-1, y+1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gx += -(r + g + b)
+                Gy += (r + g + b)
+                p = img.getpixel((x, y-1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gy += -2 * (r + g + b)
+                p = img.getpixel((x, y+1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gy += 2 * (r + g + b)
+                p = img.getpixel((x+1, y-1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gx += (r + g + b)
+                Gy += -(r + g + b)
+                p = img.getpixel((x+1, y))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gx += 2 * (r + g + b)
+                p = img.getpixel((x+1, y+1))
+                r = p[0]
+                g = p[1]
+                b = p[2]
+                Gx += (r + g + b)
+                Gy += (r + g + b)
+                length = math.sqrt((Gx * Gx) + (Gy * Gy))
+                length = length / 4328 * 255
+                length = int(length)
+                newimg.putpixel((x,y),(length,length,length))
+        newimg.save(pic_name)
         await self.client.send_file(ctx.message.channel, pic_name)
 
     async def get_attachment_images(self, ctx, url):

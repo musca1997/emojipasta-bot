@@ -368,7 +368,14 @@ class Fun():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
-    async def chan(self, ctx, board: str):
+    async def chan(self, ctx, board: str=None):
+        if board is None:
+            boards = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'gif', 'h', 'hr', 'k', 'm', 'o', 'p', 'r', 's', 't', 'u', 'v',
+                    'vg', 'vr', 'w', 'wg', 'i', 'ic', 'r9k', 's4s', 'vip', 'qa', 'cm', 'hm', 'lgbt', 'y', '3', 'aco',
+                    'adv', 'an', 'asp', 'bant', 'biz', 'cgl', 'ck', 'co', 'diy', 'fa', 'fit', 'gd', 'hc', 'his', 'int',
+                    'jp', 'lit', 'mlp', 'mu', 'n', 'news', 'out', 'po', 'pol', 'qst', 'sci', 'soc', 'sp', 'tg', 'toy',
+                    'trv', 'tv', 'vp', 'wsg', 'wsr', 'x']
+            board = boards[randint(0, len(boards) - 1)]
         url = 'https://boards.4chan.org/' + board
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0',
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
