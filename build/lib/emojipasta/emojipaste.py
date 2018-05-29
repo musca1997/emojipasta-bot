@@ -8,6 +8,7 @@ import urllib.request
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from util.functions import Functions
+from random import randint
 
 class Emojipaste():
     def __init__(self, client):
@@ -41,6 +42,114 @@ class Emojipaste():
             current_emojiface = emojiface.resize((w + int(w * .2), int((w + int(w * .2)) * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
+
+        draw_img.save('out.png')
+        await self.client.send_file(ctx.message.channel, 'out.png')
+
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.command(pass_context=True)
+    async def minion(self, ctx, url: str=None):
+        url = await Emojipaste.get_attachment_images(self, ctx, url)
+        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
+        data = {"url": url}
+        faces = {}
+        async with aiohttp.ClientSession() as session:
+            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
+                faces = await r.json()
+
+        if len(faces) == 0:
+            await self.client.say(":no_entry_sign: Unable to detect a face.")
+            return
+        if "error" in faces:
+            await self.client.say(":warning: API error returned. Try again later.")
+            return
+
+        img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
+        glasses = Image.open('images/minionglasses.png').convert("RGBA")
+
+        draw_img = img.convert("RGBA")
+        for f in faces:
+            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
+            x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
+            current_emojiface = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
+            current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+            draw_img.paste(current_emojiface, (x, y), current_emojiface)
+
+        draw_img.save('out.png')
+        await self.client.send_file(ctx.message.channel, 'out.png')
+
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.command(pass_context=True)
+    async def mlp(self, ctx, url: str=None):
+        url = await Emojipaste.get_attachment_images(self, ctx, url)
+        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
+        data = {"url": url}
+        faces = {}
+        async with aiohttp.ClientSession() as session:
+            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
+                faces = await r.json()
+
+        if len(faces) == 0:
+            await self.client.say(":no_entry_sign: Unable to detect a face.")
+            return
+        if "error" in faces:
+            await self.client.say(":warning: API error returned. Try again later.")
+            return
+
+        img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
+
+        draw_img = img.convert("RGBA")
+        for f in faces:
+            r = randint(0,5)
+            eyes = Image.open('images/mlp'+str(r)+'.png').convert("RGBA")
+            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
+            x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
+            current_emojiface = eyes.resize((w, int(w * eyes.size[1] / eyes.size[0])), resample=Image.LANCZOS)
+            current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+            eyes = None
+            draw_img.paste(current_emojiface, (x, y), current_emojiface)
+
+        draw_img.save('out.png')
+        await self.client.send_file(ctx.message.channel, 'out.png')
+
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.command(pass_context=True)
+    async def dealwithit(self, ctx, url: str=None):
+        url = await Emojipaste.get_attachment_images(self, ctx, url)
+        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
+        data = {"url": url}
+        faces = {}
+        async with aiohttp.ClientSession() as session:
+            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
+                faces = await r.json()
+
+        if len(faces) == 0:
+            await self.client.say(":no_entry_sign: Unable to detect a face.")
+            return
+        if "error" in faces:
+            await self.client.say(":warning: API error returned. Try again later.")
+            return
+
+        img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
+        glasses = Image.open('images/dealwithit.png').convert("RGBA")
+        joint = Image.open('images/joint.png').convert("RGBA")
+        draw_img = img.convert("RGBA")
+        for f in faces:
+            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
+            x, y = f['faceRectangle']['left'], int(f['faceLandmarks']['eyeLeftTop']['y'])
+            x2, y2 = int(f['faceLandmarks']['underLipTop']['x']), int(f['faceLandmarks']['underLipTop']['y'])
+
+            center_lip_y = abs((int(f['faceLandmarks']['upperLipTop']['y']) - int(f['faceLandmarks']['underLipBottom']['y'])) / 2)
+            final_y = int(f['faceLandmarks']['upperLipTop']['y'] + center_lip_y)
+            w2 = int(abs(f['faceLandmarks']['mouthLeft']['x'] - f['faceLandmarks']['mouthRight']['x']))
+            final_x = int((w2 / 2) + f['faceLandmarks']['mouthLeft']['x'])
+            current_emojiface = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
+            current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+
+            new_joint = joint.resize((int(w2 * .75), int((w2 * .75) * joint.size[1] / joint.size[0])), resample=Image.LANCZOS)
+            new_joint = new_joint.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+            draw_img.paste(current_emojiface, (x, y), current_emojiface)
+            draw_img.paste(new_joint, (final_x, final_y), new_joint)
 
         draw_img.save('out.png')
         await self.client.send_file(ctx.message.channel, 'out.png')
