@@ -370,10 +370,10 @@ class Fun():
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def chan(self, ctx, board: str=None):
         if board is None:
-            boards = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'gif', 'h', 'hr', 'k', 'm', 'o', 'p', 'r', 's', 't', 'u', 'v',
-                    'vg', 'vr', 'w', 'wg', 'i', 'ic', 'r9k', 's4s', 'vip', 'qa', 'cm', 'hm', 'lgbt', 'y', '3', 'aco',
-                    'adv', 'an', 'asp', 'bant', 'biz', 'cgl', 'ck', 'co', 'diy', 'fa', 'fit', 'gd', 'hc', 'his', 'int',
-                    'jp', 'lit', 'mlp', 'mu', 'n', 'news', 'out', 'po', 'pol', 'qst', 'sci', 'soc', 'sp', 'tg', 'toy',
+            boards = ['a', 'c', 'f', 'g', 'k', 'm', 'o', 'p', 'v',
+                    'vg', 'vr', 'w', 'wg', 'i', 'ic', 'vip', 'qa', 'cm', 'lgbt', '3',
+                    'adv', 'an', 'asp', 'biz', 'cgl', 'ck', 'co', 'diy', 'fa', 'fit', 'gd', 'his', 'int',
+                    'jp', 'lit', 'mlp', 'mu', 'n', 'news', 'out', 'po', 'qst', 'sci', 'sp', 'tg', 'toy',
                     'trv', 'tv', 'vp', 'wsg', 'wsr', 'x']
             board = boards[randint(0, len(boards) - 1)]
         url = 'https://boards.4chan.org/' + board
