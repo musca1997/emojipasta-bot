@@ -120,8 +120,8 @@ class Emojipaste():
             right_center = right_eye.mean(axis=0).astype("int")
             current_lf = lf.resize((w, int(w * lf.size[1] / lf.size[0])), resample=Image.LANCZOS)
 
+            current_lf = current_lf.rotate((f['faceAttributes']['headPose']['roll'] * -1) + 45, expand=True)
             w_offset, h_offset = int(current_lf.width / 2), int(current_lf.height / 2)
-            current_lf = current_lf.rotate((f['faceAttributes']['headPose']['roll'] * -1) + 45, expand=False)
             draw_img.paste(current_lf, (left_center[0] - w_offset, left_center[1] - h_offset), current_lf)
             draw_img.paste(current_lf, (right_center[0] - w_offset, right_center[1] - h_offset), current_lf)
 
@@ -235,20 +235,27 @@ class Emojipaste():
         joint = Image.open('images/joint.png').convert("RGBA")
         draw_img = img.convert("RGBA")
         for f in faces:
+            nose = np.array([
+                        [f['faceLandmarks']['noseRootLeft']['x'], f['faceLandmarks']['noseRootLeft']['y']],
+                        [f['faceLandmarks']['noseRootRight']['x'], f['faceLandmarks']['noseRootRight']['y']]
+                        ])
+            nose_center = nose.mean(axis=0).astype("int")
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
-            x, y = f['faceRectangle']['left'], int(f['faceLandmarks']['eyeLeftTop']['y'])
-            x2, y2 = int(f['faceLandmarks']['underLipTop']['x']), int(f['faceLandmarks']['underLipTop']['y'])
 
             center_lip_y = abs((int(f['faceLandmarks']['upperLipTop']['y']) - int(f['faceLandmarks']['underLipBottom']['y'])) / 2)
             final_y = int(f['faceLandmarks']['upperLipTop']['y'] + center_lip_y)
             w2 = int(abs(f['faceLandmarks']['mouthLeft']['x'] - f['faceLandmarks']['mouthRight']['x']))
             final_x = int((w2 / 2) + f['faceLandmarks']['mouthLeft']['x'])
-            current_emojiface = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
-            current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
 
+            head_tilt = f['faceAttributes']['headPose']['roll'] * -1
+            current_glasses = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
+            current_glasses = current_glasses.rotate(head_tilt, expand=True)
+
+            offset_x, offset_y = int(current_glasses.width / 2), int(current_glasses.height / 2)
             new_joint = joint.resize((int(w2 * .75), int((w2 * .75) * joint.size[1] / joint.size[0])), resample=Image.LANCZOS)
-            new_joint = new_joint.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
-            draw_img.paste(current_emojiface, (x, y), current_emojiface)
+            new_joint = new_joint.rotate(head_tilt, expand=False)
+
+            draw_img.paste(current_glasses, (nose_center[0] - offset_x, nose_center[1] - offset_y), current_glasses)
             draw_img.paste(new_joint, (final_x, final_y), new_joint)
 
         draw_img.save('out.png')
