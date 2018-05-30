@@ -10,8 +10,7 @@ from discord.ext.commands.cooldowns import BucketType
 from util.functions import Functions
 import numpy as np
 from random import randint
-import os
-os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
+
 class Imagepaste():
     def __init__(self, client):
         self.client = client
