@@ -214,7 +214,7 @@ class Emojipaste():
 
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
-    async def dealwithit(self, ctx, url: str=None):
+    async def thuglife(self, ctx, url: str=None):
         url = await Emojipaste.get_attachment_images(self, ctx, url)
         headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
         data = {"url": url}
