@@ -10,38 +10,29 @@ from discord.ext.commands.cooldowns import BucketType
 from util.functions import Functions
 import numpy as np
 from random import randint
-
-class Emojipaste():
+import os
+os.chdir("C:\\Users\\Frankie\\Documents\\GitHub\\emojipasta-bot\\build\\lib\\emojipasta")
+class Imagepaste():
     def __init__(self, client):
         self.client = client
 
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def epb(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         emojiface = Image.open('images/emojipasta.png').convert("RGBA")
-
         draw_img = img.convert("RGBA")
+
         for f in faces:
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
-            current_emojiface = emojiface.resize((w + int(w * .2), int((w + int(w * .2)) * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
+
+            current_emojiface = emojiface.resize((w, int(w * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
 
         draw_img.save('out.png')
@@ -50,30 +41,20 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def minion(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         glasses = Image.open('images/minionglasses.png').convert("RGBA")
-
         draw_img = img.convert("RGBA")
+
         for f in faces:
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
+
             current_emojiface = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
 
         draw_img.save('out.png')
@@ -82,25 +63,13 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def lensflare(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         lf = Image.open('images/lensflare.png').convert("RGBA")
-
         draw_img = img.convert("RGBA")
+
         for f in faces:
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             left_eye = np.array([
@@ -118,9 +87,10 @@ class Emojipaste():
 
             left_center = left_eye.mean(axis=0).astype("int")
             right_center = right_eye.mean(axis=0).astype("int")
-            current_lf = lf.resize((w, int(w * lf.size[1] / lf.size[0])), resample=Image.LANCZOS)
 
+            current_lf = lf.resize((w, int(w * lf.size[1] / lf.size[0])), resample=Image.LANCZOS)
             current_lf = current_lf.rotate((f['faceAttributes']['headPose']['roll'] * -1) + 45, expand=True)
+
             w_offset, h_offset = int(current_lf.width / 2), int(current_lf.height / 2)
             draw_img.paste(current_lf, (left_center[0] - w_offset, left_center[1] - h_offset), current_lf)
             draw_img.paste(current_lf, (right_center[0] - w_offset, right_center[1] - h_offset), current_lf)
@@ -131,25 +101,13 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def hearteyes(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         lf = Image.open('images/heart.png').convert("RGBA")
-
         draw_img = img.convert("RGBA")
+
         for f in faces:
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             left_eye = np.array([
@@ -172,6 +130,7 @@ class Emojipaste():
             w_offset, h_offset = int(current_lf.width / 2), int(current_lf.height / 2)
             leftheart = current_lf.rotate((f['faceAttributes']['headPose']['roll'] * -1) + 20, expand=False)
             rightheart = current_lf.rotate((f['faceAttributes']['headPose']['roll'] * -1) - 20, expand=False)
+
             draw_img.paste(leftheart, (left_center[0] - w_offset, left_center[1] - h_offset), leftheart)
             draw_img.paste(rightheart, (right_center[0] - w_offset, right_center[1] - h_offset), rightheart)
 
@@ -181,32 +140,22 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def mlp(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
-
         draw_img = img.convert("RGBA")
+
         for f in faces:
             r = randint(0,5)
             eyes = Image.open('images/mlp'+str(r)+'.png').convert("RGBA")
+
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
+
             current_emojiface = eyes.resize((w, int(w * eyes.size[1] / eyes.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
-            eyes = None
+
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
 
         draw_img.save('out.png')
@@ -215,45 +164,33 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def thuglife(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         glasses = Image.open('images/dealwithit.png').convert("RGBA")
         joint = Image.open('images/joint.png').convert("RGBA")
         draw_img = img.convert("RGBA")
+
         for f in faces:
+            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             nose = np.array([
                         [f['faceLandmarks']['noseRootLeft']['x'], f['faceLandmarks']['noseRootLeft']['y']],
                         [f['faceLandmarks']['noseRootRight']['x'], f['faceLandmarks']['noseRootRight']['y']]
                         ])
-            nose_center = nose.mean(axis=0).astype("int")
-            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
 
+            nose_center = nose.mean(axis=0).astype("int")
             center_lip_y = abs((int(f['faceLandmarks']['upperLipTop']['y']) - int(f['faceLandmarks']['underLipBottom']['y'])) / 2)
             final_y = int(f['faceLandmarks']['upperLipTop']['y'] + center_lip_y)
             w2 = int(abs(f['faceLandmarks']['mouthLeft']['x'] - f['faceLandmarks']['mouthRight']['x']))
             final_x = int((w2 / 2) + f['faceLandmarks']['mouthLeft']['x'])
 
-            head_tilt = f['faceAttributes']['headPose']['roll'] * -1
             current_glasses = glasses.resize((w, int(w * glasses.size[1] / glasses.size[0])), resample=Image.LANCZOS)
-            current_glasses = current_glasses.rotate(head_tilt, expand=True)
-
+            current_glasses = current_glasses.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=True)
             offset_x, offset_y = int(current_glasses.width / 2), int(current_glasses.height / 2)
+
             new_joint = joint.resize((int(w2 * .75), int((w2 * .75) * joint.size[1] / joint.size[0])), resample=Image.LANCZOS)
-            new_joint = new_joint.rotate(head_tilt, expand=False)
+            new_joint = new_joint.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
 
             draw_img.paste(current_glasses, (nose_center[0] - offset_x, nose_center[1] - offset_y), current_glasses)
             draw_img.paste(new_joint, (final_x, final_y), new_joint)
@@ -264,20 +201,8 @@ class Emojipaste():
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
     async def mood(self, ctx, url: str=None):
-        url = await Emojipaste.get_attachment_images(self, ctx, url)
-        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
-        data = {"url": url}
-        faces = {}
-        async with aiohttp.ClientSession() as session:
-            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose,emotion,glasses', headers=headers, data=json.dumps(data)) as r:
-                faces = await r.json()
-
-        if len(faces) == 0:
-            await self.client.say(":no_entry_sign: Unable to detect a face.")
-            return
-        if "error" in faces:
-            await self.client.say(":warning: API error returned. Try again later.")
-            return
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
 
         img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
         draw_img = img.convert("RGBA")
@@ -296,10 +221,13 @@ class Emojipaste():
                 emotion = k[v.index(max(v))]
 
             emojiface = Image.open('images/'+emotion+'.png').convert("RGBA")
+
             w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
             x, y = f['faceRectangle']['left'], f['faceRectangle']['top']
+
             current_emojiface = emojiface.resize((w, int(w * emojiface.size[1] / emojiface.size[0])), resample=Image.LANCZOS)
             current_emojiface = current_emojiface.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=False)
+
             draw_img.paste(current_emojiface, (x, y), current_emojiface)
 
         draw_img.save('out.png')
@@ -338,5 +266,20 @@ class Emojipaste():
             c.write(f.read())
         return last_attachment
 
+    async def get_face_data(self, ctx, url):
+        headers = {"Content-Type":"application/json", "Ocp-Apim-Subscription-Key": AZURE_API_KEY}
+        data = {"url": url}
+        faces = {}
+        async with aiohttp.ClientSession() as session:
+            async with session.post('https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=headPose,emotion,glasses', headers=headers, data=json.dumps(data)) as r:
+                faces = await r.json()
+        if len(faces) == 0:
+            await self.client.say(":no_entry_sign: Unable to detect a face.")
+            return
+        if "error" in faces:
+            await self.client.say(":warning: API error returned. Try again later.")
+            return
+        return faces
+
 def setup(client):
-    client.add_cog(Emojipaste(client))
+    client.add_cog(Imagepaste(client))
