@@ -24,20 +24,42 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
-    async def df(self, ctx, url: str=None):
+    async def invert(self, ctx, url: str=None):
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name)
-        df = original.filter(ImageFilter.EDGE_ENHANCE)
-        df = df.filter(ImageFilter.SHARPEN)
-        df = df.filter(ImageFilter.EDGE_ENHANCE_MORE)
-        df = df.filter(ImageFilter.SMOOTH)
+        inverted = ImageOps.invert(original)
+        inverted.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
 
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    async def flipv(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        original = Image.open(pic_name)
+        flipped = ImageOps.flip(original)
+        flipped.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
 
-        deep = ImageEnhance.Contrast(df)
-        df = deep.enhance(15)
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    async def fliph(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        original = Image.open(pic_name)
+        flipped = ImageOps.mirror(original)
+        flipped.save(pic_name)
+        await self.client.send_file(ctx.message.channel, pic_name)
 
-        df.save(pic_name)
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
+    async def posterize(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        original = Image.open(pic_name).convert("RGB")
+        flipped = ImageOps.posterize(original, 2)
+        flipped.save(pic_name)
         await self.client.send_file(ctx.message.channel, pic_name)
 
     @commands.command(pass_context=True)
