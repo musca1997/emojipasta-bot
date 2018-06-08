@@ -199,6 +199,33 @@ class Imagepaste():
 
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.command(pass_context=True)
+    async def mustache(self, ctx, url: str=None):
+        url = await Imagepaste.get_attachment_images(self, ctx, url)
+        faces = await Imagepaste.get_face_data(self, ctx, url)
+
+        img = Image.open(str(ctx.message.channel.id)+'.png').convert("RGBA")
+        mustache = Image.open('images/mustache.png').convert("RGBA")
+        draw_img = img.convert("RGBA")
+
+        for f in faces:
+            w, h = f['faceRectangle']['width'], f['faceRectangle']['height']
+            nose = np.array([
+                        [f['faceLandmarks']['noseRootLeft']['x'], f['faceLandmarks']['noseRootLeft']['y']],
+                        [f['faceLandmarks']['noseRootRight']['x'], f['faceLandmarks']['noseRootRight']['y']]
+                        ])
+
+            nose_center = nose.mean(axis=0).astype("int")
+            current_mustache = mustache.resize((w, int(w * mustache.size[1] / mustache.size[0])), resample=Image.LANCZOS)
+            current_mustache = current_mustache.rotate(f['faceAttributes']['headPose']['roll'] * -1, expand=True)
+            offset_x, offset_y = int(current_mustache.width / 2), int(current_mustache.height / 2)
+
+            draw_img.paste(current_mustache, (nose_center[0] - offset_x, nose_center[1] - offset_y), current_mustache)
+
+        draw_img.save('out.png')
+        await self.client.send_file(ctx.message.channel, 'out.png')
+
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.command(pass_context=True)
     async def mood(self, ctx, url: str=None):
         url = await Imagepaste.get_attachment_images(self, ctx, url)
         faces = await Imagepaste.get_face_data(self, ctx, url)
