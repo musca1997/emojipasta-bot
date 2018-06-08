@@ -15,6 +15,30 @@ class Fun():
     def __init__(self, client):
         self.client = client
 
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    @commands.command(pass_context=True)
+    async def sheriff(self, ctx, emo: str=None):
+        sheriff = "⠀ ⠀ ⠀   🤠\n　   {}{}{}\n    {}   {}　{}\n  👇  {}{}  👇\n  　  {}　{}\n　   {}　 {}\n　    👢     👢".format(emo, emo, emo, emo, emo, emo, emo, emo, emo, emo, emo, emo)
+        await self.client.say(sheriff + "\nDid someone call the sheriff of " + emo + "?")
+
+    @commands.command(pass_context=True)
+    async def theguy(self, ctx, emo:str=None):
+        if emo is None:
+            theguy = """:ok_hand:             :weary:
+    :eggplant: :zzz: :necktie: :eggplant:
+                    :oil:   :nose:
+                :zap: 8=:punch: = D :sweat_drops:
+             :trumpet:      :eggplant:                 :sweat_drops: :sweat_drops:
+             :boot:         :boot:                    :sweat_drops: :sweat_drops: :sweat_drops:"""
+        else:
+            theguy = """:ok_hand:             :weary:
+    :eggplant: :zzz: :necktie: :eggplant:
+                    :oil:   :nose:
+                :zap: 8=:punch: = D {}
+             :trumpet:      :eggplant:                 {} {}
+             :boot:         :boot:                    {} {} {}""".format(emo, emo, emo, emo, emo, emo)
+        await self.client.say(theguy)
+
     @commands.command(pass_context=True, aliases=['roll'])
     @commands.cooldown(1, 8, commands.BucketType.user)
     async def dice(self, ctx):
