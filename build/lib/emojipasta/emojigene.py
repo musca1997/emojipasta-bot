@@ -35,6 +35,16 @@ class EmojipastaGenerator:
             new_blocks.append(block)
             emojis = self._generate_emojis_from(block)
             if emojis:
+                new_blocks.append(" " + emojis)
+        return "".join(new_blocks)
+
+    def generate_uni_emojipasta(self, text):
+        blocks = emojipasta.util.text.split_into_blocks(text)
+        new_blocks = []
+        for i, block in enumerate(blocks):
+            new_blocks.append(block)
+            emojis = self._generate_emojis_from(block)
+            if emojis:
                 for emoji in emojis:
                     universal_emoji = " \\" + emoji + " "
                     new_blocks.append(universal_emoji)

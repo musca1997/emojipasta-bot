@@ -254,7 +254,13 @@ class Fun():
     async def pasta(self, ctx, *, original_words):
         generator = EmojipastaGenerator.of_default_mappings()
         final_emoji = generator.generate_emojipasta(original_words)
+        await self.client.say(final_emoji)
 
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
+    async def unipasta(self, ctx, *, original_words):
+        generator = EmojipastaGenerator.of_default_mappings()
+        final_emoji = generator.generate_uni_emojipasta(original_words)
         await self.client.say(final_emoji)
 
     @commands.command(pass_context=True)
