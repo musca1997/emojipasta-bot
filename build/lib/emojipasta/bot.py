@@ -10,13 +10,13 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 import platform
 from util.keys import DISCORD_BOT_KEY
-from util.keys import DB_VARS as DBVAR
+#from util.keys import DB_VARS as DBVAR
 
 import psycopg2
 
 client = Bot(description="Emojipasta-Bot is a dicord bot for converting text to emojipasta. \n Bot Owner: toiletplunger#8909 \n Congrats! You don't need to add quotes anymore! ", command_prefix="&", pm_help = False)
 client.remove_command("help")
-client.db = psycopg2.connect(dbname=DBVAR[0], host=DBVAR[1], user=DBVAR[2], password=DBVAR[3])
+#client.db = psycopg2.connect(dbname=DBVAR[0], host=DBVAR[1], user=DBVAR[2], password=DBVAR[3])
 
 class Bot_Events:
 
