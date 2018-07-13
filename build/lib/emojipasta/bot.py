@@ -282,41 +282,41 @@ class Restricted:
     async def emojipasta(ctx):
         if ctx.invoked_subcommand is None:
             await client.say(":no_entry_sign: Invalid subcommand passed.")
-    @emojipasta.command(pass_context=True)
-    async def enable(ctx):
-        if not (str(ctx.message.author.id) == "183457916114698241" or str(ctx.message.author.id) == "349838216637186048"):
-            return
+    #@emojipasta.command(pass_context=True)
+    #async def enable(ctx):
+        #if not (str(ctx.message.author.id) == "183457916114698241" or str(ctx.message.author.id) == "349838216637186048"):
+            #return
 
-        cur = client.db.cursor()
-        cur.execute("DELETE FROM channels WHERE id=%s;", (ctx.message.channel.id,))
-        client.db.commit()
-        cur.close()
-        await client.say(":white_check_mark: I am now enabled in <#" + ctx.message.channel.id + ">")
-    @emojipasta.command(pass_context=True)
-    async def disable(ctx):
-        if not str(ctx.message.author.id) == "183457916114698241":
-            return
+        #cur = client.db.cursor()
+        #cur.execute("DELETE FROM channels WHERE id=%s;", (ctx.message.channel.id,))
+        #client.db.commit()
+        #cur.close()
+        #await client.say(":white_check_mark: I am now enabled in <#" + ctx.message.channel.id + ">")
+    #@emojipasta.command(pass_context=True)
+    #async def disable(ctx):
+        #if not str(ctx.message.author.id) == "183457916114698241":
+            #return
 
-        cur = client.db.cursor()
-        cur.execute("""
-            INSERT INTO channels (id)
-            SELECT %s
-            WHERE
-                NOT EXISTS (
-                    SELECT id FROM channels WHERE id=%s
-                );""", (ctx.message.channel.id,ctx.message.channel.id))
-        client.db.commit()
-        cur.close()
-        await client.say(":x: I am now disabled in <#" + ctx.message.channel.id + ">")
+        #cur = client.db.cursor()
+        #cur.execute("""
+            #INSERT INTO channels (id)
+            #SELECT %s
+            #WHERE
+                #NOT EXISTS (
+                    #SELECT id FROM channels WHERE id=%s
+                #);""", (ctx.message.channel.id,ctx.message.channel.id))
+        #client.db.commit()
+        #cur.close()
+        #await client.say(":x: I am now disabled in <#" + ctx.message.channel.id + ">")
     @client.event
     async def on_message(message):
-        if not message.content.startswith("&emojipasta"):
-            cur = client.db.cursor()
-            cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
-            result = cur.fetchone()[0]
-            cur.close()
-            if result is True:
-                return
+        #if not message.content.startswith("&emojipasta"):
+            #cur = client.db.cursor()
+            #cur.execute("SELECT exists (SELECT 1 FROM channels WHERE id=%s LIMIT 1);", (message.channel.id,))
+            #result = cur.fetchone()[0]
+            #cur.close()
+            #if result is True:
+                #return
         await client.process_commands(message)
         if (message.content.startswith("spank me") or message.content.startswith("Spank me") or message.content.startswith("SPANK ME")):
             await client.add_reaction(message, '👏')
