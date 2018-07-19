@@ -74,6 +74,31 @@ class Fun():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 8, commands.BucketType.user)
+    async def compare(self, ctx, member: discord.Member=None):
+        inches = randint(2, 12)
+        cm = inches * 2.54
+        text = "8" + ("=" * inches) + "D" + " " + "{} inches ({} cm)".format(inches, cm)
+        userinches = randint(2, 12)
+        usercm = userinches * 2.54
+        usertext = "8" + ("=" * userinches) + "D" + " " + "{} inches ({} cm)".format(userinches, usercm)
+
+        winmessage = ""
+        if inches == userinches:
+            winmessage = "Tie!"
+        else:
+            winner = ctx.message.author if inches > userinches else member
+            winmessage = "The winner is {}!".format(winner.mention)
+        msg = "{}\n\n{}".format(text, usertext)
+        embed = discord.Embed(description=msg)
+        embed.set_author(icon_url=ctx.message.author.avatar_url, name=ctx.message.author.display_name)
+        embed.set_footer(icon_url=member.avatar_url, text=member.display_name)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/372188609425702915/469451848873672704/Eggplant_Emoji_large.png")
+        embed.colour = ctx.message.author.colour if hasattr(ctx.message.author, "colour") else discord.Colour.default()
+
+        await self.client.send_message(ctx.message.channel, embed=embed, content=winmessage)
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 8, commands.BucketType.user)
     async def spin(self, ctx, member: discord.Member=None):
         if member:
             member = member
