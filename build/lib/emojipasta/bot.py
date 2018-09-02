@@ -38,7 +38,7 @@ class Bot_Events:
         server = member.server
         if not (server.id == "419521489759502337"):
             return
-        message = "Hello, welcome to Kermit House of Shitposting <@" + member.id + ">! Home of the Emojipasta Bot. We are looking for Python developers. If you are interested, please check <#444895389921837067> :) If not, chill with us and use the bot!!!"
+        message = "Hello, welcome to Kermit House of Shitposting <@" + member.id + ">! Home of the Emojipasta Bot. Please check <#420627194348568576> before you send message. :) "
         await client.send_message(discord.Object(id="420586176467042316"), content=message)
     @client.event
     async def on_member_remove(member):
