@@ -36,7 +36,7 @@ class Moderation:
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done.")
 
-            if (ctx.message.author.server_permissions.change_nickname == True) and (target == '<@' + ctx.message.author.id + '>'):
+            elif (ctx.message.author.server_permissions.change_nickname == True) and (target == '<@' + ctx.message.author.id + '>'):
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done.")
             else:
