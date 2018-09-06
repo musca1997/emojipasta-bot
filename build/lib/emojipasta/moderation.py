@@ -36,9 +36,9 @@ class Moderation:
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done.")
 
-            elif (ctx.message.author.server_permissions.change_nickname == True) and (str(target) == '<@' + str(ctx.message.author.id) + '>'):
+            elif ((ctx.message.author.server_permissions.change_nickname == True) and (str(target) == str(ctx.message.author)):
                 await self.client.change_nickname(target, nickname)
-                await self.client.say("Done.")
+                await self.client.say("Done, " + str(target))
             else:
                 await self.client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
