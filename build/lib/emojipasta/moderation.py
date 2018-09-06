@@ -32,7 +32,11 @@ class Moderation:
     @commands.command(pass_context=True)
     async def nick(self, ctx, target: discord.User, *, nickname):
         try:
-            if (ctx.message.author.server_permissions.ban_members == True):
+            if (ctx.message.author.server_permissions.manage_nicknames == True):
+                await self.client.change_nickname(target, nickname)
+                await self.client.say("Done.")
+
+            if (ctx.message.author.server_permissions.change_nickname == True) and (target == '<@' + ctx.message.author.id + '>'):
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done.")
             else:
