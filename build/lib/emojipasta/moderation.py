@@ -36,7 +36,7 @@ class Moderation:
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done.")
 
-            elif ((ctx.message.author.server_permissions.change_nickname == True) and (str(target) == str(ctx.message.author)):
+            elif ((ctx.message.author.server_permissions.change_nickname == True) and (str(target) == str(ctx.message.author))):
                 await self.client.change_nickname(target, nickname)
                 await self.client.say("Done, " + str(target))
             else:
