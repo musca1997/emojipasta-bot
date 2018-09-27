@@ -276,8 +276,8 @@ class Restricted:
             if (str(ctx.message.author.id) == i):
                 await client.change_presence(game=discord.Game(name=(new_stat)))
                 await client.say("Done.")
-            else:
-                await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+        else:
+            await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
 
 
     @client.group(pass_context=True)
