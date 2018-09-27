@@ -271,11 +271,13 @@ class Restricted:
     @client.command(pass_context=True)
     async def status(ctx,  *, new_stat):
         new_stat = "&help | " + new_stat
-        if (str(ctx.message.author.id) == "349838216637186048" or str(ctx.message.author.id)  == "396783619466854402" or str(ctx.message.author.id)  == "183457916114698241" or str(ctx.message.author.id)  == "294963984535257089"):
-            await client.change_presence(game=discord.Game(name=(new_stat)))
-            await client.say("Done.")
-        else:
-            await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
+        mod_id = ['349838216637186048','396783619466854402','183457916114698241','294963984535257089','223225823317065742','335509033282699275','257318564724211719','435285293063602181','324678737377492993','288657785955287040','267472888012079116']
+        for i in mod_id:
+            if (str(ctx.message.author.id) == i):
+                await client.change_presence(game=discord.Game(name=(new_stat)))
+                await client.say("Done.")
+            else:
+                await client.say("HAHA CUCKED U DONT HAVE THE PERMISSION TO CHANGE MY STATUS.")
 
 
     @client.group(pass_context=True)
