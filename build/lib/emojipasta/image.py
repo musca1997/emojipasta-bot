@@ -14,6 +14,18 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
+    async def reverse(self, ctx, url: str=None):
+        pic_name = str(ctx.message.channel.id)+'.png'
+        await Bot_Image_Filter.get_attachment_images(self, ctx, url)
+        filePath = pic_name
+        searchUrl = 'http://www.google.hr/searchbyimage/upload'
+        multipart = {'encoded_image': (filePath, open(filePath, 'rb')), 'image_content': ''}
+        response = requests.post(searchUrl, files=multipart, allow_redirects=False)
+        fetchUrl = response.headers['Location']
+        await self.client.say('**OK so here is the google reverse search result for this image: **' + str(fetchUrl))
+
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def blur(self, ctx, url: str=None):
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
