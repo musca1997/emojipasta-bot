@@ -24,8 +24,6 @@ class Bot_Image_Filter():
         multipart = {'encoded_image': (filePath, open(filePath, 'rb')), 'image_content': ''}
         response = requests.post(searchUrl, files=multipart, allow_redirects=False)
         fetchUrl = response.headers['Location']
-        upload_time = response.headers['Date']
-        expire_time = response.headers['Expires']
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0',
                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                         'Accept-Language': 'q=0.8,en-us;q=0.5,en;q=0.3',
@@ -35,11 +33,9 @@ class Bot_Image_Filter():
         r = requests.get(fetchUrl, headers=headers)
         soup = BeautifulSoup(r.content,"html.parser")
         best_guess = soup.find_all("input")
-        best_guess = best_guess[2].get("value")
+        best_guess = str(best_guess[2].get("value"))
         embed = discord.Embed(description=text)
         embed.set_author(name='Click here to view the search page 🤓', url=fetchUrl)
-        embed.add_field(name="Upload Time: ", value=upload_time)
-        embed.add_field(name="Expire Time: ", value=expire_time)
         embed.add_field(name="Best guess for this image: ", value=best_guess)
         await self.client.say(embed=embed)
 
