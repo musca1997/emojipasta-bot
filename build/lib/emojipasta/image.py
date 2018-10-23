@@ -35,7 +35,7 @@ class Bot_Image_Filter():
         best_guess = soup.find_all("input")
         best_guess = best_guess[2].get("value")
         embed = discord.Embed(description=text)
-        embed.set_author(name='Click here to view the search page 🤓', url=fetchUrl)
+        embed.set_author(name='Click here to view the search page 🤓', url=str(fetchUrl))
         embed.add_field(name="Best guess for this image: ", value=best_guess)
         await self.client.say(embed=embed)
 
