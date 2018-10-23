@@ -367,7 +367,7 @@ class Frames():
         if len(split) > 1:
             rand = randint(0, len(split) - 1)
             command = str(split[rand])
-
+        await self.client.say("**processing...**")
         command = str(command)
         frame = "frames/"+command+".png"
         picture = str(ctx.message.channel.id)+'.png'

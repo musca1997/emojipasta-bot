@@ -17,6 +17,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def reverse(self, ctx, url: str=None):
+        await self.client.say("**thinking...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         filePath = pic_name
@@ -43,6 +44,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def blur(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name)
@@ -53,6 +55,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def invert(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name)
@@ -63,6 +66,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def flipv(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name)
@@ -72,7 +76,8 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
-    async def fliph(self, ctx, url: str=None):
+    async def flip(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name)
@@ -83,6 +88,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def posterize(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         original = Image.open(pic_name).convert("RGB")
@@ -93,6 +99,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def shrink(self, ctx, per: str=None, url: str=None):
+        await self.client.say("**processing...**")
         if not (per is None and url is None):
             try:
                 per = int(per)
@@ -118,6 +125,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def glitch(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         img = Image.open(pic_name)
@@ -138,6 +146,7 @@ class Bot_Image_Filter():
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def edges(self, ctx, url: str=None):
+        await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
         img = Image.open(pic_name).convert("RGBA")
