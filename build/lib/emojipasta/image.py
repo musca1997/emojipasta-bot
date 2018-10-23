@@ -33,7 +33,7 @@ class Bot_Image_Filter():
         r = requests.get(fetchUrl, headers=headers)
         soup = BeautifulSoup(r.content,"html.parser")
         best_guess = soup.find_all("input")
-        best_guess = str(best_guess[2].get("value"))
+        best_guess = best_guess[2].get("value")
         embed = discord.Embed(description=text)
         embed.set_author(name='Click here to view the search page 🤓', url=fetchUrl)
         embed.add_field(name="Best guess for this image: ", value=best_guess)
