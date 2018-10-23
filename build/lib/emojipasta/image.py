@@ -76,7 +76,7 @@ class Bot_Image_Filter():
 
     @commands.command(pass_context=True)
     @commands.cooldown(1, 15, commands.BucketType.user)
-    async def flip(self, ctx, url: str=None):
+    async def fliph(self, ctx, url: str=None):
         await self.client.say("**processing...**")
         pic_name = str(ctx.message.channel.id)+'.png'
         await Bot_Image_Filter.get_attachment_images(self, ctx, url)
