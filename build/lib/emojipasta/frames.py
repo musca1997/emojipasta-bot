@@ -370,7 +370,7 @@ class Frames():
         command = str(command)
         frame = "frames/"+command+".png"
         picture = str(ctx.message.channel.id)+'.png'
-        await self.client.say("**processing...**")
+        await self.client.send_message(ctx.message.channel, "**processing...**")
         await Frames.filtered_image(self, ctx, picture, frame)
         await self.client.send_file(ctx.message.channel, picture)
 
