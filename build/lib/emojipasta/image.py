@@ -4,6 +4,7 @@ from discord.ext.commands.cooldowns import BucketType
 from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 from random import randint
 import urllib.request
+import requests
 from util.functions import Functions
 import math
 
