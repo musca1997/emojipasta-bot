@@ -59,4 +59,4 @@ Use & as prefix. **&help** if you need help.
 
 [vote](https://discordbots.org/bot/429662497172357123)
 
-[server](https://discord.gg/JHNRwr6)
+[server](https://discord.gg/Q3EqU6p)
