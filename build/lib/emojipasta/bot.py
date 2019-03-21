@@ -125,7 +125,7 @@ class Bot_Info:
     async def help(ctx, *args):
         embed = discord.Embed(description=" Emojipasta-bot info")
         embed.add_field(name="💬Command List", value=' https://www.emojipasta.fun/commands/', inline=True)
-        embed.add_field(name="🏠Support Server", value=' https://discord.gg/JHNRwr6', inline=True)
+        embed.add_field(name="🏠Support Server", value=' https://discord.gg/Q3EqU6p', inline=True)
         embed.add_field(name="🤥Twitter", value=' https://twitter.com/KShitpostbot', inline=True)
         await client.say(embed=embed)
 
