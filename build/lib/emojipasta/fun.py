@@ -461,8 +461,8 @@ class Fun():
         embed.set_image(url=image)
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/532908645852381184/565072809341222912/4chan-logo.png")
 
-        embed.add_field(name="thread in /" + board + "/", value="``` ```")
-        embed.add_field(name=":mouse_three_button: ", value="[click here to view the original thread](thread_url)")
+        embed.add_field(name="thread in /" + board + "/", value="```{}```".format(get_text))
+        embed.add_field(name=":mouse_three_button: ", value="[click here to view the original thread]({})".format(thread_url))
 
         await self.client.say(embed=embed)
 def setup(client):
