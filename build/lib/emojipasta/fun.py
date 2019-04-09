@@ -448,21 +448,22 @@ class Fun():
         yeet = divs[4].find('a', attrs={"class":"fileThumb"})
         despacito = divs[4].find('blockquote', attrs={"class":"postMessage"})
         get_image = yeet.attrs['href']
-        get_text = despacito.find_all(text=True)
+        get_text = despacito.get_text("\n")
         thread_id = despacito.attrs['id']
         image = 'https:' + get_image
-        text = ''
-        if get_text is not None:
-            for i in get_text:
-                text = text + i
         thread_url = url + '/thread/'
         for a in thread_id:
             if a != 'm':
                 thread_url = thread_url + a
-        embed = discord.Embed(description=text)
-        embed.set_author(name='Click here to view original thread in /' + board + '/', url=thread_url)
-        embed.set_image(url=image)
-        await self.client.say(embed=embed)
 
+        embed = discord.Embed(colour=discord.Colour(0x7b34ba))
+
+        embed.set_image(url=image)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/532908645852381184/565072809341222912/4chan-logo.png")
+
+        embed.add_field(name="thread in /" + board + "/", value="``` ```")
+        embed.add_field(name=":mouse_three_button: ", value="[click here to view the original thread](thread_url)")
+
+        await self.client.say(embed=embed)
 def setup(client):
     client.add_cog(Fun(client))
