@@ -9,9 +9,10 @@ class Moderation:
     async def ban(self, ctx, target: discord.User, *reason):
         try:
             if (ctx.message.author.server_permissions.ban_members == True):
-                await self.client.ban(target)
-                reason = " ".join(map(str, reason))
-                await self.client.say("Banned {0} {1}".format(target, reason))
+                if ctx.message.author.top_role > target.top_role:
+                    await self.client.ban(target)
+                    reason = " ".join(map(str, reason))
+                    await self.client.say("Banned {0} {1}".format(target, reason))
             else:
                 await self.client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
@@ -21,9 +22,10 @@ class Moderation:
     async def kick(self, ctx, target: discord.User, *reason):
         try:
             if (ctx.message.author.server_permissions.ban_members == True):
-                await self.client.kick(target)
-                reason = " ".join(map(str, reason))
-                await self.client.say("Kicked {0} {1}".format(target, reason))
+                if ctx.message.author.top_role > target.top_role:
+                    await self.client.kick(target)
+                    reason = " ".join(map(str, reason))
+                    await self.client.say("Kicked {0} {1}".format(target, reason))
             else:
                 await self.client.say("You don't have the required permissions, {}".format(ctx.message.author))
         except Exception as e:
@@ -33,8 +35,9 @@ class Moderation:
     async def nick(self, ctx, target: discord.User, *, nickname):
         try:
             if (ctx.message.author.server_permissions.manage_nicknames == True):
-                await self.client.change_nickname(target, nickname)
-                await self.client.say("Done.")
+                if ctx.message.author.top_role > target.top_role:
+                    await self.client.change_nickname(target, nickname)
+                    await self.client.say("Done.")
 
             elif ((ctx.message.author.server_permissions.change_nickname == True) and (str(target) == str(ctx.message.author))):
                 await self.client.change_nickname(target, nickname)
